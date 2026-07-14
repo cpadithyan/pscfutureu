@@ -228,6 +228,36 @@ img { max-width: 100%; display: block; }
 .page { display: none; }
 .page.active { display: block; }
 
+/* ---------------- Home: quick-access + personalised ---------------- */
+.quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.quick-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 20px 18px; display: block; transition: box-shadow .15s, transform .15s, border-color .15s; }
+.quick-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--color-primary-soft); }
+.quick-card .qc-icon { width: 42px; height: 42px; border-radius: 12px; background: var(--color-primary-soft); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 19px; margin-bottom: 12px; }
+.quick-card h3 { font-size: 15.5px; margin-bottom: 3px; }
+.quick-card .qc-count { font-family: var(--font-mono); font-size: 12px; color: var(--color-ink-soft); }
+
+.greet-banner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; background: linear-gradient(155deg, var(--color-primary), var(--color-primary-dark)); color: #fff; border-radius: var(--radius-lg); padding: 26px 28px; margin-bottom: 24px; }
+.greet-banner h2 { color: #fff; font-size: 22px; margin-bottom: 4px; }
+.greet-banner p { color: #dfe9ee; margin: 0; font-size: 13.5px; }
+.greet-stats { display: flex; gap: 22px; flex-wrap: wrap; }
+.greet-stats div strong { display: block; font-family: var(--font-mono); font-size: 22px; }
+.greet-stats div span { font-size: 11.5px; color: #cfe0e7; }
+
+.suggest-card { display: flex; align-items: center; gap: 16px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 12px; }
+.suggest-card .qc-icon { width: 44px; height: 44px; border-radius: 12px; background: #FBF0DA; color: var(--color-accent-dark); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.suggest-card .grow { flex: 1; min-width: 0; }
+.suggest-card h4 { font-size: 15px; margin-bottom: 2px; }
+.suggest-card p { margin: 0; font-size: 12.5px; }
+
+.guest-cta { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; background: var(--color-primary-soft); border: 1.5px dashed var(--color-primary); border-radius: var(--radius-lg); padding: 22px 26px; margin-bottom: 26px; }
+.guest-cta h3 { font-size: 17px; margin-bottom: 4px; color: var(--color-primary-dark); }
+.guest-cta p { margin: 0; font-size: 13.5px; max-width: 420px; }
+
+@media (max-width: 860px) {
+  .quick-grid { grid-template-columns: repeat(2, 1fr); }
+  .greet-banner { flex-direction: column; align-items: flex-start; }
+}
+
 @media (max-width: 860px) {
   .hero .container { grid-template-columns: 1fr; }
   .admit-card { transform: none; max-width: 340px; margin: 0 auto; }
@@ -257,15 +287,15 @@ img { max-width: 100%; display: block; }
 <header class="site-header">
   <div class="container">
     <div style="display:flex; align-items:center; gap:28px;">
-      <a href="#home" class="brand"><span class="brand-mark">PU</span> PSC FutureU</a>
+      <a href="/" class="brand"><span class="brand-mark">PU</span> PSC FutureU</a>
       <nav class="site-nav">
-        <a href="#home" data-nav="home">Home</a>
-        <a href="#videos" data-nav="videos">Video Classes</a>
-        <a href="#pdfs" data-nav="pdfs">Study Notes</a>
-        <a href="#quizzes" data-nav="quizzes">Quizzes</a>
-        <a href="#mocks" data-nav="mocks">Mock Tests</a>
-        <a href="#dashboard" data-nav="dashboard">Dashboard</a>
-        <a href="#admin" data-nav="admin" id="navAdminLink" style="display:none;">Admin</a>
+        <a href="/" data-nav="home">Home</a>
+        <a href="/videos" data-nav="videos">Video Classes</a>
+        <a href="/pdfs" data-nav="pdfs">Study Notes</a>
+        <a href="/quizzes" data-nav="quizzes">Quizzes</a>
+        <a href="/mocks" data-nav="mocks">Mock Tests</a>
+        <a href="/dashboard" data-nav="dashboard">Dashboard</a>
+        <a href="/admin" data-nav="admin" id="navAdminLink" style="display:none;">Admin</a>
       </nav>
     </div>
     <div class="header-actions">
@@ -286,8 +316,8 @@ img { max-width: 100%; display: block; }
           <h1>Prepare with a plan, not just <span class="accent">practice.</span></h1>
           <p class="lead">Curated video classes, downloadable notes, subject-wise quizzes and full-length mock tests — built for LDC, LGS, Degree Level and every Kerala PSC exam, all in one place.</p>
           <div class="hero-actions">
-            <a href="#videos" class="btn btn-primary">Start with Video Classes</a>
-            <a href="#mocks" class="btn btn-ghost">Take a Mock Test</a>
+            <a href="/videos" class="btn btn-primary">Start with Video Classes</a>
+            <a href="/mocks" class="btn btn-ghost">Take a Mock Test</a>
           </div>
           <div class="hero-stats">
             <div><strong id="statVideos">—</strong><span>Video playlists</span></div>
@@ -314,31 +344,8 @@ img { max-width: 100%; display: block; }
       </div>
     </div>
 
-    <div class="section container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Everything in one place</span>
-          <h2>Four tools, one exam goal</h2>
-        </div>
-      </div>
-      <div class="grid grid-3">
-        <div class="card"><div class="card-body">
-          <h3>🎬 Video Classes</h3>
-          <p class="muted">Handpicked YouTube playlists, organised by subject and exam — no searching, no distractions.</p>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <h3>📄 Study Notes</h3>
-          <p class="muted">Downloadable PDF notes you can read offline, anytime, on any device.</p>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <h3>📝 Quizzes</h3>
-          <p class="muted">Short subject-wise quizzes to test what you've just learned.</p>
-        </div></div>
-        <div class="card"><div class="card-body">
-          <h3>⏱️ Mock Tests</h3>
-          <p class="muted">Full-length, timed exams that simulate the real PSC test experience.</p>
-        </div></div>
-      </div>
+    <div class="section container" id="homeDynamic">
+      <p class="muted">Loading your home screen…</p>
     </div>
   </section>
 
@@ -406,11 +413,11 @@ img { max-width: 100%; display: block; }
 
 <nav class="tab-bar">
   <div class="tab-bar-inner">
-    <a href="#home" data-tab="home"><span class="ic">🏠</span>Home</a>
-    <a href="#videos" data-tab="videos"><span class="ic">🎬</span>Videos</a>
-    <a href="#pdfs" data-tab="pdfs"><span class="ic">📄</span>Notes</a>
-    <a href="#quizzes" data-tab="quizzes"><span class="ic">📝</span>Quiz</a>
-    <a href="#dashboard" data-tab="dashboard"><span class="ic">👤</span>Profile</a>
+    <a href="/" data-tab="home"><span class="ic">🏠</span>Home</a>
+    <a href="/videos" data-tab="videos"><span class="ic">🎬</span>Videos</a>
+    <a href="/pdfs" data-tab="pdfs"><span class="ic">📄</span>Notes</a>
+    <a href="/quizzes" data-tab="quizzes"><span class="ic">📝</span>Quiz</a>
+    <a href="/dashboard" data-tab="dashboard"><span class="ic">👤</span>Profile</a>
   </div>
 </nav>
 
@@ -481,10 +488,31 @@ function $all(sel, root = document) { return [...root.querySelectorAll(sel)]; }
 function signInWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider).catch(err => {
+    // Popup-based sign-in isn't supported in every environment (sandboxed
+    // iframes, in-app browsers, some webviews, file:// previews, etc.).
+    // In that case, fall back to a full-page redirect flow instead.
+    const popupUnsupported = [
+      "auth/operation-not-supported-in-this-environment",
+      "auth/popup-blocked",
+      "auth/web-storage-unsupported"
+    ].includes(err.code);
+
+    if (popupUnsupported) {
+      auth.signInWithRedirect(provider).catch(redirectErr => {
+        alert("Sign-in failed: " + redirectErr.message);
+      });
+      return;
+    }
+
     if (err.code !== "auth/popup-closed-by-user") alert("Sign-in failed: " + err.message);
   });
 }
 function signOutUser() { auth.signOut(); }
+
+// Pick up the result if we just came back from a signInWithRedirect() round trip.
+auth.getRedirectResult().catch(err => {
+  if (err && err.code) alert("Sign-in failed: " + err.message);
+});
 
 function buildProfileModal() {
   if ($("#profileModal")) return;
@@ -585,36 +613,81 @@ function renderAuthArea(detail) {
 const cache = { playlists: null, pdfs: null, quizzes: null, mocks: null };
 let activeTest = null;
 
+// Routes are real URL paths (domain.com/admin, domain.com/videos, ...),
+// driven by history.pushState so no page reload is needed for in-app
+// navigation. "/admin" is intentionally left out of the visible nav (it's
+// only shown once an admin account is signed in) but the route itself
+// still works if someone types or bookmarks the URL directly.
+// NOTE: for a direct browser visit / refresh on a path like /admin to work
+// (rather than 404), the host needs to rewrite all paths to this file
+// (a standard single-page-app rewrite). See firebase.json.
+const ROUTES = ["home", "videos", "pdfs", "quizzes", "mocks", "dashboard", "admin"];
+
+function currentRoute() {
+  let path = location.pathname.replace(/^\/+|\/+$/g, "");
+  if (!path) path = "home";
+  return ROUTES.includes(path) ? path : "home";
+}
+
+function navigateTo(pathAndQuery) {
+  const url = pathAndQuery.startsWith("/") ? pathAndQuery : "/" + pathAndQuery;
+  if (location.pathname + location.search !== url) {
+    history.pushState({}, "", url);
+  }
+  router();
+}
+
 function router() {
-  const hash = (location.hash || "#home").replace("#", "");
+  const route = currentRoute();
   $all(".page").forEach(p => p.classList.remove("active"));
-  (document.getElementById("page-" + hash) || document.getElementById("page-home")).classList.add("active");
-  $all("[data-nav]").forEach(a => a.classList.toggle("active", a.dataset.nav === hash));
-  $all("[data-tab]").forEach(a => a.classList.toggle("active", a.dataset.tab === hash));
+  (document.getElementById("page-" + route) || document.getElementById("page-home")).classList.add("active");
+  $all("[data-nav]").forEach(a => a.classList.toggle("active", a.dataset.nav === route));
+  $all(".tab-bar [data-tab]").forEach(a => a.classList.toggle("active", a.dataset.tab === route));
   const nav = $(".site-nav"); if (nav) nav.classList.remove("open");
   window.scrollTo(0, 0);
-  loadPage(hash);
+  loadPage(route);
 }
-window.addEventListener("hashchange", router);
-window.addEventListener("DOMContentLoaded", router);
+window.addEventListener("popstate", router);
+window.addEventListener("DOMContentLoaded", () => {
+  // Migrate any old-style #hash links (e.g. shared before this update) to the new path-based URLs.
+  if (location.hash) {
+    const legacy = location.hash.replace("#", "");
+    const path = ROUTES.includes(legacy) ? legacy : "home";
+    history.replaceState({}, "", (path === "home" ? "/" : "/" + path) + location.search);
+  }
+  router();
+});
 
-function loadPage(hash) {
-  if (hash === "home") loadHome();
-  else if (hash === "videos") loadVideos();
-  else if (hash === "pdfs") loadPdfs();
-  else if (hash === "quizzes") loadQuizzes();
-  else if (hash === "mocks") loadMocks();
-  else if (hash === "dashboard") loadDashboard();
-  else if (hash === "admin") renderAdminPage(lastAuthDetail);
+// Intercept clicks on same-origin internal links so navigation stays
+// client-side (no full reload) — this is what makes /admin, /videos, etc.
+// feel instant instead of round-tripping to the server every click.
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a");
+  if (!a) return;
+  const href = a.getAttribute("href");
+  if (!href || !href.startsWith("/")) return;
+  if (a.target === "_blank" || a.hasAttribute("download")) return;
+  e.preventDefault();
+  navigateTo(href);
+});
+
+function loadPage(route) {
+  if (route === "home") loadHome();
+  else if (route === "videos") loadVideos();
+  else if (route === "pdfs") loadPdfs();
+  else if (route === "quizzes") loadQuizzes();
+  else if (route === "mocks") loadMocks();
+  else if (route === "dashboard") loadDashboard();
+  else if (route === "admin") renderAdminPage(lastAuthDetail);
 }
 
 window.addEventListener("authReady", (e) => {
   renderAuthArea(e.detail);
   const adminLink = $("#navAdminLink");
   if (adminLink) adminLink.style.display = e.detail.isAdmin ? "" : "none";
-  const hash = (location.hash || "#home").replace("#", "");
-  if (["quizzes", "mocks", "dashboard"].includes(hash)) loadPage(hash);
-  if (hash === "admin") renderAdminPage(e.detail);
+  const route = currentRoute();
+  if (["home", "quizzes", "mocks", "dashboard"].includes(route)) loadPage(route);
+  if (route === "admin") renderAdminPage(e.detail);
 });
 
 async function fetchCollection(name) {
@@ -637,14 +710,176 @@ function getYouTubeId(url) {
 }
 
 // ---------------- HOME ----------------
+function quickAccessGridHTML(pl, pdfs, qz, mk) {
+  return `
+    <div class="section-head">
+      <div><span class="eyebrow">Everything in one place</span><h2>Jump back in</h2></div>
+    </div>
+    <div class="quick-grid">
+      <a class="quick-card" href="/videos"><div class="qc-icon">🎬</div><h3>Video Classes</h3><p class="qc-count">${pl.length} playlist${pl.length === 1 ? "" : "s"}</p></a>
+      <a class="quick-card" href="/pdfs"><div class="qc-icon">📄</div><h3>Study Notes</h3><p class="qc-count">${pdfs.length} note${pdfs.length === 1 ? "" : "s"}</p></a>
+      <a class="quick-card" href="/quizzes"><div class="qc-icon">📝</div><h3>Quizzes</h3><p class="qc-count">${qz.length} quiz${qz.length === 1 ? "" : "zes"}</p></a>
+      <a class="quick-card" href="/mocks"><div class="qc-icon">⏱️</div><h3>Mock Tests</h3><p class="qc-count">${mk.length} test${mk.length === 1 ? "" : "s"}</p></a>
+    </div>`;
+}
+
 async function loadHome() {
+  const container = $("#homeDynamic");
+  container.innerHTML = `<p class="muted">Loading your home screen…</p>`;
+
   const [pl, pdfs, qz, mk] = await Promise.all([
     fetchCollection("playlists"), fetchCollection("pdfs"), fetchCollection("quizzes"), fetchCollection("mocks")
   ]);
-  $("#statVideos").textContent = pl.length;
-  $("#statPdfs").textContent = pdfs.length;
-  $("#statQuizzes").textContent = qz.length;
-  $("#statMocks").textContent = mk.length;
+  if ($("#statVideos")) $("#statVideos").textContent = pl.length;
+  if ($("#statPdfs")) $("#statPdfs").textContent = pdfs.length;
+  if ($("#statQuizzes")) $("#statQuizzes").textContent = qz.length;
+  if ($("#statMocks")) $("#statMocks").textContent = mk.length;
+
+  if (!currentUser) {
+    container.innerHTML = `
+      <div class="guest-cta">
+        <div>
+          <h3>See your rank, marks &amp; a study plan made for you</h3>
+          <p>Sign in with Google to unlock your dashboard, attempt quizzes &amp; mock tests, and get suggestions based on how you're doing.</p>
+        </div>
+        <button class="btn btn-primary js-home-signin">Sign in with Google</button>
+      </div>
+      ${quickAccessGridHTML(pl, pdfs, qz, mk)}`;
+    const btn = $(".js-home-signin", container);
+    if (btn) btn.addEventListener("click", signInWithGoogle);
+    return;
+  }
+
+  container.innerHTML = `<p class="muted">Loading your personalised home screen…</p>`;
+  const summary = await buildHomeSummary();
+  const firstName = (currentProfile?.name || currentUser.displayName || "Student").split(" ")[0];
+
+  container.innerHTML = `
+    <div class="greet-banner">
+      <div>
+        <h2>Welcome back, ${firstName} 👋</h2>
+        <p>${summary.attempted ? "Here's where you stand and what to study next." : "Take your first quiz or mock test to start tracking your progress."}</p>
+      </div>
+      <div class="greet-stats">
+        <div><strong>${summary.attempted}</strong><span>Tests attempted</span></div>
+        <div><strong>${summary.attempted ? summary.accuracy + "%" : "—"}</strong><span>Accuracy</span></div>
+        <div><strong>${summary.rank ? "#" + summary.rank : "—"}</strong><span>${summary.rank ? "Rank of " + summary.rankOf : "Not ranked yet"}</span></div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <div><span class="eyebrow">Suggested for you</span><h2>What to study next</h2></div>
+    </div>
+    <div id="homeSuggestions">${suggestionsHTML(summary)}</div>
+
+    <div style="height:10px;"></div>
+    ${quickAccessGridHTML(pl, pdfs, qz, mk)}`;
+}
+
+// Builds { attempted, accuracy, rank, rankOf, weakSubject, lastResult } for the current user.
+async function buildHomeSummary() {
+  const empty = { attempted: 0, accuracy: 0, rank: null, rankOf: 0, weakSubject: null, lastResult: null };
+  if (!currentUser) return empty;
+
+  let myResults = [];
+  try {
+    const snap = await db.collection("results").where("uid", "==", currentUser.uid).orderBy("date", "desc").limit(50).get();
+    myResults = snap.docs.map(d => d.data());
+  } catch (err) { console.error("Could not load results:", err); return empty; }
+
+  if (!myResults.length) return empty;
+
+  const totalScore = myResults.reduce((s, r) => s + r.score, 0);
+  const totalMax = myResults.reduce((s, r) => s + r.total, 0);
+  const accuracy = totalMax ? Math.round((totalScore / totalMax) * 1000) / 10 : 0;
+
+  // Rank: compare against everyone else's overall accuracy, using a bounded
+  // recent-results sample (fine for a small/medium user base; swap for a
+  // Cloud Function aggregate if this ever needs to scale further).
+  let rank = null, rankOf = 0;
+  try {
+    const snap = await db.collection("results").orderBy("date", "desc").limit(500).get();
+    const byUser = {};
+    snap.docs.forEach(d => {
+      const r = d.data();
+      if (!byUser[r.uid]) byUser[r.uid] = { score: 0, total: 0 };
+      byUser[r.uid].score += r.score;
+      byUser[r.uid].total += r.total;
+    });
+    const standings = Object.entries(byUser)
+      .map(([uid, v]) => ({ uid, acc: v.total ? v.score / v.total : 0 }))
+      .sort((a, b) => b.acc - a.acc);
+    rankOf = standings.length;
+    const idx = standings.findIndex(s => s.uid === currentUser.uid);
+    rank = idx === -1 ? null : idx + 1;
+  } catch (err) { console.error("Could not compute rank:", err); }
+
+  // Weak subject: join each attempt's refId back to its quiz/mock doc to find its subject.
+  let weakSubject = null;
+  try {
+    const [quizzes, mocks] = await Promise.all([fetchCollection("quizzes"), fetchCollection("mocks")]);
+    const subjectOf = {};
+    [...quizzes, ...mocks].forEach(d => { if (d.subject) subjectOf[d.id] = d.subject; });
+    const bySubject = {};
+    myResults.forEach(r => {
+      const subj = subjectOf[r.refId];
+      if (!subj) return;
+      if (!bySubject[subj]) bySubject[subj] = { score: 0, total: 0 };
+      bySubject[subj].score += r.score;
+      bySubject[subj].total += r.total;
+    });
+    const ranked = Object.entries(bySubject)
+      .map(([subj, v]) => ({ subj, acc: v.total ? v.score / v.total : 0 }))
+      .sort((a, b) => a.acc - b.acc);
+    if (ranked.length) weakSubject = ranked[0];
+  } catch (err) { console.error("Could not compute weak subject:", err); }
+
+  return { attempted: myResults.length, accuracy, rank, rankOf, weakSubject, lastResult: myResults[0] };
+}
+
+function suggestionsHTML(summary) {
+  if (!summary.attempted) {
+    return `
+      <div class="suggest-card">
+        <div class="qc-icon">📝</div>
+        <div class="grow"><h4>Take your first quiz</h4><p class="muted">Quick subject-wise quizzes are the fastest way to see where you stand.</p></div>
+        <a href="/quizzes" class="btn btn-primary btn-sm">Start a quiz</a>
+      </div>
+      <div class="suggest-card">
+        <div class="qc-icon">🎬</div>
+        <div class="grow"><h4>Not sure where to begin?</h4><p class="muted">Browse video classes organised by subject and exam.</p></div>
+        <a href="/videos" class="btn btn-ghost btn-sm">Browse videos</a>
+      </div>`;
+  }
+
+  const cards = [];
+  if (summary.weakSubject) {
+    const subj = summary.weakSubject.subj;
+    const acc = Math.round(summary.weakSubject.acc * 100);
+    cards.push(`
+      <div class="suggest-card">
+        <div class="qc-icon">🎯</div>
+        <div class="grow"><h4>Focus on ${subj}</h4><p class="muted">Your accuracy here is ${acc}% — your weakest subject so far. Revise notes, then re-test.</p></div>
+        <a href="/pdfs?subject=${encodeURIComponent(subj)}" class="btn btn-ghost btn-sm">Notes</a>
+        <a href="/quizzes?subject=${encodeURIComponent(subj)}" class="btn btn-primary btn-sm">Quiz</a>
+      </div>`);
+  }
+  if (summary.lastResult) {
+    const r = summary.lastResult;
+    cards.push(`
+      <div class="suggest-card">
+        <div class="qc-icon">🔁</div>
+        <div class="grow"><h4>Retake "${r.title}"</h4><p class="muted">Last score: ${r.score}/${r.total}. A second attempt helps it stick.</p></div>
+        <a href="/${r.type === "quiz" ? "quizzes" : "mocks"}" class="btn btn-ghost btn-sm">Retake</a>
+      </div>`);
+  }
+  cards.push(`
+    <div class="suggest-card">
+      <div class="qc-icon">⏱️</div>
+      <div class="grow"><h4>Try a full-length mock</h4><p class="muted">Simulate real exam conditions with a timed, full-length test.</p></div>
+      <a href="/mocks" class="btn btn-ghost btn-sm">Mock tests</a>
+    </div>`);
+  return cards.join("");
 }
 
 // ---------------- VIDEOS ----------------
@@ -653,6 +888,7 @@ async function loadVideos() {
   grid.innerHTML = `<p class="muted">Loading playlists…</p>`;
   const playlists = await fetchCollection("playlists");
   populateFilterOptions("#videoSubjectFilter", "#videoExamFilter", playlists);
+  applyQueryPrefill("#videoSubjectFilter", "#videoExamFilter", "#videoSearch");
 
   const render = () => {
     const search = $("#videoSearch").value.toLowerCase();
@@ -719,6 +955,7 @@ async function loadPdfs() {
   grid.innerHTML = `<p class="muted">Loading notes…</p>`;
   const pdfs = await fetchCollection("pdfs");
   populateFilterOptions("#pdfSubjectFilter", "#pdfExamFilter", pdfs);
+  applyQueryPrefill("#pdfSubjectFilter", "#pdfExamFilter", "#pdfSearch");
 
   const render = () => {
     const search = $("#pdfSearch").value.toLowerCase();
@@ -747,6 +984,15 @@ async function loadPdfs() {
   $("#pdfSearch").oninput = render;
   $("#pdfSubjectFilter").onchange = render;
   $("#pdfExamFilter").onchange = render;
+}
+
+function applyQueryPrefill(subjSel, examSel, searchSel) {
+  const params = new URLSearchParams(location.search);
+  const subject = params.get("subject");
+  const exam = params.get("exam");
+  if (subject && $(subjSel) && [...$(subjSel).options].some(o => o.value === subject)) $(subjSel).value = subject;
+  if (exam && $(examSel) && [...$(examSel).options].some(o => o.value === exam)) $(examSel).value = exam;
+  if (searchSel && $(searchSel)) $(searchSel).value = "";
 }
 
 function populateFilterOptions(subjSel, examSel, items) {
@@ -800,6 +1046,7 @@ function renderTestList(el, items, type) {
     </div>
     <div class="grid grid-3" id="${type}Grid"></div>`;
   populateFilterOptions(`#${type}SubjectFilter`, `#${type}ExamFilter`, items);
+  applyQueryPrefill(`#${type}SubjectFilter`, `#${type}ExamFilter`);
 
   const render = () => {
     const subj = $(`#${type}SubjectFilter`).value;
