@@ -218,7 +218,7 @@ const KERALA_DISTRICTS = [
 let state = {
   view: "loading",
   student: null,
-  content: { videos: [], pdfs: [], quizzes: [], exams: [] },
+  content: { videos: [], pdfs: [], quizzes: [], exams: [], playlists: [] },
   authStep: "phone", // "phone" -> "otp" -> "profile" (profile only for first-time users)
   pendingPhone: null,
   isAdmin: false,
@@ -268,7 +268,7 @@ function uid(){ return Math.random().toString(36).slice(2,9); }
    so there's no manual "session:current" key anymore.
 */
 async function loadContent(){
-  const keys = ["videos","pdfs","quizzes","exams"];
+  const keys = ["videos","pdfs","quizzes","exams","playlists"];
   for(const k of keys){
     try{
       const snap = await db.collection(k).get();
@@ -282,6 +282,9 @@ async function loadContent(){
 async function addContentItem(key, item){
   const ref = await db.collection(key).add(item);
   return ref.id;
+}
+async function updateContentItem(key, id, patch){
+  await db.collection(key).doc(id).update(patch);
 }
 async function deleteContentItem(key, id){
   await db.collection(key).doc(id).delete();
@@ -320,6 +323,7 @@ async function init(){
   auth.onAuthStateChanged(async (user) => {
     if(state.isAdmin) return; // admin flow doesn't use Firebase auth
     if(user && user.phoneNumber){
+      await loadContent(); // re-fetch now that we're authenticated (rules allow it from here)
       const phone = user.phoneNumber.replace(/^\+91/, ""); // stored without country code
       const s = await loadStudent(phone);
       if(s){
@@ -560,10 +564,16 @@ function bindLogin(){
   if(adminLink) adminLink.onclick = (e) => { e.preventDefault(); openAdminGate(); };
 }
 
-function openAdminGate(){
+async function openAdminGate(){
   const pass = prompt("Admin passcode:");
   if(pass === ADMIN_PASSCODE){
-    state.isAdmin = true;
+    state.isAdmin = true; // set before the await so onAuthStateChanged ignores this sign-in
+    try{
+      await auth.signInAnonymously(); // gives Firestore an authenticated user so admin writes pass the rules
+    }catch(e){
+      console.error("admin auth error", e);
+      showToast("Admin sign-in failed: " + (e.message || "try again"));
+    }
     state.view = "admin";
     if(!state.student) state.student = { name:"Admin", place:"FutureU", phone:"admin", rollNumber:"ADMIN" };
     render();
@@ -612,18 +622,31 @@ function homeStat(label, count, nav){
 /* ---------- VIDEOS ---------- */
 function renderVideos(){
   const vids = state.content.videos;
+  const playlists = state.content.playlists;
   if(!vids.length) return emptyState("No videos yet", "Your admin hasn't uploaded any video playlists.");
-  const cats = [...new Set(vids.map(v=>v.category||"General"))];
-  return `<div class="section-title">Video playlist</div>` + cats.map(cat => `
-    <div class="category-pill">${cat}</div>
-    ${vids.filter(v=>(v.category||"General")===cat).map(v => `
+
+  const grouped = playlists.map(pl => ({
+    playlist: pl,
+    items: vids.filter(v => v.playlistId === pl.id)
+  })).filter(g => g.items.length);
+
+  const unassigned = vids.filter(v => !v.playlistId || !playlists.find(p=>p.id===v.playlistId));
+
+  const section = (title, desc, items) => `
+    <div class="category-pill">${title}</div>
+    ${desc ? `<div style="font-size:13px;color:var(--slate);margin:-4px 0 10px 0;">${desc}</div>` : ""}
+    ${items.map(v => `
       <div class="card">
         <div class="video-thumb"><iframe src="https://www.youtube.com/embed/${ytId(v.url)}" allowfullscreen></iframe></div>
         <div style="font-weight:600;margin-bottom:4px;">${v.title}</div>
         ${v.description ? `<div style="font-size:13px;color:var(--slate);">${v.description}</div>` : ""}
       </div>
     `).join("")}
-  `).join("");
+  `;
+
+  return `<div class="section-title">Video playlists</div>`
+    + grouped.map(g => section(g.playlist.title, g.playlist.description, g.items)).join("")
+    + (unassigned.length ? section("Other videos", "", unassigned) : "");
 }
 
 /* ---------- PDFS ---------- */
@@ -813,6 +836,9 @@ async function loadProfileResults(){
 }
 
 /* ---------- ADMIN ---------- */
+let adminOpenItem = null; // "key:id" of currently expanded preview
+function isAdminOpen(key, id){ return adminOpenItem === (key+":"+id); }
+
 function renderAdmin(){
   return `
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
@@ -820,14 +846,27 @@ function renderAdmin(){
       <span style="font-size:12px;color:var(--slate);">Content is visible to every student instantly.</span>
     </div>
 
+    ${adminSection("Create playlist", `
+      <div class="field"><label>Playlist name</label><input id="a-pl-title" placeholder="e.g. Kerala Rivers &amp; Dams"/></div>
+      <div class="field"><label>Description (optional)</label><textarea id="a-pl-desc" rows="2"></textarea></div>
+      <button class="btn" id="a-pl-add">Create playlist</button>
+    `)}
+    ${renderAdminPlaylists()}
+
     ${adminSection("Add video", `
       <div class="field"><label>Title</label><input id="a-v-title"/></div>
-      <div class="field"><label>Category</label><input id="a-v-cat" placeholder="e.g. Kerala Rivers"/></div>
+      <div class="field">
+        <label>Playlist</label>
+        <select id="a-v-playlist">
+          <option value="">No playlist (shows under "Other videos")</option>
+          ${state.content.playlists.map(p=>`<option value="${p.id}">${p.title}</option>`).join("")}
+        </select>
+      </div>
       <div class="field"><label>YouTube URL or video ID</label><input id="a-v-url"/></div>
       <div class="field"><label>Short description (optional)</label><textarea id="a-v-desc" rows="2"></textarea></div>
       <button class="btn" id="a-v-add">Add video</button>
     `)}
-    ${adminList(state.content.videos, v=>v.title, "videos")}
+    ${renderAdminVideos()}
 
     ${adminSection("Add PDF", `
       <div class="field"><label>Title</label><input id="a-p-title"/></div>
@@ -835,7 +874,7 @@ function renderAdmin(){
       <div class="field"><label>File link (Google Drive / hosted URL)</label><input id="a-p-url" placeholder="https://..."/></div>
       <button class="btn" id="a-p-add">Add PDF</button>
     `)}
-    ${adminList(state.content.pdfs, p=>p.title, "pdfs")}
+    ${renderAdminPdfs()}
 
     ${adminSection("Add quiz", `
       <div class="field"><label>Quiz title</label><input id="a-q-title"/></div>
@@ -844,7 +883,7 @@ function renderAdmin(){
       <button class="btn secondary" id="a-q-addq" style="margin-bottom:10px;">+ Add question</button>
       <button class="btn" id="a-q-save">Save quiz</button>
     `)}
-    ${adminList(state.content.quizzes, q=>q.title+" ("+q.questions.length+" Q)", "quizzes")}
+    ${renderAdminQuizList()}
 
     ${adminSection("Add mock exam", `
       <div class="field"><label>Exam title</label><input id="a-e-title"/></div>
@@ -854,7 +893,7 @@ function renderAdmin(){
       <button class="btn secondary" id="a-e-addq" style="margin-bottom:10px;">+ Add question</button>
       <button class="btn maroon" id="a-e-save">Save mock exam</button>
     `)}
-    ${adminList(state.content.exams, e=>e.title+" ("+e.questions.length+" Q, "+e.durationMinutes+"m)", "exams")}
+    ${renderAdminExamList()}
 
     <div class="divider"></div>
     <button class="btn secondary" id="a-exit">Exit admin panel</button>
@@ -863,14 +902,114 @@ function renderAdmin(){
 function adminSection(title, inner){
   return `<div class="card"><div class="eyebrow">${title}</div><div style="margin-top:10px;">${inner}</div></div>`;
 }
-function adminList(arr, labelFn, key){
-  if(!arr.length) return "";
+
+function renderAdminPlaylists(){
+  const pls = state.content.playlists;
+  if(!pls.length) return `<div class="card"><div class="eyebrow">Playlists</div><div style="font-size:13px;color:var(--slate);margin-top:6px;">No playlists yet — create one above, then videos can be added into it.</div></div>`;
   return `<div class="card">
-    <div class="eyebrow" style="margin-bottom:8px;">Existing (${arr.length})</div>
-    ${arr.map(item => `
+    <div class="eyebrow" style="margin-bottom:8px;">Playlists (${pls.length})</div>
+    ${pls.map(p => `
       <div class="list-item link-row">
-        <div style="font-size:13px;">${labelFn(item)}</div>
-        <button class="icon-btn" data-del="${key}:${item.id}">Remove</button>
+        <div>
+          <div style="font-size:13px;font-weight:600;">${p.title}</div>
+          ${p.description ? `<div style="font-size:11px;color:var(--slate);">${p.description}</div>` : ""}
+        </div>
+        <button class="icon-btn" data-del="playlists:${p.id}">Remove</button>
+      </div>
+    `).join("")}
+  </div>`;
+}
+
+function renderAdminVideos(){
+  const vids = state.content.videos;
+  if(!vids.length) return "";
+  return `<div class="card">
+    <div class="eyebrow" style="margin-bottom:8px;">Existing videos (${vids.length})</div>
+    ${vids.map(v => `
+      <div style="border-bottom:1px solid var(--line);padding:10px 0;">
+        <div class="list-item link-row" style="border-bottom:none;padding:0;">
+          <div style="font-size:13px;font-weight:600;">${v.title}</div>
+          <div style="display:flex;gap:6px;flex-shrink:0;">
+            <button class="icon-btn" style="color:var(--green);" data-preview="videos:${v.id}">${isAdminOpen('videos',v.id)?'Hide':'Preview'}</button>
+            <button class="icon-btn" data-del="videos:${v.id}">Remove</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:8px;">
+          <select class="a-v-reassign" data-vid="${v.id}" style="flex:1;padding:7px 8px;border:1.5px solid var(--line);border-radius:6px;font-size:12px;">
+            <option value="" ${!v.playlistId?'selected':''}>No playlist</option>
+            ${state.content.playlists.map(p=>`<option value="${p.id}" ${v.playlistId===p.id?'selected':''}>${p.title}</option>`).join("")}
+          </select>
+          <button class="btn small secondary" data-save-playlist="${v.id}">Save</button>
+        </div>
+        ${isAdminOpen('videos', v.id) ? `<div class="video-thumb" style="margin-top:10px;"><iframe src="https://www.youtube.com/embed/${ytId(v.url)}" allowfullscreen></iframe></div>` : ""}
+      </div>
+    `).join("")}
+  </div>`;
+}
+
+function renderAdminPdfs(){
+  const pdfs = state.content.pdfs;
+  if(!pdfs.length) return "";
+  return `<div class="card">
+    <div class="eyebrow" style="margin-bottom:8px;">Existing PDFs (${pdfs.length})</div>
+    ${pdfs.map(p => `
+      <div class="list-item link-row">
+        <div style="font-size:13px;">${p.title}</div>
+        <div style="display:flex;gap:6px;">
+          <a class="btn small secondary" href="${p.url}" target="_blank" rel="noopener">Open</a>
+          <button class="icon-btn" data-del="pdfs:${p.id}">Remove</button>
+        </div>
+      </div>
+    `).join("")}
+  </div>`;
+}
+
+function renderQuestionPreview(questions){
+  return `<div style="margin-top:10px;">
+    ${questions.map((qq,i) => `
+      <div style="background:var(--paper2);border-radius:8px;padding:10px;margin-bottom:8px;">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px;">${i+1}. ${qq.q}</div>
+        ${qq.options.map((opt,oi) => `<div style="font-size:12px;padding:5px 8px;border-radius:6px;margin-bottom:3px;${oi===qq.correctIndex?'background:rgba(31,111,74,0.18);font-weight:600;':''}">${opt}${oi===qq.correctIndex?' &check; correct':''}</div>`).join("")}
+      </div>
+    `).join("")}
+  </div>`;
+}
+
+function renderAdminQuizList(){
+  const qz = state.content.quizzes;
+  if(!qz.length) return "";
+  return `<div class="card">
+    <div class="eyebrow" style="margin-bottom:8px;">Existing quizzes (${qz.length})</div>
+    ${qz.map(q => `
+      <div style="border-bottom:1px solid var(--line);padding:10px 0;">
+        <div class="list-item link-row" style="border-bottom:none;padding:0;">
+          <div style="font-size:13px;">${q.title} (${q.questions.length} Q)</div>
+          <div style="display:flex;gap:6px;flex-shrink:0;">
+            <button class="icon-btn" style="color:var(--green);" data-preview="quizzes:${q.id}">${isAdminOpen('quizzes',q.id)?'Hide':'Preview'}</button>
+            <button class="icon-btn" data-del="quizzes:${q.id}">Remove</button>
+          </div>
+        </div>
+        ${isAdminOpen('quizzes', q.id) ? renderQuestionPreview(q.questions) : ""}
+      </div>
+    `).join("")}
+  </div>`;
+}
+
+function renderAdminExamList(){
+  const ex = state.content.exams;
+  if(!ex.length) return "";
+  return `<div class="card">
+    <div class="eyebrow" style="margin-bottom:8px;">Existing mock exams (${ex.length})</div>
+    ${ex.map(e => `
+      <div style="border-bottom:1px solid var(--line);padding:10px 0;">
+        <div class="list-item link-row" style="border-bottom:none;padding:0;">
+          <div style="font-size:13px;">${e.title} (${e.questions.length} Q, ${e.durationMinutes}m)</div>
+          <div style="display:flex;gap:6px;flex-shrink:0;">
+            <button class="icon-btn" style="color:var(--green);" data-preview="exams:${e.id}">${isAdminOpen('exams',e.id)?'Hide':'Preview'}</button>
+            <button class="icon-btn" data-del="exams:${e.id}">Remove</button>
+          </div>
+        </div>
+        ${isAdminOpen('exams', e.id) ? renderQuestionPreview(e.questions) : ""}
       </div>
     `).join("")}
   </div>`;
@@ -1004,20 +1143,51 @@ function bindAdminEvents(){
   if(state.view !== "admin") return;
 
   const exitBtn = document.getElementById("a-exit");
-  if(exitBtn) exitBtn.onclick = () => { state.isAdmin = false; state.student = null; state.view = "login"; render(); };
+  if(exitBtn) exitBtn.onclick = async () => { state.isAdmin = false; state.student = null; await auth.signOut(); state.authStep = "phone"; state.view = "login"; render(); };
+
+  const plAdd = document.getElementById("a-pl-add");
+  if(plAdd) plAdd.onclick = async () => {
+    const title = document.getElementById("a-pl-title").value.trim();
+    const desc = document.getElementById("a-pl-desc").value.trim();
+    if(!title){ showToast("Give the playlist a name"); return; }
+    await addContentItem("playlists", { title, description: desc });
+    await loadContent();
+    showToast("Playlist created");
+    render();
+  };
 
   const vAdd = document.getElementById("a-v-add");
   if(vAdd) vAdd.onclick = async () => {
     const title = document.getElementById("a-v-title").value.trim();
-    const cat = document.getElementById("a-v-cat").value.trim();
+    const playlistId = document.getElementById("a-v-playlist").value;
     const url = document.getElementById("a-v-url").value.trim();
     const desc = document.getElementById("a-v-desc").value.trim();
     if(!title || !url){ showToast("Title and video URL are required"); return; }
-    await addContentItem("videos", { title, category: cat, url, description: desc });
+    await addContentItem("videos", { title, playlistId: playlistId || null, url, description: desc });
     await loadContent();
     showToast("Video added");
     render();
   };
+
+  document.querySelectorAll("[data-preview]").forEach(el=>{
+    el.onclick = () => {
+      const [key, id] = el.getAttribute("data-preview").split(":");
+      adminOpenItem = isAdminOpen(key,id) ? null : (key+":"+id);
+      render();
+    };
+  });
+
+  document.querySelectorAll("[data-save-playlist]").forEach(el=>{
+    el.onclick = async () => {
+      const vid = el.getAttribute("data-save-playlist");
+      const select = document.querySelector(`.a-v-reassign[data-vid="${vid}"]`);
+      const playlistId = select.value || null;
+      await updateContentItem("videos", vid, { playlistId });
+      await loadContent();
+      showToast("Playlist updated");
+      render();
+    };
+  });
 
   const pAdd = document.getElementById("a-p-add");
   if(pAdd) pAdd.onclick = async () => {
