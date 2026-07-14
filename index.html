@@ -6,9 +6,6 @@
 <title>PSC FutureU — Kerala PSC Study Companion</title>
 <meta name="description" content="Video classes, downloadable notes, quizzes and full-length mock tests for Kerala PSC exam preparation." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://firestore.googleapis.com">
-<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://lh3.googleusercontent.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
@@ -67,7 +64,6 @@ img { max-width: 100%; display: block; }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 19px; }
 .brand-mark { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(155deg, var(--color-primary), var(--color-primary-dark)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 14px; }
 .site-nav { display: flex; align-items: center; gap: 4px; }
-.mobile-account { display: none; }
 .site-nav a { padding: 9px 14px; border-radius: 999px; font-weight: 600; font-size: 14.5px; color: var(--color-ink-soft); transition: background .15s, color .15s; }
 .site-nav a:hover { background: var(--color-primary-soft); color: var(--color-primary-dark); }
 .site-nav a.active { background: var(--color-primary); color: #fff; }
@@ -110,8 +106,7 @@ img { max-width: 100%; display: block; }
 .admit-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
 .admit-card-top .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; background: var(--color-primary-soft); color: var(--color-primary-dark); padding: 4px 9px; border-radius: 6px; }
 .admit-card-body { display: flex; gap: 16px; align-items: center; }
-.admit-photo { width: 58px; height: 58px; border-radius: 12px; background: linear-gradient(155deg, var(--color-accent), var(--color-accent-dark)); flex-shrink: 0; overflow: hidden; }
-.admit-photo img { width: 100%; height: 100%; object-fit: cover; }
+.admit-photo { width: 58px; height: 58px; border-radius: 12px; background: linear-gradient(155deg, var(--color-accent), var(--color-accent-dark)); flex-shrink: 0; }
 .admit-card-body h4 { font-size: 17px; margin-bottom: 2px; }
 .admit-card-body span { font-size: 12.5px; color: var(--color-ink-soft); }
 .admit-perforation { display: flex; gap: 3px; margin-top: 20px; }
@@ -255,14 +250,6 @@ img { max-width: 100%; display: block; }
 .suggest-card h4 { font-size: 15px; margin-bottom: 2px; }
 .suggest-card p { margin: 0; font-size: 12.5px; }
 
-.cat-card { display: flex; align-items: center; gap: 14px; padding: 18px; }
-.cat-card .qc-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--color-primary-soft); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-.cat-card .grow { flex: 1; min-width: 0; }
-.cat-card h3 { font-size: 15.5px; margin-bottom: 2px; }
-.cat-card .chev { color: var(--color-ink-soft); font-size: 18px; }
-.back-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13.5px; color: var(--color-primary); margin-bottom: 14px; cursor: pointer; }
-.back-link:hover { text-decoration: underline; }
-
 .guest-cta { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; background: var(--color-primary-soft); border: 1.5px dashed var(--color-primary); border-radius: var(--radius-lg); padding: 22px 26px; margin-bottom: 26px; }
 .guest-cta h3 { font-size: 17px; margin-bottom: 4px; color: var(--color-primary-dark); }
 .guest-cta p { margin: 0; font-size: 13.5px; max-width: 420px; }
@@ -282,7 +269,7 @@ img { max-width: 100%; display: block; }
   .admin-side a { white-space: nowrap; }
 }
 @media (max-width: 620px) {
-  .site-nav { position: fixed; top: var(--header-h); left: 0; right: 0; background: var(--color-surface); flex-direction: column; align-items: stretch; padding: 10px; border-bottom: 1px solid var(--color-border); display: none; gap: 2px; }
+  .site-nav { position: fixed; top: var(--header-h); left: 0; right: 0; background: var(--color-surface); flex-direction: column; align-items: stretch; padding: 10px; border-bottom: 1px solid var(--color-border); display: none; gap: 2px; max-height: calc(100vh - var(--header-h)); overflow-y: auto; }
   .site-nav.open { display: flex; }
   .site-nav a { text-align: center; }
   .nav-toggle { display: block; }
@@ -293,11 +280,59 @@ img { max-width: 100%; display: block; }
   .hero-stats { flex-wrap: wrap; gap: 18px; }
   .form-row-inline { flex-direction: column; gap: 16px; }
   .header-actions .btn span.label { display: none; }
-  #authArea { display: none; }
-  .mobile-account { display: flex !important; flex-direction: column; gap: 8px; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--color-border); }
-  .mobile-account .user-chip { justify-content: center; padding: 10px 12px; }
-  .mobile-account .user-chip span { max-width: none; }
+  #authArea { gap: 6px; }
+  .user-chip span { max-width: 64px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }
+
+/* ---------------- Mobile nav auth block (inside the ☰ menu) ---------------- */
+.nav-auth-block { display: none; }
+@media (max-width: 620px) {
+  .nav-auth-block { display: block; border-top: 1px solid var(--color-border); margin-top: 8px; padding-top: 10px; }
+  .nav-auth-block .user-chip { width: 100%; justify-content: flex-start; margin-bottom: 8px; padding: 8px; }
+  .nav-auth-block .user-chip span { max-width: none; }
+  .nav-auth-block .btn { width: 100%; }
+}
+
+/* ---------------- View toggle (grid / list) ---------------- */
+.view-toggle { display: inline-flex; border: 1.5px solid var(--color-border); border-radius: 999px; overflow: hidden; margin-left: auto; }
+.view-toggle button { border: none; background: var(--color-surface); padding: 8px 14px; font-size: 13px; font-weight: 700; color: var(--color-ink-soft); }
+.view-toggle button.active { background: var(--color-primary); color: #fff; }
+
+/* ---------------- List rows (long list view) ---------------- */
+.list-rows { display: flex; flex-direction: column; gap: 10px; }
+.list-row { display: flex; align-items: center; gap: 14px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 14px 16px; cursor: pointer; transition: box-shadow .15s, border-color .15s; }
+.list-row:hover { box-shadow: var(--shadow-sm); border-color: var(--color-primary-soft); }
+.list-row .lr-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--color-primary-soft); color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.list-row .grow { flex: 1; min-width: 0; }
+.list-row h3 { font-size: 15px; margin-bottom: 2px; }
+.list-row .lr-count { font-family: var(--font-mono); font-size: 12px; color: var(--color-ink-soft); background: var(--color-bg); padding: 4px 10px; border-radius: 999px; flex-shrink: 0; }
+.list-row .lr-chevron { color: var(--color-ink-soft); flex-shrink: 0; }
+
+/* ---------------- Signups / analytics (admin) ---------------- */
+.stat-strip { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+.stat-pill { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 14px 18px; min-width: 130px; }
+.stat-pill strong { display: block; font-family: var(--font-mono); font-size: 22px; }
+.stat-pill span { font-size: 12px; color: var(--color-ink-soft); }
+.analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 26px; }
+.pie-legend { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; font-size: 12.5px; }
+.pie-legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 8px; }
+@media (max-width: 860px) { .analytics-grid { grid-template-columns: 1fr; } }
+
+/* ---------------- Bulk import ---------------- */
+.bulk-import-box { border: 1.5px dashed var(--color-border); border-radius: var(--radius); padding: 18px; margin-bottom: 22px; background: var(--color-primary-soft); }
+.bulk-import-box h4 { font-size: 14.5px; margin-bottom: 6px; }
+.bulk-import-box .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+
+/* ---------------- Skeleton loaders (perceived speed) ---------------- */
+.skel { background: linear-gradient(90deg, var(--color-border) 25%, #eef1f4 37%, var(--color-border) 63%); background-size: 400% 100%; animation: skel-shine 1.4s ease infinite; border-radius: var(--radius); }
+@keyframes skel-shine { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+.skel-card { height: 190px; }
+.skel-row { height: 62px; }
+
+/* ---------------- Admin extras ---------------- */
+.field-required { color: var(--color-danger); }
+.chip-complete { background: var(--color-success-soft); color: var(--color-success); }
+.chip-incomplete { background: var(--color-danger-soft); color: var(--color-danger); }
 </style>
 </head>
 <body>
@@ -314,7 +349,7 @@ img { max-width: 100%; display: block; }
         <a href="/mocks" data-nav="mocks">Mock Tests</a>
         <a href="/dashboard" data-nav="dashboard">Dashboard</a>
         <a href="/admin" data-nav="admin" id="navAdminLink" style="display:none;">Admin</a>
-        <div class="mobile-account" id="mobileAccountArea"></div>
+        <div class="nav-auth-block" id="navAuthBlock"></div>
       </nav>
     </div>
     <div class="header-actions">
@@ -378,6 +413,7 @@ img { max-width: 100%; display: block; }
         <input type="search" id="videoSearch" placeholder="Search playlists…" />
         <select id="videoSubjectFilter"><option value="">All subjects</option></select>
         <select id="videoExamFilter"><option value="">All exams</option></select>
+        <div id="videoViewToggle"></div>
       </div>
       <div class="grid grid-3" id="videoGrid"></div>
     </div>
@@ -385,7 +421,18 @@ img { max-width: 100%; display: block; }
 
   <!-- PDFS -->
   <section class="page" id="page-pdfs">
-    <div class="section container" id="pdfsContainer"></div>
+    <div class="section container">
+      <div class="section-head">
+        <div><span class="eyebrow">Public · No login needed</span><h2>Study Notes</h2><p>Downloadable PDF notes, organised by subject and exam.</p></div>
+      </div>
+      <div class="filter-bar">
+        <input type="search" id="pdfSearch" placeholder="Search notes…" />
+        <select id="pdfSubjectFilter"><option value="">All subjects</option></select>
+        <select id="pdfExamFilter"><option value="">All exams</option></select>
+        <div id="pdfViewToggle"></div>
+      </div>
+      <div class="grid grid-2" id="pdfGrid"></div>
+    </div>
   </section>
 
   <!-- QUIZZES -->
@@ -453,8 +500,6 @@ img { max-width: 100%; display: block; }
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 
 <script>
 // ============================================================
@@ -472,8 +517,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
-// Cache Firestore reads in IndexedDB so repeat visits/navigations feel instant
-// instead of re-fetching over the network every time.
+// Cache reads on-device so repeat visits/navigations render instantly
+// instead of waiting on a fresh round trip every time.
 db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
 const ADMIN_EMAIL = "futureuapp@gmail.com";
 const KERALA_DISTRICTS = [
@@ -603,28 +648,40 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove("show"), 2400);
 }
 
+const GOOGLE_G_SVG = `<svg width="16" height="16" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84c-.21 1.13-.85 2.09-1.8 2.73v2.27h2.92c1.7-1.57 2.68-3.88 2.68-6.64z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.17l-2.92-2.27c-.81.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.71H.96v2.34C2.44 15.98 5.48 18 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 013.68 9c0-.59.1-1.17.29-1.71V4.95H.96A9 9 0 000 9c0 1.45.35 2.83.96 4.05l3.01-2.34z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.45 3.44 1.35l2.59-2.59C13.46.89 11.43 0 9 0 5.48 0 2.44 2.02.96 4.95l3.01 2.34C4.68 5.16 6.66 3.58 9 3.58z"/></svg>`;
+
 function renderAuthArea(detail) {
   const area = $("#authArea");
-  const mobileArea = $("#mobileAccountArea");
-  const googleBtnSvg = `<svg width="16" height="16" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84c-.21 1.13-.85 2.09-1.8 2.73v2.27h2.92c1.7-1.57 2.68-3.88 2.68-6.64z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.17l-2.92-2.27c-.81.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.71H.96v2.34C2.44 15.98 5.48 18 9 18z"/><path fill="#FBBC05" d="M3.97 10.71A5.4 5.4 0 013.68 9c0-.59.1-1.17.29-1.71V4.95H.96A9 9 0 000 9c0 1.45.35 2.83.96 4.05l3.01-2.34z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.45 3.44 1.35l2.59-2.59C13.46.89 11.43 0 9 0 5.48 0 2.44 2.02.96 4.95l3.01 2.34C4.68 5.16 6.66 3.58 9 3.58z"/></svg>`;
-
+  const navBlock = $("#navAuthBlock");
+  if (!area) return;
   if (!detail.user) {
-    const html = `<button class="btn btn-google btn-block js-google-signin">${googleBtnSvg} <span class="label">Sign in with Google</span></button>`;
-    if (area) { area.innerHTML = `<button class="btn btn-google js-google-signin">${googleBtnSvg} <span class="label">Sign in</span></button>`; $(".js-google-signin", area).addEventListener("click", signInWithGoogle); }
-    if (mobileArea) { mobileArea.innerHTML = html; $(".js-google-signin", mobileArea).addEventListener("click", signInWithGoogle); }
-    return;
-  }
-
-  const initial = (detail.profile?.name || detail.user.displayName || "U").charAt(0).toUpperCase();
-  const chipHTML = `<div class="user-chip">${detail.user.photoURL ? `<img src="${detail.user.photoURL}" alt="" referrerpolicy="no-referrer">` : `<span class="avatar-fallback">${initial}</span>`}<span>${(detail.profile?.name || detail.user.displayName || "Student").split(" ")[0]}</span></div>`;
-
-  if (area) {
-    area.innerHTML = `${chipHTML}<button class="btn btn-ghost btn-sm js-signout">Sign out</button>`;
+    const signInBtn = `<button class="btn btn-google js-google-signin">${GOOGLE_G_SVG} <span class="label">Sign in</span></button>`;
+    area.innerHTML = signInBtn;
+    $(".js-google-signin", area).addEventListener("click", signInWithGoogle);
+    if (navBlock) {
+      navBlock.innerHTML = `<button class="btn btn-google btn-block js-google-signin">${GOOGLE_G_SVG} <span class="label">Sign in with Google</span></button>`;
+      $(".js-google-signin", navBlock).addEventListener("click", signInWithGoogle);
+    }
+  } else {
+    const initial = (detail.profile?.name || detail.user.displayName || "U").charAt(0).toUpperCase();
+    const photo = detail.user.photoURL;
+    const avatarHTML = photo ? `<img src="${photo}" alt="">` : `<span class="avatar-fallback">${initial}</span>`;
+    area.innerHTML = `
+      <div class="user-chip">
+        ${avatarHTML}
+        <span>${(detail.profile?.name || detail.user.displayName || "Student").split(" ")[0]}</span>
+      </div>
+      <button class="btn btn-ghost btn-sm js-signout">Sign out</button>`;
     $(".js-signout", area).addEventListener("click", signOutUser);
-  }
-  if (mobileArea) {
-    mobileArea.innerHTML = `${chipHTML}<button class="btn btn-ghost btn-block js-signout">Sign out</button>`;
-    $(".js-signout", mobileArea).addEventListener("click", signOutUser);
+    if (navBlock) {
+      navBlock.innerHTML = `
+        <div class="user-chip">
+          ${avatarHTML}
+          <span>${detail.profile?.name || detail.user.displayName || "Student"}</span>
+        </div>
+        <button class="btn btn-danger btn-block js-signout" style="margin-top:6px;">Sign out</button>`;
+      $(".js-signout", navBlock).addEventListener("click", signOutUser);
+    }
   }
 }
 
@@ -711,11 +768,31 @@ window.addEventListener("authReady", (e) => {
   if (route === "admin") renderAdminPage(e.detail);
 });
 
-async function fetchCollection(name) {
+function readLocalCache(name) {
+  try {
+    const raw = localStorage.getItem("pfu_cache_" + name);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) { return null; }
+}
+function writeLocalCache(name, data) {
+  try { localStorage.setItem("pfu_cache_" + name, JSON.stringify(data)); } catch (e) {}
+}
+
+// Stale-while-revalidate: if we already have last-known data (in memory or
+// on-device from a previous visit) return it immediately so pages render
+// without a spinner, then quietly refresh from Firestore in the background.
+async function fetchCollection(name, { onRefresh } = {}) {
   if (cache[name]) return cache[name];
-  const snap = await db.collection(name).orderBy("createdAt", "desc").get();
-  cache[name] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  return cache[name];
+  const local = readLocalCache(name);
+  const refresh = db.collection(name).orderBy("createdAt", "desc").get().then(snap => {
+    const fresh = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    cache[name] = fresh;
+    writeLocalCache(name, fresh);
+    if (local && onRefresh && JSON.stringify(fresh) !== JSON.stringify(local)) onRefresh(fresh);
+    return fresh;
+  });
+  if (local) { cache[name] = local; return local; }
+  return refresh;
 }
 
 function getYouTubeId(url) {
@@ -911,6 +988,9 @@ async function loadVideos() {
   populateFilterOptions("#videoSubjectFilter", "#videoExamFilter", playlists);
   applyQueryPrefill("#videoSubjectFilter", "#videoExamFilter", "#videoSearch");
 
+  $("#videoViewToggle").innerHTML = viewToggleHTML("videos");
+  wireViewToggle($("#videoViewToggle"), "videos", () => render());
+
   const render = () => {
     const search = $("#videoSearch").value.toLowerCase();
     const subj = $("#videoSubjectFilter").value;
@@ -921,25 +1001,41 @@ async function loadVideos() {
     );
     if (!filtered.length) {
       grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><div class="glyph">🎬</div><p>No playlists match your filters yet.</p></div>`;
+      grid.className = "grid grid-3";
       return;
     }
-    grid.innerHTML = filtered.map(p => {
-      const firstId = p.videos?.[0] ? getYouTubeId(p.videos[0].url) : null;
-      const thumb = firstId ? `https://img.youtube.com/vi/${firstId}/hqdefault.jpg` : "";
-      return `
-      <div class="card js-open-playlist" data-id="${p.id}" style="cursor:pointer;">
-        <div class="video-thumb">
-          ${thumb ? `<img src="${thumb}" alt="${p.title}" loading="lazy">` : ""}
-          <div class="play"><span>▶</span></div>
-          <div class="playlist-count">${(p.videos || []).length} video${(p.videos || []).length === 1 ? "" : "s"}</div>
-        </div>
-        <div class="card-body">
-          <div class="card-tags">${p.subject ? `<span class="tag">${p.subject}</span>` : ""}${p.exam ? `<span class="tag gold">${p.exam}</span>` : ""}</div>
-          <h3>${p.title}</h3>
-          <p class="muted">${p.description || ""}</p>
-        </div>
-      </div>`;
-    }).join("");
+    if (getViewMode("videos") === "list") {
+      grid.className = "list-rows";
+      grid.innerHTML = filtered.map(p => `
+        <div class="list-row js-open-playlist" data-id="${p.id}">
+          <div class="lr-icon">🎬</div>
+          <div class="grow">
+            <div class="card-tags">${p.subject ? `<span class="tag">${p.subject}</span>` : ""}${p.exam ? `<span class="tag gold">${p.exam}</span>` : ""}</div>
+            <h3>${p.title}</h3>
+          </div>
+          <span class="lr-count">${(p.videos || []).length} video${(p.videos || []).length === 1 ? "" : "s"}</span>
+          <span class="lr-chevron">›</span>
+        </div>`).join("");
+    } else {
+      grid.className = "grid grid-3";
+      grid.innerHTML = filtered.map(p => {
+        const firstId = p.videos?.[0] ? getYouTubeId(p.videos[0].url) : null;
+        const thumb = firstId ? `https://img.youtube.com/vi/${firstId}/hqdefault.jpg` : "";
+        return `
+        <div class="card js-open-playlist" data-id="${p.id}" style="cursor:pointer;">
+          <div class="video-thumb">
+            ${thumb ? `<img src="${thumb}" alt="${p.title}" loading="lazy">` : ""}
+            <div class="play"><span>▶</span></div>
+            <div class="playlist-count">${(p.videos || []).length} video${(p.videos || []).length === 1 ? "" : "s"}</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">${p.subject ? `<span class="tag">${p.subject}</span>` : ""}${p.exam ? `<span class="tag gold">${p.exam}</span>` : ""}</div>
+            <h3>${p.title}</h3>
+            <p class="muted">${p.description || ""}</p>
+          </div>
+        </div>`;
+      }).join("");
+    }
     $all(".js-open-playlist", grid).forEach(el => el.addEventListener("click", () => openPlaylistModal(el.dataset.id)));
   };
   render();
@@ -972,44 +1068,17 @@ function closeVideoModal() { $("#videoModal").classList.remove("show"); $("#vide
 
 // ---------------- PDFS ----------------
 async function loadPdfs() {
-  const container = $("#pdfsContainer");
-  container.innerHTML = `<p class="muted">Loading notes…</p>`;
+  const grid = $("#pdfGrid");
+  grid.innerHTML = `<p class="muted">Loading notes…</p>`;
   const pdfs = await fetchCollection("pdfs");
-  const params = new URLSearchParams(location.search);
-  const category = params.get("category");
-
-  if (!category) {
-    const groups = groupByCategory(pdfs);
-    container.innerHTML = `
-      <div class="section-head">
-        <div><span class="eyebrow">Public · No login needed</span><h2>Study Notes</h2><p>Downloadable PDF notes, organised into categories.</p></div>
-      </div>
-      ${categoryGridHTML(groups, "📄", "/pdfs")}`;
-    return;
-  }
-
-  container.innerHTML = `
-    <a class="back-link" href="/pdfs">‹ All categories</a>
-    <div class="section-head">
-      <div><span class="eyebrow">Study Notes</span><h2>${category}</h2></div>
-    </div>
-    <div class="filter-bar">
-      <input type="search" id="pdfSearch" placeholder="Search notes…" />
-      <select id="pdfSubjectFilter"><option value="">All subjects</option></select>
-      <select id="pdfExamFilter"><option value="">All exams</option></select>
-    </div>
-    <div class="grid grid-2" id="pdfGrid"></div>`;
-
-  const inCategory = pdfs.filter(p => ((p.category || "").trim() || "Uncategorised") === category);
-  populateFilterOptions("#pdfSubjectFilter", "#pdfExamFilter", inCategory);
+  populateFilterOptions("#pdfSubjectFilter", "#pdfExamFilter", pdfs);
   applyQueryPrefill("#pdfSubjectFilter", "#pdfExamFilter", "#pdfSearch");
 
-  const grid = $("#pdfGrid");
   const render = () => {
     const search = $("#pdfSearch").value.toLowerCase();
     const subj = $("#pdfSubjectFilter").value;
     const exam = $("#pdfExamFilter").value;
-    const filtered = inCategory.filter(p =>
+    const filtered = pdfs.filter(p =>
       (!subj || p.subject === subj) && (!exam || p.exam === exam) &&
       (!search || p.title.toLowerCase().includes(search))
     );
@@ -1043,26 +1112,19 @@ function applyQueryPrefill(subjSel, examSel, searchSel) {
   if (searchSel && $(searchSel)) $(searchSel).value = "";
 }
 
-// ---------------- CATEGORY BROWSING (shared by PDFs / Quizzes / Mocks) ----------------
-function groupByCategory(items) {
-  const groups = {};
-  items.forEach(i => {
-    const cat = (i.category || "").trim() || "Uncategorised";
-    if (!groups[cat]) groups[cat] = [];
-    groups[cat].push(i);
-  });
-  return groups;
+function getViewMode(section) { return localStorage.getItem("pfu_view_" + section) || "grid"; }
+function setViewMode(section, mode) { try { localStorage.setItem("pfu_view_" + section, mode); } catch (e) {} }
+function viewToggleHTML(section) {
+  const mode = getViewMode(section);
+  return `<div class="view-toggle">
+    <button type="button" class="js-view-grid ${mode === "grid" ? "active" : ""}" data-section="${section}" title="Grid view">▦ Grid</button>
+    <button type="button" class="js-view-list ${mode === "list" ? "active" : ""}" data-section="${section}" title="List view">☰ List</button>
+  </div>`;
 }
-
-function categoryGridHTML(groups, icon, basePath) {
-  const names = Object.keys(groups).sort();
-  if (!names.length) return `<div class="empty-state"><div class="glyph">${icon}</div><p>Nothing added yet — check back soon.</p></div>`;
-  return `<div class="grid grid-2">${names.map(name => `
-    <a class="card cat-card" href="${basePath}?category=${encodeURIComponent(name)}">
-      <div class="qc-icon">${icon}</div>
-      <div class="grow"><h3>${name}</h3><p class="muted qc-count">${groups[name].length} item${groups[name].length === 1 ? "" : "s"}</p></div>
-      <span class="chev">›</span>
-    </a>`).join("")}</div>`;
+function wireViewToggle(container, section, onChange) {
+  const g = container.querySelector(".js-view-grid"), l = container.querySelector(".js-view-list");
+  if (g) g.addEventListener("click", () => { setViewMode(section, "grid"); g.classList.add("active"); l.classList.remove("active"); onChange("grid"); });
+  if (l) l.addEventListener("click", () => { setViewMode(section, "list"); l.classList.add("active"); g.classList.remove("active"); onChange("list"); });
 }
 
 function populateFilterOptions(subjSel, examSel, items) {
@@ -1104,40 +1166,24 @@ async function loadMocks() {
 }
 
 function renderTestList(el, items, type) {
-  const basePath = type === "quiz" ? "/quizzes" : "/mocks";
-  const params = new URLSearchParams(location.search);
-  const category = params.get("category");
-
-  if (!category) {
-    const groups = groupByCategory(items);
-    el.innerHTML = `
-      <div class="section-head">
-        <div><span class="eyebrow">${type === "quiz" ? "Practice" : "Timed · Full length"}</span>
-        <h2>${type === "quiz" ? "Quizzes" : "Mock Tests"}</h2>
-        <p>${type === "quiz" ? "Short subject-wise quizzes, organised into categories." : "Full-length timed tests, organised into categories."}</p></div>
-      </div>
-      ${categoryGridHTML(groups, type === "quiz" ? "📝" : "⏱️", basePath)}`;
-    return;
-  }
-
-  const inCategory = items.filter(i => ((i.category || "").trim() || "Uncategorised") === category);
   el.innerHTML = `
-    <a class="back-link" href="${basePath}">‹ All categories</a>
     <div class="section-head">
-      <div><span class="eyebrow">${type === "quiz" ? "Practice" : "Timed · Full length"}</span><h2>${category}</h2></div>
+      <div><span class="eyebrow">${type === "quiz" ? "Practice" : "Timed · Full length"}</span>
+      <h2>${type === "quiz" ? "Quizzes" : "Mock Tests"}</h2>
+      <p>${type === "quiz" ? "Short subject-wise quizzes — take your time." : "Full-length tests with a countdown timer, just like the real exam."}</p></div>
     </div>
     <div class="filter-bar">
       <select id="${type}SubjectFilter"><option value="">All subjects</option></select>
       <select id="${type}ExamFilter"><option value="">All exams</option></select>
     </div>
     <div class="grid grid-3" id="${type}Grid"></div>`;
-  populateFilterOptions(`#${type}SubjectFilter`, `#${type}ExamFilter`, inCategory);
+  populateFilterOptions(`#${type}SubjectFilter`, `#${type}ExamFilter`, items);
   applyQueryPrefill(`#${type}SubjectFilter`, `#${type}ExamFilter`);
 
   const render = () => {
     const subj = $(`#${type}SubjectFilter`).value;
     const exam = $(`#${type}ExamFilter`).value;
-    const filtered = inCategory.filter(i => (!subj || i.subject === subj) && (!exam || i.exam === exam));
+    const filtered = items.filter(i => (!subj || i.subject === subj) && (!exam || i.exam === exam));
     const grid = $(`#${type}Grid`);
     if (!filtered.length) {
       grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><div class="glyph">📝</div><p>No ${type === "quiz" ? "quizzes" : "mock tests"} available yet — check back soon.</p></div>`;
@@ -1311,7 +1357,7 @@ async function loadDashboard() {
             <span class="tag" style="background:#FBF0DA;color:#C9860F;">${currentProfile?.district || ""}</span>
           </div>
           <div class="admit-card-body">
-            <div class="admit-photo" style="display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-mono);font-weight:700;">${currentUser.photoURL ? `<img src="${currentUser.photoURL}" alt="" referrerpolicy="no-referrer">` : initial}</div>
+            <div class="admit-photo" style="display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-mono);font-weight:700;overflow:hidden;">${currentUser.photoURL ? `<img src="${currentUser.photoURL}" alt="" style="width:100%;height:100%;object-fit:cover;">` : initial}</div>
             <div>
               <h4>${currentProfile?.name || currentUser.displayName || "Student"}</h4>
               <span>${currentProfile?.phone || ""}</span><br/>
@@ -1512,7 +1558,6 @@ function renderPdfsAdmin() {
     <div class="form-card">
       <h3 style="margin-bottom:14px;">Add a new note</h3>
       <form id="pdfForm">
-        <div class="form-row"><label>Category (folder students browse — e.g. "LDC Notes Batch 1")</label><input type="text" id="pdf-category" required list="pdfCategoryList" placeholder="e.g. LDC Notes Batch 1" /><datalist id="pdfCategoryList"></datalist></div>
         <div class="form-row"><label>Title</label><input type="text" id="pdf-title" required placeholder="e.g. Indian Constitution — Short Notes" /></div>
         <div class="form-row"><label>Description (optional)</label><textarea id="pdf-desc" rows="2"></textarea></div>
         <div class="form-row-inline">
@@ -1524,13 +1569,8 @@ function renderPdfsAdmin() {
       </form>
     </div>
     <h3 style="margin-bottom:10px;">Existing notes</h3>
-    <table class="admin-table"><thead><tr><th>Category</th><th>Title</th><th>Subject</th><th>Exam</th><th></th></tr></thead>
-    <tbody id="pdfTableBody"><tr><td colspan="5">Loading…</td></tr></tbody></table>`;
-
-  fetchCollection("pdfs").then(items => {
-    const cats = [...new Set(items.map(i => i.category).filter(Boolean))].sort();
-    $("#pdfCategoryList").innerHTML = cats.map(c => `<option value="${c}">`).join("");
-  });
+    <table class="admin-table"><thead><tr><th>Title</th><th>Subject</th><th>Exam</th><th></th></tr></thead>
+    <tbody id="pdfTableBody"><tr><td colspan="4">Loading…</td></tr></tbody></table>`;
 
   $("#pdfForm").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -1538,7 +1578,6 @@ function renderPdfsAdmin() {
     btn.disabled = true; btn.textContent = "Saving…";
     try {
       await db.collection("pdfs").add({
-        category: $("#pdf-category").value.trim(),
         title: $("#pdf-title").value.trim(),
         description: $("#pdf-desc").value.trim(),
         subject: $("#pdf-subject").value.trim(),
@@ -1548,7 +1587,6 @@ function renderPdfsAdmin() {
       });
       showToast("Note saved!");
       e.target.reset();
-      cache.pdfs = null;
       loadPdfTable();
     } catch (err) { showToast("Error: " + err.message); }
     btn.disabled = false; btn.textContent = "Save note";
@@ -1560,11 +1598,11 @@ function renderPdfsAdmin() {
 async function loadPdfTable() {
   const tbody = $("#pdfTableBody");
   const snap = await db.collection("pdfs").orderBy("createdAt", "desc").get();
-  if (snap.empty) { tbody.innerHTML = `<tr><td colspan="5">No notes yet.</td></tr>`; return; }
+  if (snap.empty) { tbody.innerHTML = `<tr><td colspan="4">No notes yet.</td></tr>`; return; }
   tbody.innerHTML = snap.docs.map(d => {
     const p = d.data();
     return `<tr>
-      <td>${p.category || "—"}</td><td>${p.title}</td><td>${p.subject || "—"}</td><td>${p.exam || "—"}</td>
+      <td>${p.title}</td><td>${p.subject || "—"}</td><td>${p.exam || "—"}</td>
       <td class="actions"><button class="icon-btn danger js-del" data-id="${d.id}">Delete</button></td>
     </tr>`;
   }).join("");
@@ -1572,7 +1610,6 @@ async function loadPdfTable() {
     if (!confirm("Delete this note?")) return;
     await db.collection("pdfs").doc(b.dataset.id).delete();
     showToast("Note deleted.");
-    cache.pdfs = null;
     loadPdfTable();
   }));
 }
@@ -1583,12 +1620,8 @@ function renderTestAdmin(collectionName) {
   el.innerHTML = `
     <h2>${isMock ? "Mock Tests" : "Quizzes"}</h2>
     <div class="form-card">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
-        <h3 style="margin:0;">Add a new ${isMock ? "mock test" : "quiz"}</h3>
-        <button type="button" class="btn btn-ghost btn-sm" id="openBulkImportBtn">📥 Bulk import from Excel</button>
-      </div>
+      <h3 style="margin-bottom:14px;">Add a new ${isMock ? "mock test" : "quiz"}</h3>
       <form id="testForm">
-        <div class="form-row"><label>Category (folder students browse — e.g. "History Quizzes")</label><input type="text" id="t-category" required list="testCategoryList-${collectionName}" placeholder="e.g. ${isMock ? "LDC Full Mocks" : "History Quizzes"}" /><datalist id="testCategoryList-${collectionName}"></datalist></div>
         <div class="form-row"><label>Title</label><input type="text" id="t-title" required placeholder="e.g. ${isMock ? "LDC Full Mock — Set 1" : "Indian History — Quiz 1"}" /></div>
         <div class="form-row-inline">
           <div class="form-row"><label>Subject</label><input type="text" id="t-subject" placeholder="e.g. History" /></div>
@@ -1607,15 +1640,8 @@ function renderTestAdmin(collectionName) {
       </form>
     </div>
     <h3 style="margin-bottom:10px;">Existing ${isMock ? "mock tests" : "quizzes"}</h3>
-    <table class="admin-table"><thead><tr><th>Category</th><th>Title</th><th>Subject</th><th>Exam</th><th>Qs</th><th></th></tr></thead>
-    <tbody id="testTableBody"><tr><td colspan="6">Loading…</td></tr></tbody></table>`;
-
-  fetchCollection(collectionName).then(items => {
-    const cats = [...new Set(items.map(i => i.category).filter(Boolean))].sort();
-    $(`#testCategoryList-${collectionName}`).innerHTML = cats.map(c => `<option value="${c}">`).join("");
-  });
-
-  $("#openBulkImportBtn").addEventListener("click", () => openBulkImportModal(collectionName, isMock));
+    <table class="admin-table"><thead><tr><th>Title</th><th>Subject</th><th>Exam</th><th>Qs</th><th></th></tr></thead>
+    <tbody id="testTableBody"><tr><td colspan="5">Loading…</td></tr></tbody></table>`;
 
   $("#t-negmark").addEventListener("change", (e) => { $("#t-negvalue").disabled = !e.target.checked; });
 
@@ -1656,7 +1682,6 @@ function renderTestAdmin(collectionName) {
     btn.disabled = true; btn.textContent = "Saving…";
     try {
       const payload = {
-        category: $("#t-category").value.trim(),
         title: $("#t-title").value.trim(),
         subject: $("#t-subject").value.trim(),
         exam: $("#t-exam").value.trim(),
@@ -1670,7 +1695,6 @@ function renderTestAdmin(collectionName) {
       showToast(`${isMock ? "Mock test" : "Quiz"} saved!`);
       e.target.reset();
       $("#questionRows").innerHTML = ""; addQuestionRow();
-      cache[collectionName] = null;
       loadTestTable(collectionName);
     } catch (err) { showToast("Error: " + err.message); }
     btn.disabled = false; btn.textContent = `Save ${isMock ? "mock test" : "quiz"}`;
@@ -1682,11 +1706,11 @@ function renderTestAdmin(collectionName) {
 async function loadTestTable(collectionName) {
   const tbody = $("#testTableBody");
   const snap = await db.collection(collectionName).orderBy("createdAt", "desc").get();
-  if (snap.empty) { tbody.innerHTML = `<tr><td colspan="6">Nothing added yet.</td></tr>`; return; }
+  if (snap.empty) { tbody.innerHTML = `<tr><td colspan="5">Nothing added yet.</td></tr>`; return; }
   tbody.innerHTML = snap.docs.map(d => {
     const t = d.data();
     return `<tr>
-      <td>${t.category || "—"}</td><td>${t.title}</td><td>${t.subject || "—"}</td><td>${t.exam || "—"}</td><td>${(t.questions || []).length}</td>
+      <td>${t.title}</td><td>${t.subject || "—"}</td><td>${t.exam || "—"}</td><td>${(t.questions || []).length}</td>
       <td class="actions"><button class="icon-btn danger js-del" data-id="${d.id}">Delete</button></td>
     </tr>`;
   }).join("");
@@ -1694,137 +1718,8 @@ async function loadTestTable(collectionName) {
     if (!confirm("Delete this?")) return;
     await db.collection(collectionName).doc(b.dataset.id).delete();
     showToast("Deleted.");
-    cache[collectionName] = null;
     loadTestTable(collectionName);
   }));
-}
-
-// ---------------- BULK IMPORT (Excel) for quizzes / mocks ----------------
-const BULK_IMPORT_HEADERS = ["Category", "Title", "Subject", "Exam", "TimerMinutes", "NegativeMarking", "NegativeValue", "Question", "Option1", "Option2", "Option3", "Option4", "CorrectOption"];
-
-function downloadBulkImportTemplate(isMock) {
-  const sample = [
-    ["History Quizzes", "Indian History — Quiz 1", "History", "LDC", isMock ? 60 : "", "Y", 0.33, "Who built the Taj Mahal?", "Akbar", "Shah Jahan", "Aurangzeb", "Jahangir", 2],
-    ["History Quizzes", "Indian History — Quiz 1", "History", "LDC", isMock ? 60 : "", "Y", 0.33, "In which year did India gain independence?", "1945", "1946", "1947", "1948", 3],
-    ["Geography Quizzes", "Kerala Geography — Quiz 1", "Geography", "LGS", "", "N", 0, "Which is the largest district in Kerala?", "Palakkad", "Idukki", "Wayanad", "Kollam", 1]
-  ];
-  const ws = XLSX.utils.aoa_to_sheet([BULK_IMPORT_HEADERS, ...sample]);
-  ws["!cols"] = BULK_IMPORT_HEADERS.map(() => ({ wch: 22 }));
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Import");
-  XLSX.writeFile(wb, `${isMock ? "mock_test" : "quiz"}_bulk_import_template.xlsx`);
-}
-
-function openBulkImportModal(collectionName, isMock) {
-  if ($("#bulkImportModal")) $("#bulkImportModal").remove();
-  const modal = document.createElement("div");
-  modal.id = "bulkImportModal";
-  modal.className = "modal-overlay show";
-  modal.innerHTML = `
-    <div class="modal-card">
-      <div class="modal-eyebrow">Bulk import</div>
-      <h2>Import ${isMock ? "mock tests" : "quizzes"} from Excel</h2>
-      <p class="modal-sub">Each row is one question. Rows with the same <strong>Title</strong> are grouped into one ${isMock ? "mock test" : "quiz"}. <strong>CorrectOption</strong> is 1–4.</p>
-      <div style="display:flex; gap:10px; margin:16px 0;">
-        <button type="button" class="btn btn-ghost btn-block" id="downloadTemplateBtn">⬇ Download template</button>
-      </div>
-      <div class="form-row"><label>Select .xlsx file</label><input type="file" id="bulkImportFile" accept=".xlsx,.xls" /></div>
-      <p class="muted" id="bulkImportStatus" style="font-size:12.5px;"></p>
-      <div style="display:flex; gap:10px; margin-top:8px;">
-        <button type="button" class="btn btn-ghost btn-block js-close-bulk">Cancel</button>
-        <button type="button" class="btn btn-primary btn-block" id="runBulkImportBtn" disabled>Import</button>
-      </div>
-    </div>`;
-  document.body.appendChild(modal);
-
-  modal.addEventListener("click", (e) => { if (e.target === modal) modal.remove(); });
-  $(".js-close-bulk", modal).addEventListener("click", () => modal.remove());
-  $("#downloadTemplateBtn", modal).addEventListener("click", () => downloadBulkImportTemplate(isMock));
-
-  let parsedTests = null;
-  $("#bulkImportFile", modal).addEventListener("change", async (e) => {
-    const file = e.target.files[0];
-    const status = $("#bulkImportStatus", modal);
-    const runBtn = $("#runBulkImportBtn", modal);
-    runBtn.disabled = true;
-    parsedTests = null;
-    if (!file) return;
-    status.textContent = "Reading file…";
-    try {
-      const buf = await file.arrayBuffer();
-      const wb = XLSX.read(buf, { type: "array" });
-      const sheet = wb.Sheets[wb.SheetNames[0]];
-      const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
-      parsedTests = groupBulkImportRows(rows, isMock);
-      const totalQ = parsedTests.reduce((s, t) => s + t.questions.length, 0);
-      if (!parsedTests.length) {
-        status.textContent = "No valid rows found. Check the template format and try again.";
-      } else {
-        status.textContent = `Found ${parsedTests.length} test${parsedTests.length === 1 ? "" : "s"}, ${totalQ} question${totalQ === 1 ? "" : "s"} total. Ready to import.`;
-        runBtn.disabled = false;
-      }
-    } catch (err) {
-      status.textContent = "Could not read that file: " + err.message;
-    }
-  });
-
-  $("#runBulkImportBtn", modal).addEventListener("click", async () => {
-    if (!parsedTests || !parsedTests.length) return;
-    const runBtn = $("#runBulkImportBtn", modal);
-    const status = $("#bulkImportStatus", modal);
-    runBtn.disabled = true; runBtn.textContent = "Importing…";
-    try {
-      let batch = db.batch();
-      let opCount = 0;
-      for (const test of parsedTests) {
-        const ref = db.collection(collectionName).doc();
-        batch.set(ref, { ...test, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-        opCount++;
-        if (opCount >= 450) { await batch.commit(); batch = db.batch(); opCount = 0; }
-      }
-      if (opCount > 0) await batch.commit();
-      status.textContent = `Imported ${parsedTests.length} test${parsedTests.length === 1 ? "" : "s"} successfully!`;
-      showToast("Bulk import complete!");
-      cache[collectionName] = null;
-      loadTestTable(collectionName);
-      setTimeout(() => modal.remove(), 1200);
-    } catch (err) {
-      status.textContent = "Import failed: " + err.message;
-      runBtn.disabled = false;
-    }
-    runBtn.textContent = "Import";
-  });
-}
-
-// Groups flat Excel rows (one row per question) into test documents by Title.
-function groupBulkImportRows(rows, isMock) {
-  const byTitle = {};
-  const order = [];
-  rows.forEach(row => {
-    const title = String(row.Title || "").trim();
-    const qText = String(row.Question || "").trim();
-    if (!title || !qText) return;
-    const opts = [row.Option1, row.Option2, row.Option3, row.Option4].map(o => String(o ?? "").trim());
-    if (opts.some(o => !o)) return;
-    const correctNum = Number(row.CorrectOption);
-    if (!correctNum || correctNum < 1 || correctNum > 4) return;
-
-    if (!byTitle[title]) {
-      byTitle[title] = {
-        category: String(row.Category || "").trim(),
-        title,
-        subject: String(row.Subject || "").trim(),
-        exam: String(row.Exam || "").trim(),
-        negativeMarking: /^y(es)?$/i.test(String(row.NegativeMarking || "").trim()),
-        negativeValue: Number(row.NegativeValue) || 0,
-        questions: []
-      };
-      if (isMock) byTitle[title].timerMinutes = row.TimerMinutes ? Number(row.TimerMinutes) : null;
-      order.push(title);
-    }
-    byTitle[title].questions.push({ q: qText, options: opts, correct: correctNum - 1 });
-  });
-  return order.map(t => byTitle[t]).filter(t => t.questions.length);
 }
 </script>
 </body>
