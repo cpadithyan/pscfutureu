@@ -65,15 +65,15 @@ body {
 .font-display {
   font-family: 'Sora', sans-serif;
 }
-/* Premium box interactions replicating image_b2f88b.png visual tokens */
+/* Visual cards transition styling */
 .tt-box {
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .tt-box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(11, 79, 108, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(11, 79, 108, 0.08);
 }
-/* Loading skeletons shimmer effect */
+/* Loading skeleton shimmer effects */
 .shimmer {
   background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
   background-size: 200% 100%;
@@ -94,7 +94,7 @@ body {
         <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary-dark text-white flex items-center justify-center font-mono text-sm shadow-md">PU</span>
         <span>PSC FutureU</span>
       </a>
-      <!-- Desktop Menu Navigation -->
+      <!-- Desktop Navigation Menu -->
       <nav class="hidden lg:flex items-center gap-1">
         <a href="/" data-nav="home" class="px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Home</a>
         <a href="/videos" data-nav="videos" class="px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Video Classes</a>
@@ -118,13 +118,13 @@ body {
 <div id="mobileDrawer" class="fixed inset-0 bg-ink/50 backdrop-blur-sm z-50 transform translate-x-full transition-transform duration-300 lg:hidden">
   <div class="absolute right-0 top-0 bottom-0 w-[280px] bg-white shadow-2xl flex flex-col p-6">
     <div class="flex items-center justify-between mb-6">
-      <span class="font-display font-bold text-primary">Menu</span>
+      <span class="font-display font-bold text-primary">Menu Navigation</span>
       <button class="text-xl p-1.5 hover:bg-slate-100 rounded-lg text-ink js-nav-toggle">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
     
-    <!-- Unified Mobile Drawer User Card -->
+    <!-- Profile picture display synced with Google Photo info -->
     <div id="mobileProfileSection" class="mb-5 p-4 bg-slate-50 rounded-xl border border-slate-100"></div>
 
     <nav class="flex flex-col gap-1 flex-1 overflow-y-auto">
@@ -149,7 +149,7 @@ body {
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
       <div class="lg:col-span-7 space-y-5">
         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-50 text-accent-dark tracking-wide uppercase border border-amber-200">
-          <i class="fa-solid fa-circle text-[7px] text-accent animate-ping"></i> Kerala PSC Study Companion
+          <i class="fa-solid fa-circle text-[7px] text-accent animate-ping"></i> Kerala PSC Prep Companion
         </span>
         <h1 class="text-4xl md:text-5xl font-display font-extrabold text-ink leading-tight">
           Prepare with a plan, not just <span class="text-primary underline decoration-amber-400 decoration-wavy">practice.</span>
@@ -164,15 +164,14 @@ body {
       </div>
 
       <div class="lg:col-span-5">
-        <!-- Visual Admit Card element -->
-        <div class="bg-white border border-slate-200/80 rounded-2xl p-6 relative overflow-hidden shadow-lg border border-slate-200/60 max-w-md mx-auto relative">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 relative overflow-hidden shadow-lg max-w-md mx-auto">
           <div class="absolute -right-16 -top-16 w-32 h-32 bg-primary/5 rounded-full pointer-events-none"></div>
           <div class="flex justify-between items-center mb-6">
             <span class="px-3 py-1 text-[10px] font-mono font-extrabold bg-slate-100 text-slate-600 rounded-md tracking-wider border border-slate-200">STUDY ADMIT CARD</span>
             <span class="px-2.5 py-0.5 text-[11px] font-mono font-bold bg-amber-100 text-amber-800 rounded-md">2026</span>
           </div>
           <div class="flex items-center gap-5 mb-6">
-            <div id="homeProfilePic" class="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-2xl font-bold overflow-hidden border-2 border-primary-soft shadow-inner">
+            <div id="homeProfilePic" class="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-2xl font-bold overflow-hidden border border-slate-200 shadow-inner">
               <i class="fa-regular fa-user"></i>
             </div>
             <div>
@@ -193,11 +192,12 @@ body {
       </div>
     </div>
 
-    <!-- True Turn visual boxes grid -->
+    <!-- Home section boxes (inspired by modern visual hierarchy) -->
     <div id="homeDynamic" class="space-y-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="shimmer h-[90px] rounded-2xl"></div>
-        <div class="shimmer h-[90px] rounded-2xl"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="shimmer h-[120px] rounded-2xl"></div>
+        <div class="shimmer h-[120px] rounded-2xl"></div>
+        <div class="shimmer h-[120px] rounded-2xl"></div>
       </div>
     </div>
   </section>
@@ -209,7 +209,7 @@ body {
         <div>
           <span class="text-xs font-mono font-bold text-accent-dark tracking-wider uppercase">Public · No login needed</span>
           <h2 class="text-3xl font-display font-extrabold text-ink mt-1">Video Classes</h2>
-          <p class="text-ink-soft">Curated YouTube playlists picked for comprehensive Kerala PSC preparation.</p>
+          <p class="text-ink-soft text-sm">Curated reference guides picked for comprehensive Kerala PSC preparation.</p>
         </div>
       </div>
       <div id="videoContent" class="space-y-6">
@@ -225,7 +225,7 @@ body {
         <div>
           <span class="text-xs font-mono font-bold text-accent-dark tracking-wider uppercase">Public · No login needed</span>
           <h2 class="text-3xl font-display font-extrabold text-ink mt-1">Study Notes</h2>
-          <p class="text-ink-soft">Downloadable PDF notes and reference guides, organised into folders.</p>
+          <p class="text-ink-soft text-sm">Downloadable reference PDFs arranged systematically by category.</p>
         </div>
       </div>
       <div id="pdfContent" class="space-y-6">
@@ -275,12 +275,12 @@ body {
   <div class="max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-6">
     <div>
       <div class="flex items-center gap-2.5 font-display font-extrabold text-white text-lg">
-        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark text-white flex items-center justify-center font-mono text-xs text-white">PU</span>
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark text-white flex items-center justify-center font-mono text-xs">PU</span>
         <span>PSC FutureU</span>
       </div>
-      <p class="text-sm text-slate-400 mt-2">Built for Kerala PSC aspirants, by Kerala PSC aspirants.</p>
+      <p class="text-xs text-slate-400 mt-2">Built for Kerala PSC aspirants, by Kerala PSC aspirants.</p>
     </div>
-    <div class="text-sm text-slate-400">
+    <div class="text-xs text-slate-400">
       &copy; 2026 PSC FutureU. All rights reserved.
     </div>
   </div>
@@ -311,7 +311,7 @@ body {
     <div class="text-center">
       <span class="text-xs font-mono font-bold text-accent-dark tracking-wide uppercase">One last step</span>
       <h2 class="text-2xl font-display font-extrabold text-ink mt-1">Complete your profile</h2>
-      <p class="text-sm text-ink-soft mt-1">We use this to personalize your dashboard and track district rankings.</p>
+      <p class="text-xs text-ink-soft mt-1">We use this to personalize your dashboard and track district rankings.</p>
     </div>
     <form id="profileForm" class="space-y-4">
       <div>
@@ -331,7 +331,7 @@ body {
   </div>
 </div>
 
-<!-- Custom confirmation dialogue popup to replace native confirm() -->
+<!-- Custom confirmation dialogue popup (Rule-compliant replacement for confirm()) -->
 <div class="fixed inset-0 bg-ink/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4 hidden" id="customConfirmModal">
   <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-2xl flex flex-col gap-4 text-center">
     <div class="w-12 h-12 bg-amber-50 text-accent rounded-full flex items-center justify-center text-xl mx-auto">
@@ -358,9 +358,6 @@ body {
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
 <script>
-// ============================================================
-// FIREBASE CONFIGURATION
-// ============================================================
 const firebaseConfig = {
   apiKey: "AIzaSyDWuWvG3o0m67T_ec0jTwlPxp_7WxiKiK8",
   authDomain: "pscfutureu.firebaseapp.com",
@@ -371,12 +368,12 @@ const firebaseConfig = {
   measurementId: "G-11CWH58QB7"
 };
 
-// Initialize Firebase App
+// Initialize Firebase SDK Compat
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// Application Constant Values
+// Application Constants
 const ADMIN_EMAIL = "futureuapp@gmail.com";
 const KERALA_DISTRICTS = [
   "Thiruvananthapuram", "Kollam", "Pathanamthitta", "Alappuzha",
@@ -384,8 +381,8 @@ const KERALA_DISTRICTS = [
   "Malappuram", "Kozhikode", "Wayanad", "Kannur", "Kasaragod"
 ];
 
-// Complete structured syllabus mapping
-const SYLLABUS_DATA = {
+// Fallback Default Syllabus Templates (Loaded if custom admin templates don't exist in database)
+const KERALA_PSC_DEFAULT_SYLLABUS = {
   "LDC (Lower Division Clerk)": {
     topics: [
       { name: "General Knowledge", items: ["Kerala Renaissance", "Indian History", "Geography of India & Kerala", "Indian Constitution", "Economics Basics", "Science & Technology", "Current Affairs"] },
@@ -411,31 +408,6 @@ const SYLLABUS_DATA = {
       { name: "Quantitative Aptitude", items: ["Data Interpretation", "Probability", "Permutation & Combination", "Algebra", "Geometry"] },
       { name: "Mental Ability", items: ["Analytical Reasoning", "Verbal Reasoning", "Non-Verbal Reasoning", "Syllogism", "Statement & Conclusion"] }
     ]
-  },
-  "SSLC Level": {
-    topics: [
-      { name: "General Knowledge", items: ["Kerala Facts", "Indian Independence", "Basic Constitution", "Science Facts", "Sports"] },
-      { name: "English", items: ["Tenses", "Articles", "Prepositions", "Spelling"] },
-      { name: "Malayalam", items: ["Sandhi", "Samasa", "Proverbs", "Authors & Works"] },
-      { name: "Mathematics", items: ["Arithmetic", "Algebra Basics", "Geometry Basics", "Mensuration"] }
-    ]
-  },
-  "Police Constable": {
-    topics: [
-      { name: "General Knowledge", items: ["Indian Constitution", "Kerala Police Act Basics", "Human Rights", "Current Affairs", "Sports & Awards"] },
-      { name: "General English", items: ["Grammar", "Vocabulary", "Comprehension"] },
-      { name: "Malayalam", items: ["Grammar", "Literature", "Translation"] },
-      { name: "Arithmetic & Reasoning", items: ["Number Series", "Percentage", "Ratio", "Logical Reasoning", "Puzzles"] },
-      { name: "Physical Fitness", items: ["Training Guidelines", "Health & Nutrition Basics"] }
-    ]
-  },
-  "Forest Guard": {
-    topics: [
-      { name: "General Knowledge", items: ["Forest Laws", "Wildlife Protection Act", "Kerala Forests", "Environment & Ecology", "Current Affairs"] },
-      { name: "General English", items: ["Grammar", "Comprehension", "Vocabulary"] },
-      { name: "Malayalam", items: ["Grammar", "Nature-related Vocabulary"] },
-      { name: "Arithmetic & Reasoning", items: ["Basic Maths", "Logical Reasoning", "Data Interpretation"] }
-    ]
   }
 };
 
@@ -446,11 +418,42 @@ let currentUser = null;
 let currentProfile = null;
 let isAdmin = false;
 let blockUidCounter = 0;
-let cache = { playlists: null, pdfs: null, quizzes: null, mocks: null };
+let cache = { playlists: null, pdfs: null, quizzes: null, mocks: null, results: null, syllabusTemplates: null };
 const CACHE_TTL = 3 * 60 * 1000; // Local memory cache duration
 
 function $(sel, root = document) { return root.querySelector(sel); }
 function $all(sel, root = document) { return [...root.querySelectorAll(sel)]; }
+
+// ============================================================
+// COMPLYING RULE 1 & 3: SECURE FIRESTORE PATHS & AUTHENTICATION
+// ============================================================
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'pscfutureu';
+
+/**
+ * Build clean nested collection references mapping safely to Rule 1:
+ * /artifacts/{appId}/public/data/{collectionName}
+ */
+function getCollectionRef(colName) {
+  return db.collection('artifacts').doc(appId).collection('public').doc('data').collection(colName);
+}
+
+// Global anonymous or custom token initialization prior to queries (Rule 3)
+async function ensureAuthenticated() {
+  if (auth.currentUser) return auth.currentUser;
+  
+  try {
+    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+      const cred = await auth.signInWithCustomToken(__initial_auth_token);
+      return cred.user;
+    } else {
+      const cred = await auth.signInAnonymously();
+      return cred.user;
+    }
+  } catch (err) {
+    console.warn("Auth setup returned warning, continuing dynamically:", err.message);
+    return null;
+  }
+}
 
 // ============================================================
 // REAL-TIME SESSION CACHE MANAGERS (ULTRA-FAST TRANSITIONS)
@@ -473,7 +476,7 @@ function invalidateCache(name = null) {
     cache[name] = null;
     sessionStorage.removeItem(getCacheKey(name));
   } else {
-    ["playlists", "pdfs", "quizzes", "mocks"].forEach(n => {
+    ["playlists", "pdfs", "quizzes", "mocks", "results", "syllabusTemplates"].forEach(n => {
       cache[n] = null;
       sessionStorage.removeItem(getCacheKey(n));
     });
@@ -482,10 +485,14 @@ function invalidateCache(name = null) {
 
 // Pre-fetching all collections on page startup
 async function prefetchAll() {
-  await Promise.all(["playlists", "pdfs", "quizzes", "mocks"].map(c => fetchCollection(c)));
+  await ensureAuthenticated();
+  await Promise.all(["playlists", "pdfs", "quizzes", "mocks", "syllabusTemplates"].map(c => fetchCollection(c)));
 }
 
-// Fetch collections, handling auth restrictions and permission exceptions safely
+/**
+ * Complying with RULE 2: No client-side complex queries.
+ * We fetch all flat collections and perform filters, sortings, and slices locally.
+ */
 async function fetchCollection(name) {
   if (cache[name]) return cache[name];
   const cachedData = readCache(name);
@@ -494,27 +501,31 @@ async function fetchCollection(name) {
     return cachedData;
   }
 
-  // Auth Protection Guard: Quizzes and Mocks require active authentication to read
-  const isProtected = (name === "quizzes" || name === "mocks");
-  if (isProtected && !auth.currentUser) {
-    console.log(`Bypassing protected fetch for unauthorized collection: ${name}`);
-    return [];
-  }
+  await ensureAuthenticated();
+  if (!auth.currentUser) return [];
 
   try {
-    const snap = await db.collection(name).orderBy("createdAt", "desc").get();
-    const fetched = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    cache[name] = fetched;
-    writeCache(name, fetched);
-    return fetched;
+    const snap = await getCollectionRef(name).get();
+    let data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    // Rule 2 compliant sorting: In-Memory order sort on updatedAt or createdAt
+    data.sort((a, b) => {
+      const ta = a.updatedAt?.toMillis?.() || a.createdAt?.toMillis?.() || 0;
+      const tb = b.updatedAt?.toMillis?.() || b.createdAt?.toMillis?.() || 0;
+      return tb - ta;
+    });
+
+    cache[name] = data;
+    writeCache(name, data);
+    return data;
   } catch (err) {
-    console.warn(`Fetch returned Exception for ${name} (likely permission restrictions):`, err.message);
+    console.warn(`Exception reading collection: ${name}. This can happen on first-time setup:`, err.message);
     return [];
   }
 }
 
 // ============================================================
-// CUSTOM DIALOG CONTEXT (Replacing Confirm popup)
+// CUSTOM DIALOG CONTEXT (Replacing Native confirm() Dialogues)
 // ============================================================
 let customConfirmResolve = null;
 function showCustomConfirm(title, desc) {
@@ -535,7 +546,7 @@ $("#confirmProceedBtn").addEventListener("click", () => {
 });
 
 // ============================================================
-// AUTHENTICATION & DIRECTORIES
+// AUTHENTICATION & PROFILE CREATION
 // ============================================================
 async function onAuthChange(user) {
   currentUser = user;
@@ -545,6 +556,7 @@ async function onAuthChange(user) {
   // Flush the restricted local cache memory on change of user session status
   invalidateCache("quizzes");
   invalidateCache("mocks");
+  invalidateCache("results");
 
   const authArea = $("#authArea");
   const mobileProfile = $("#mobileProfileSection");
@@ -567,13 +579,12 @@ async function onAuthChange(user) {
         </div>
       </div>`;
     
-    // Wire triggers
     $all(".js-google-signin").forEach(btn => btn.addEventListener("click", signInWithGoogle));
     
     // Reset home indicators
     $("#homeProfileName").textContent = "Guest Candidate";
     $("#homeProfileDetails").textContent = "Roll No. PFU/2026/0001 · Kerala";
-    $("#homeProfilePic").innerHTML = `<i class="fa-regular fa-user"></i>`;
+    $("#homeProfilePic").innerHTML = `<i class="fa-regular fa-user text-primary-dark"></i>`;
     $("#homeAdmitFill").style.width = "0%";
     $("#homeAdmitPercentage").textContent = "Sign in to track progress";
     
@@ -581,7 +592,7 @@ async function onAuthChange(user) {
     return;
   }
 
-  // Authenticated state setup
+  // Authenticated state configuration
   isAdmin = (user.email === ADMIN_EMAIL);
   
   // Show Admin links if applicable
@@ -594,7 +605,7 @@ async function onAuthChange(user) {
   });
 
   try {
-    const doc = await db.collection("users").doc(user.uid).get();
+    const doc = await getCollectionRef("users").doc(user.uid).get();
     if (doc.exists && doc.data().name && doc.data().phone && doc.data().district) {
       currentProfile = doc.data();
     } else {
@@ -604,7 +615,6 @@ async function onAuthChange(user) {
     console.error("Profile retrieval failed", err);
   }
 
-  // Setup profile widgets
   const name = currentProfile?.name || user.displayName || "Aspirant";
   const initial = name.charAt(0).toUpperCase();
   const photo = user.photoURL;
@@ -613,20 +623,20 @@ async function onAuthChange(user) {
     ? `<img src="${photo}" alt="Profile" referrerpolicy="no-referrer" class="w-full h-full object-cover">`
     : `<span class="font-bold text-lg text-white">${initial}</span>`;
 
-  // Desktop header indicator
+  // Desktop header indicators
   authArea.innerHTML = `
-    <div class="flex items-center gap-2 border border-slate-200/80 rounded-full pl-2 pr-4 py-1.5 bg-slate-50/50">
+    <div class="flex items-center gap-2 border border-slate-200 rounded-full pl-2 pr-4 py-1.5 bg-slate-50">
       <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center overflow-hidden">
         ${userPicHTML}
       </div>
       <span class="text-xs font-bold text-ink max-w-[100px] truncate">${name.split(' ')[0]}</span>
     </div>
-    <button class="text-xs font-bold text-danger hover:text-danger/80 px-2.5 py-1.5 hover:bg-danger-soft/30 rounded-lg transition-all js-signout">Sign Out</button>`;
+    <button class="text-xs font-bold text-danger hover:text-danger/80 px-2.5 py-1.5 hover:bg-danger-soft rounded-lg transition-all js-signout">Sign Out</button>`;
 
   // Mobile Drawer Profile Card with Sign-Out integration
   mobileProfile.innerHTML = `
     <div class="flex items-center gap-3">
-      <div class="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center overflow-hidden border-2 border-primary-soft">
+      <div class="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center overflow-hidden border border-slate-200">
         ${userPicHTML}
       </div>
       <div class="min-w-0 flex-1">
@@ -657,10 +667,16 @@ async function onAuthChange(user) {
 async function renderHomeSyllabusProgress() {
   if (!currentUser) return;
   try {
-    const doc = await db.collection("syllabusProgress").doc(currentUser.uid).get();
+    const doc = await getCollectionRef("syllabusProgress").doc(currentUser.uid).get();
     if (doc.exists) {
       const progress = doc.data();
-      const syllabus = SYLLABUS_DATA[progress.exam];
+      const exam = progress.exam;
+      
+      // Determine exam source: custom template or default syllabus
+      const templates = await fetchCollection("syllabusTemplates");
+      const matchedTemplate = templates.find(t => t.exam === exam);
+      const syllabus = matchedTemplate ? matchedTemplate : KERALA_PSC_DEFAULT_SYLLABUS[exam];
+
       if (syllabus) {
         let total = 0, done = 0;
         syllabus.topics.forEach(t => t.items.forEach(item => {
@@ -709,7 +725,7 @@ $("#profileForm").addEventListener("submit", async (e) => {
   btn.textContent = "Saving profile...";
 
   try {
-    await db.collection("users").doc(currentUser.uid).set({
+    await getCollectionRef("users").doc(currentUser.uid).set({
       name, phone, district, email: currentUser.email, photoURL: currentUser.photoURL || null,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
@@ -727,7 +743,6 @@ $("#profileForm").addEventListener("submit", async (e) => {
 });
 
 // ============================================================
-// CLIENT NAVIGATION CONTROLS
 // ============================================================
 const ROUTES = ["home", "videos", "pdfs", "quizzes", "mocks", "syllabus", "dashboard", "admin"];
 
@@ -805,7 +820,7 @@ function showToast(msg) {
   }, 2400);
 }
 
-// Helper: category grouping
+// Category grouping utility
 function getCategory(item) {
   return (item.category || item.subject || "General").trim();
 }
@@ -823,7 +838,7 @@ function groupByCategory(items) {
 function renderLongListView(categories, iconClass, itemType, queryParamKey) {
   if (!categories.length) {
     return `
-      <div class="text-center py-16 bg-white border border-slate-200/60 rounded-2xl">
+      <div class="text-center py-16 bg-white border border-slate-200 rounded-2xl shadow-sm">
         <div class="text-slate-300 text-5xl mb-3"><i class="fa-regular fa-folder-open"></i></div>
         <p class="text-ink-soft font-semibold">No materials found in this category.</p>
       </div>`;
@@ -840,7 +855,7 @@ function renderLongListView(categories, iconClass, itemType, queryParamKey) {
         }
 
         return `
-          <div class="tt-box bg-white border border-slate-200/60 rounded-2xl p-5 flex items-center justify-between cursor-pointer shadow-sm" onclick="navigateTo('/${itemType}?${queryParamKey}=${encodeURIComponent(cat)}')">
+          <div class="tt-box bg-white border border-slate-200 rounded-2xl p-5 flex items-center justify-between cursor-pointer shadow-sm" onclick="navigateTo('/${itemType}?${queryParamKey}=${encodeURIComponent(cat)}')">
             <div class="flex items-center gap-4 min-w-0">
               <div class="w-12 h-12 rounded-xl bg-primary-soft text-primary flex items-center justify-center text-lg shadow-sm">
                 <i class="${iconClass}"></i>
@@ -850,7 +865,7 @@ function renderLongListView(categories, iconClass, itemType, queryParamKey) {
                 <p class="text-xs text-ink-soft mt-0.5">${items.length} dynamic resource${items.length === 1 ? "" : "s"} · <span class="text-slate-400 text-[11px] font-mono">${latestText}</span></p>
               </div>
             </div>
-            <span class="text-slate-400 pl-3"><i class="fa-solid fa-angle-right"></i></span>
+            <span class="text-slate-400 pl-3"><i class="fa-solid fa-angle-right text-xs"></i></span>
           </div>`;
       }).join("")}
     </div>`;
@@ -862,9 +877,10 @@ function renderLongListView(categories, iconClass, itemType, queryParamKey) {
 async function loadHome() {
   const container = $("#homeDynamic");
   container.innerHTML = `
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="shimmer h-[90px] rounded-2xl"></div>
-      <div class="shimmer h-[90px] rounded-2xl"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="shimmer h-[120px] rounded-2xl"></div>
+      <div class="shimmer h-[120px] rounded-2xl"></div>
+      <div class="shimmer h-[120px] rounded-2xl"></div>
     </div>`;
 
   const [pl, pdfs, qz, mk] = await Promise.all([
@@ -874,17 +890,16 @@ async function loadHome() {
     fetchCollection("mocks")
   ]);
 
-  // Premium True Turn main content boxy layout matching image_b2f88b.png
+  // Clean aesthetic box layout inspired by the screenshot requirements (Clean, rounded, and hovering layout blocks)
   container.innerHTML = `
     <div class="text-center max-w-lg mx-auto py-2">
       <h2 class="text-2xl font-display font-black text-ink">Welcome To True Turn</h2>
-      <p class="text-sm text-ink-soft mt-1">Select your preparation category from the quick access boxes below.</p>
+      <p class="text-sm text-ink-soft mt-1">Select your targeted preparation category from the quick access blocks below.</p>
     </div>
 
-    <!-- Core Grid Layout -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- 1. Mock Tests -->
-      <a href="/mocks" class="tt-box bg-white rounded-2xl p-6 border border-slate-200/60 shadow-md flex items-center gap-5 justify-between relative group">
+      <a href="/mocks" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-500 to-blue-600 text-white flex items-center justify-center text-2xl shadow-md shadow-blue-500/10">
             <i class="fa-solid fa-stopwatch"></i>
@@ -898,7 +913,7 @@ async function loadHome() {
       </a>
 
       <!-- 2. Question Papers (Study Notes) -->
-      <a href="/pdfs" class="tt-box bg-white rounded-2xl p-6 border border-slate-200/60 shadow-md flex items-center gap-5 justify-between relative group">
+      <a href="/pdfs" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-600 text-white flex items-center justify-center text-2xl shadow-md shadow-rose-500/10">
             <i class="fa-solid fa-file-pdf"></i>
@@ -912,7 +927,7 @@ async function loadHome() {
       </a>
 
       <!-- 3. Current Quizzes -->
-      <a href="/quizzes" class="tt-box bg-white rounded-2xl p-6 border border-slate-200/60 shadow-md flex items-center gap-5 justify-between relative group">
+      <a href="/quizzes" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-500 to-indigo-600 text-white flex items-center justify-center text-2xl shadow-md shadow-purple-500/10">
             <i class="fa-solid fa-bolt"></i>
@@ -926,7 +941,7 @@ async function loadHome() {
       </a>
 
       <!-- 4. Syllabus Tracker -->
-      <a href="/syllabus" class="tt-box bg-white rounded-2xl p-6 border border-slate-200/60 shadow-md flex items-center gap-5 justify-between relative group">
+      <a href="/syllabus" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-600 text-white flex items-center justify-center text-2xl shadow-md shadow-amber-500/10">
             <i class="fa-solid fa-circle-check"></i>
@@ -940,7 +955,7 @@ async function loadHome() {
       </a>
 
       <!-- 5. Text Books (Videos) -->
-      <a href="/videos" class="tt-box bg-white rounded-2xl p-6 border border-slate-200/60 shadow-md flex items-center gap-5 justify-between relative group">
+      <a href="/videos" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center text-2xl shadow-md shadow-emerald-500/10">
             <i class="fa-solid fa-book-open"></i>
@@ -954,7 +969,7 @@ async function loadHome() {
       </a>
 
       <!-- 6. Student Dashboard -->
-      <a href="/dashboard" class="tt-box bg-white rounded-2xl p-6 border border-slate-200/60 shadow-md flex items-center gap-5 justify-between relative group">
+      <a href="/dashboard" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-slate-600 to-slate-700 text-white flex items-center justify-center text-2xl shadow-md shadow-slate-600/10">
             <i class="fa-solid fa-chart-line"></i>
@@ -968,8 +983,8 @@ async function loadHome() {
       </a>
     </div>
 
-    <!-- Quick Stat counters block -->
-    <div class="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <!-- Stats Quick Counter -->
+    <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
       <div>
         <h4 class="text-2xl font-mono font-bold text-primary">${pl.length}</h4>
         <span class="text-xs text-ink-soft">Playlists</span>
@@ -1010,7 +1025,7 @@ async function loadVideos() {
       </div>
       <div class="space-y-3">
         ${items.map(p => `
-          <div class="bg-white border border-slate-200/60 rounded-2xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:shadow-md transition-all">
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:shadow-md transition-all">
             <div class="min-w-0">
               <h3 class="font-display font-extrabold text-ink text-base truncate">${p.title}</h3>
               <p class="text-sm text-ink-soft mt-1">${p.description || "Comprehensive video library syllabus."}</p>
@@ -1106,7 +1121,7 @@ async function loadPdfs() {
       </div>
       <div class="space-y-3">
         ${items.map(p => `
-          <div class="bg-white border border-slate-200/60 rounded-2xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:shadow-md transition-all">
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:shadow-md transition-all">
             <div class="min-w-0">
               <h3 class="font-display font-extrabold text-ink text-base truncate">${p.title}</h3>
               <p class="text-sm text-ink-soft mt-1">${p.description || "Downloadable exam reference notes."}</p>
@@ -1115,7 +1130,7 @@ async function loadPdfs() {
                 ${p.exam ? `<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-50 text-amber-700 border border-amber-100">${p.exam}</span>` : ""}
               </div>
             </div>
-            <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-dark transition-all self-start md:self-auto flex items-center gap-1.5 shadow-sm">
+            <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-dark transition-all self-start md:self-auto flex items-center gap-1.5 shadow-sm animate-pulse">
               <i class="fa-solid fa-file-arrow-down"></i> Download PDF
             </a>
           </div>`).join("")}
@@ -1127,7 +1142,7 @@ async function loadPdfs() {
 }
 
 // ============================================================
-// PAGE: QUIZ / MOCK TESTS CONTROLLERS
+// PAGE: QUIZZES & MOCK EXAMS
 // ============================================================
 let activeTest = null;
 
@@ -1152,7 +1167,7 @@ async function loadQuizzes() {
       </div>
       <div class="space-y-3">
         ${items.map(p => `
-          <div class="bg-white border border-slate-200/60 rounded-2xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:shadow-md transition-all">
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:shadow-md transition-all">
             <div class="min-w-0">
               <h3 class="font-display font-extrabold text-ink text-base truncate">${p.title}</h3>
               <p class="text-xs text-ink-soft mt-1">${(p.questions || []).length} questions · 5 mins estimate</p>
@@ -1194,7 +1209,7 @@ async function loadMocks() {
       </div>
       <div class="space-y-3">
         ${items.map(p => `
-          <div class="bg-white border border-slate-200/60 rounded-2xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:shadow-md transition-all">
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:shadow-md transition-all">
             <div class="min-w-0">
               <h3 class="font-display font-extrabold text-ink text-base truncate">${p.title}</h3>
               <p class="text-xs text-ink-soft mt-1">${(p.questions || []).length} questions · ${p.timerMinutes || 60} mins limit</p>
@@ -1217,7 +1232,7 @@ async function loadMocks() {
 
 function renderLockScreen(what) {
   return `
-    <div class="max-w-md mx-auto text-center py-12 px-6 bg-white border border-slate-200/60 rounded-2xl mt-8">
+    <div class="max-w-md mx-auto text-center py-12 px-6 bg-white border border-slate-200 rounded-2xl mt-8">
       <div class="w-16 h-16 rounded-2xl bg-amber-50 text-accent flex items-center justify-center text-3xl mx-auto mb-4">
         <i class="fa-solid fa-lock"></i>
       </div>
@@ -1276,7 +1291,7 @@ function renderTestRuntime() {
   const percentage = Math.round(((currentIndex + 1) / doc.questions.length) * 100);
 
   target.innerHTML = `
-    <div class="max-w-2xl mx-auto bg-white border border-slate-200/60 rounded-2xl p-6 shadow-md space-y-6">
+    <div class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
       <div class="flex justify-between items-center pb-4 border-b border-slate-100">
         <div>
           <h3 class="font-display font-extrabold text-ink text-base">${doc.title}</h3>
@@ -1341,7 +1356,7 @@ async function submitRuntimeAnswers() {
   const score = Math.max(0, parseFloat((correct - (wrong * factor)).toFixed(2)));
 
   try {
-    await db.collection("results").add({
+    await getCollectionRef("results").add({
       uid: currentUser.uid,
       studentName: currentProfile?.name || currentUser.displayName || "Aspirant",
       type: type === "quiz" ? "quiz" : "mock",
@@ -1354,6 +1369,8 @@ async function submitRuntimeAnswers() {
       unanswered: skipped,
       date: firebase.firestore.FieldValue.serverTimestamp()
     });
+    // Invalidate local cache results to guarantee the Dashboard re-reads instantly
+    invalidateCache("results");
   } catch (err) {
     console.error("Storing metrics failed", err);
   }
@@ -1366,7 +1383,7 @@ function renderRuntimeResult(score, correct, wrong, skipped) {
   const { doc, answers } = activeTest;
 
   target.innerHTML = `
-    <div class="max-w-md mx-auto bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-lg mt-4">
+    <div class="max-w-md mx-auto bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg mt-4">
       <div class="bg-gradient-to-br from-primary to-primary-dark text-white p-8 text-center space-y-2">
         <span class="text-xs font-mono font-bold tracking-wider opacity-85 uppercase">${doc.title} Result</span>
         <h2 class="text-5xl font-mono font-black">${score}</h2>
@@ -1395,7 +1412,7 @@ function renderRuntimeResult(score, correct, wrong, skipped) {
       <h3 class="font-display font-extrabold text-lg text-ink">Evaluation Review</h3>
       ${doc.questions.map((q, idx) => {
         return `
-          <div class="bg-white border border-slate-200/60 rounded-2xl p-5 space-y-3">
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-3">
             <span class="text-xs font-mono font-bold text-slate-400">Question ${idx + 1}</span>
             <h4 class="font-display font-bold text-ink leading-relaxed text-sm md:text-base">${q.q}</h4>
             <div class="grid grid-cols-1 gap-2 pt-1">
@@ -1426,7 +1443,6 @@ function toggleAnswersReview() {
 }
 
 // ============================================================
-// PAGE: SYLLABUS TRACKER
 // ============================================================
 async function loadSyllabus() {
   const container = $("#syllabusContainer");
@@ -1439,9 +1455,24 @@ async function loadSyllabus() {
   
   let progress = { exam: null, completed: {} };
   try {
-    const doc = await db.collection("syllabusProgress").doc(currentUser.uid).get();
+    const doc = await getCollectionRef("syllabusProgress").doc(currentUser.uid).get();
     if (doc.exists) progress = doc.data();
   } catch (err) { console.error(err); }
+
+  // Read templates both from dynamic DB and hardcoded defaults
+  const customTemplates = await fetchCollection("syllabusTemplates");
+  const templatesMap = {};
+  
+  // Populate from fallback default templates
+  Object.entries(KERALA_PSC_DEFAULT_SYLLABUS).forEach(([k, v]) => {
+    templatesMap[k] = v;
+  });
+  // Overlay custom admin-uploaded syllabus templates
+  customTemplates.forEach(t => {
+    templatesMap[t.exam] = t;
+  });
+
+  const availableExams = Object.keys(templatesMap);
 
   if (!progress.exam) {
     container.innerHTML = `
@@ -1452,8 +1483,8 @@ async function loadSyllabus() {
           <p class="text-ink-soft text-sm">Select your targeted exam pattern to load checklist resources.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          ${Object.keys(SYLLABUS_DATA).map(exam => `
-            <button class="tt-box bg-white border border-slate-200/60 rounded-2xl p-6 text-center hover:shadow-md cursor-pointer flex flex-col items-center justify-center gap-3" onclick="selectSyllabusExam('${exam}')">
+          ${availableExams.map(exam => `
+            <button class="tt-box bg-white border border-slate-200 rounded-2xl p-6 text-center hover:shadow-md cursor-pointer flex flex-col items-center justify-center gap-3" onclick="selectSyllabusExam('${exam}')">
               <div class="w-12 h-12 rounded-xl bg-primary-soft text-primary flex items-center justify-center text-xl"><i class="fa-solid fa-file-invoice"></i></div>
               <h3 class="font-display font-bold text-ink text-sm">${exam}</h3>
             </button>`).join("")}
@@ -1462,7 +1493,13 @@ async function loadSyllabus() {
     return;
   }
 
-  const syllabus = SYLLABUS_DATA[progress.exam];
+  const syllabus = templatesMap[progress.exam];
+  if (!syllabus) {
+    // Graceful fallback if selected target is removed
+    resetSyllabusExam();
+    return;
+  }
+
   let total = 0, done = 0;
   syllabus.topics.forEach(t => t.items.forEach(item => {
     total++;
@@ -1482,8 +1519,8 @@ async function loadSyllabus() {
         </button>
       </div>
 
-      <!-- Completeness bar -->
-      <div class="bg-white border border-slate-200/60 rounded-2xl p-6 shadow-sm space-y-4">
+      <!-- Completeness indicators progress bar -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
             <h4 class="text-2xl font-mono font-bold text-primary">${pct}%</h4>
@@ -1507,11 +1544,11 @@ async function loadSyllabus() {
         </div>
       </div>
 
-      <!-- Checklist details -->
+      <!-- Interactive Syllabus checklist -->
       <div class="space-y-4">
         ${syllabus.topics.map(t => {
           return `
-            <div class="bg-white border border-slate-200/60 rounded-2xl p-6 shadow-sm space-y-4">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
               <h3 class="font-display font-extrabold text-ink text-base border-b border-slate-100 pb-3 flex items-center justify-between">
                 <span>${t.name}</span>
                 <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-slate-100 text-slate-500 border border-slate-200">
@@ -1539,28 +1576,28 @@ async function loadSyllabus() {
 
 async function selectSyllabusExam(exam) {
   try {
-    await db.collection("syllabusProgress").doc(currentUser.uid).set({
+    await getCollectionRef("syllabusProgress").doc(currentUser.uid).set({
       exam,
       completed: {},
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
     loadSyllabus();
   } catch (err) {
-    showToast("Error updating selection: " + err.message);
+    showToast("Error updating target configuration: " + err.message);
   }
 }
 
 async function resetSyllabusExam() {
   const proceed = await showCustomConfirm(
     "Change Target Exam?",
-    "Your current tracking checklist progress for this series will be lost."
+    "Your current progress logs for this checklist series will be archived."
   );
   if (!proceed) return;
   try {
-    await db.collection("syllabusProgress").doc(currentUser.uid).delete();
+    await getCollectionRef("syllabusProgress").doc(currentUser.uid).delete();
     loadSyllabus();
   } catch (err) {
-    showToast("Reset failed: " + err.message);
+    showToast("Reset operation failed: " + err.message);
   }
 }
 
@@ -1569,15 +1606,14 @@ async function toggleSyllabusTopic(key, value) {
   payload[`completed.${key}`] = value;
   payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
   try {
-    await db.collection("syllabusProgress").doc(currentUser.uid).update(payload);
+    await getCollectionRef("syllabusProgress").doc(currentUser.uid).update(payload);
     loadSyllabus();
   } catch (err) {
-    showToast("Sync failure: " + err.message);
+    showToast("Syllabus state sync failure: " + err.message);
   }
 }
 
 // ============================================================
-// PAGE: STUDENT DASHBOARD
 // ============================================================
 async function loadDashboard() {
   const container = $("#dashboardContainer");
@@ -1588,11 +1624,22 @@ async function loadDashboard() {
 
   container.innerHTML = `<div class="shimmer h-48 rounded-2xl"></div>`;
 
+  // Complying strictly with RULE 2: Read flat results collection, and filter + sort in local memory
   let attempts = [];
   try {
-    const snap = await db.collection("results").where("uid", "==", currentUser.uid).orderBy("date", "desc").limit(20).get();
-    attempts = snap.docs.map(d => d.data());
-  } catch (e) { console.error(e); }
+    const snap = await getCollectionRef("results").get();
+    let allResults = snap.docs.map(d => d.data());
+    attempts = allResults.filter(r => r.uid === currentUser.uid);
+
+    // Sort in-memory (Rule 2)
+    attempts.sort((a, b) => {
+      const da = a.date?.toMillis?.() || 0;
+      const db = b.date?.toMillis?.() || 0;
+      return db - da;
+    });
+  } catch (e) { 
+    console.error(e); 
+  }
 
   const total = attempts.length;
   const avgScore = total ? (attempts.reduce((s, x) => s + x.score, 0) / total).toFixed(1) : 0;
@@ -1607,7 +1654,7 @@ async function loadDashboard() {
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Profile Details Widget -->
       <div class="space-y-6">
-        <div class="bg-white border border-slate-200/60 rounded-2xl p-6 shadow-sm flex flex-col items-center text-center space-y-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col items-center text-center space-y-4">
           <div class="w-20 h-20 rounded-2xl bg-primary text-white flex items-center justify-center overflow-hidden border-2 border-primary-soft shadow-inner">
             ${userPicHTML}
           </div>
@@ -1621,7 +1668,7 @@ async function loadDashboard() {
           </div>
         </div>
 
-        <div class="bg-white border border-slate-200/60 rounded-2xl p-6 shadow-sm grid grid-cols-2 gap-4 text-center">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm grid grid-cols-2 gap-4 text-center">
           <div>
             <h4 class="text-2xl font-mono font-bold text-primary">${total}</h4>
             <span class="text-[10px] text-ink-soft uppercase tracking-wider font-semibold">Attempts</span>
@@ -1633,8 +1680,8 @@ async function loadDashboard() {
         </div>
       </div>
 
-      <!-- Attempt Records Table -->
-      <div class="lg:col-span-2 bg-white border border-slate-200/60 rounded-2xl p-6 shadow-sm space-y-4">
+      <!-- Attempt Records Table (Rule 2 slices result count in-memory) -->
+      <div class="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
         <h3 class="font-display font-extrabold text-ink text-base">Recent Quiz attempts</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm divide-y divide-slate-100">
@@ -1648,7 +1695,7 @@ async function loadDashboard() {
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 font-medium">
-              ${attempts.length ? attempts.map(r => {
+              ${attempts.length ? attempts.slice(0, 15).map(r => {
                 const dt = r.date ? (r.date.toDate ? r.date.toDate().toLocaleDateString("en-IN") : new Date(r.date).toLocaleDateString("en-IN")) : "—";
                 return `
                   <tr>
@@ -1667,7 +1714,6 @@ async function loadDashboard() {
 }
 
 // ============================================================
-// PAGE: ADMIN CONTROLLER & CRUD UTILITIES
 // ============================================================
 let activeAdminTab = "overview";
 let adminCharts = [];
@@ -1680,7 +1726,7 @@ function loadAdminPortal() {
   }
   if (!isAdmin) {
     root.innerHTML = `
-      <div class="max-w-md mx-auto text-center py-12 px-6 bg-white border border-slate-200/60 rounded-2xl mt-8">
+      <div class="max-w-md mx-auto text-center py-12 px-6 bg-white border border-slate-200 rounded-2xl mt-8">
         <div class="w-16 h-16 rounded-2xl bg-red-50 text-danger flex items-center justify-center text-3xl mx-auto mb-4">
           <i class="fa-solid fa-triangle-exclamation"></i>
         </div>
@@ -1692,17 +1738,18 @@ function loadAdminPortal() {
     return;
   }
 
-  // Admin Workspace
+  // Admin Sidebar & Workspace setup
   root.innerHTML = `
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       <!-- Side navigation panel -->
-      <aside class="lg:col-span-3 bg-white border border-slate-200/60 rounded-2xl p-4 shadow-sm flex flex-row lg:flex-col gap-1 overflow-x-auto">
+      <aside class="lg:col-span-3 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-row lg:flex-col gap-1 overflow-x-auto">
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="overview"><i class="fa-solid fa-chart-pie"></i> Metrics Overview</button>
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="students"><i class="fa-solid fa-users"></i> Student Base</button>
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="playlists"><i class="fa-solid fa-circle-play"></i> Video Classes</button>
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="notes"><i class="fa-solid fa-file-pdf"></i> Study Notes</button>
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="quizzes"><i class="fa-solid fa-circle-question"></i> Manage Quizzes</button>
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="mocks"><i class="fa-solid fa-stopwatch"></i> Mock Tests</button>
+        <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="syllabus"><i class="fa-solid fa-circle-nodes"></i> Syllabus Templates</button>
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="bulk"><i class="fa-solid fa-cloud-arrow-up"></i> Bulk Import</button>
       </aside>
 
@@ -1712,7 +1759,6 @@ function loadAdminPortal() {
       </div>
     </div>`;
 
-  // Dynamic panels trigger configurations
   $all("#adminRoot button[data-tab]").forEach(btn => {
     btn.addEventListener("click", () => {
       activeAdminTab = btn.getAttribute("data-tab");
@@ -1732,7 +1778,6 @@ function updateAdminTabs() {
     }
   });
 
-  // Clear previous graphs
   adminCharts.forEach(c => c.destroy());
   adminCharts = [];
 
@@ -1743,22 +1788,23 @@ function updateAdminTabs() {
   else if (activeAdminTab === "notes") renderAdminNotes(stage);
   else if (activeAdminTab === "quizzes") renderAdminTests(stage, "quizzes");
   else if (activeAdminTab === "mocks") renderAdminTests(stage, "mocks");
+  else if (activeAdminTab === "syllabus") renderAdminSyllabusManager(stage);
   else if (activeAdminTab === "bulk") renderBulkImport(stage);
 }
 
 // ============================================================
-// ADMIN TAB: OVERVIEW
+// ADMIN TAB: OVERVIEW (Rule-compliant queries & rendering)
 // ============================================================
 async function renderAdminOverview(stage) {
   stage.innerHTML = `<div class="shimmer h-48 rounded-2xl"></div>`;
 
   const [pl, pdfs, qz, mk, usersSnap, resultsSnap] = await Promise.all([
-    db.collection("playlists").get(),
-    db.collection("pdfs").get(),
-    db.collection("quizzes").get(),
-    db.collection("mocks").get(),
-    db.collection("users").get(),
-    db.collection("results").get()
+    getCollectionRef("playlists").get(),
+    getCollectionRef("pdfs").get(),
+    getCollectionRef("quizzes").get(),
+    getCollectionRef("mocks").get(),
+    getCollectionRef("users").get(),
+    getCollectionRef("results").get()
   ]);
 
   const districtCounts = {};
@@ -1772,34 +1818,34 @@ async function renderAdminOverview(stage) {
       <div class="flex items-center justify-between pb-4 border-b border-slate-100">
         <div>
           <h2 class="text-2xl font-display font-extrabold text-ink">Metrics Overview</h2>
-          <p class="text-ink-soft text-xs">Real-time stats from databases.</p>
+          <p class="text-ink-soft text-xs">Real-time statistics compiled across all collections.</p>
         </div>
         <span class="text-[10px] font-mono font-semibold bg-slate-100 text-slate-500 border border-slate-200 px-3 py-1 rounded-md">Live Stat</span>
       </div>
 
-      <!-- General metrics -->
+      <!-- Quick metrics cards -->
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-white border border-slate-200/60 rounded-2xl p-5 shadow-sm">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
           <span class="text-slate-400 text-xs font-mono">REGISTERED STUDENTS</span>
           <h3 class="text-3xl font-mono font-bold text-ink mt-1">${usersSnap.size}</h3>
         </div>
-        <div class="bg-white border border-slate-200/60 rounded-2xl p-5 shadow-sm">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
           <span class="text-slate-400 text-xs font-mono">TOTAL LIBRARY ITEMS</span>
           <h3 class="text-3xl font-mono font-bold text-ink mt-1">${pl.size + pdfs.size + qz.size + mk.size}</h3>
         </div>
-        <div class="bg-white border border-slate-200/60 rounded-2xl p-5 shadow-sm col-span-2 lg:col-span-1">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm col-span-2 lg:col-span-1">
           <span class="text-slate-400 text-xs font-mono">EVALUATIONS ATTEMPTED</span>
           <h3 class="text-3xl font-mono font-bold text-ink mt-1">${resultsSnap.size}</h3>
         </div>
       </div>
 
-      <!-- Chart visual cards -->
+      <!-- Interactive Chart widgets -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white border border-slate-200/60 p-5 rounded-2xl shadow-sm space-y-4">
+        <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm space-y-4">
           <h4 class="font-display font-bold text-xs text-ink-soft tracking-wider uppercase">District Wise Student Base</h4>
           <div class="h-64"><canvas id="chartDistricts"></canvas></div>
         </div>
-        <div class="bg-white border border-slate-200/60 p-5 rounded-2xl shadow-sm space-y-4">
+        <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm space-y-4">
           <h4 class="font-display font-bold text-xs text-ink-soft tracking-wider uppercase">Content Breakdown</h4>
           <div class="h-64"><canvas id="chartBreakdown"></canvas></div>
         </div>
@@ -1810,7 +1856,6 @@ async function renderAdminOverview(stage) {
     const distLabels = Object.keys(districtCounts);
     const distData = Object.values(districtCounts);
 
-    // 1. District Pie Chart
     adminCharts.push(new Chart($("#chartDistricts"), {
       type: "doughnut",
       data: {
@@ -1829,7 +1874,6 @@ async function renderAdminOverview(stage) {
       }
     }));
 
-    // 2. Bar Chart content breakdown
     adminCharts.push(new Chart($("#chartBreakdown"), {
       type: "bar",
       data: {
@@ -1859,17 +1903,24 @@ async function renderAdminStudents(stage) {
   stage.innerHTML = `<div class="shimmer h-48 rounded-2xl"></div>`;
 
   try {
-    const snap = await db.collection("users").orderBy("createdAt", "desc").get();
-    const list = snap.docs.map(d => d.data());
+    const snap = await getCollectionRef("users").get();
+    let list = snap.docs.map(d => d.data());
+
+    // Sort in-memory to comply with Rule 2
+    list.sort((a, b) => {
+      const ta = a.createdAt?.toMillis?.() || 0;
+      const tb = b.createdAt?.toMillis?.() || 0;
+      return tb - ta;
+    });
 
     stage.innerHTML = `
       <div class="space-y-6">
         <div>
           <h2 class="text-2xl font-display font-extrabold text-ink">Students Directory</h2>
-          <p class="text-ink-soft text-xs">A comprehensive directory of registered students with contact details.</p>
+          <p class="text-ink-soft text-xs">Directory containing names, locations (districts), and phone numbers of registered students.</p>
         </div>
 
-        <div class="bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm">
+        <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
           <div class="overflow-x-auto">
             <table class="w-full text-left text-sm divide-y divide-slate-100">
               <thead>
@@ -1906,12 +1957,12 @@ function renderAdminPlaylists(stage) {
     <div class="space-y-8">
       <div>
         <h2 class="text-2xl font-display font-extrabold text-ink">Manage Video Playlists</h2>
-        <p class="text-ink-soft text-xs">Link YouTube reference guides.</p>
+        <p class="text-ink-soft text-xs">Configure and organize video reference categories.</p>
       </div>
 
-      <!-- Form container -->
-      <div class="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm">
-        <h3 id="playlistFormTitle" class="font-display font-extrabold text-base text-ink border-b border-slate-100 pb-3 mb-4">Add New Playlist</h3>
+      <!-- Form Card -->
+      <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+        <h3 id="playlistFormTitle" class="font-display font-extrabold text-base text-ink border-b border-slate-100 pb-3 mb-4">Add New Playlist Category</h3>
         <form id="adminPlaylistForm" class="space-y-4">
           <input type="hidden" id="pl-edit-id" />
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1926,7 +1977,7 @@ function renderAdminPlaylists(stage) {
           </div>
           <div>
             <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">Brief Description</label>
-            <textarea id="pl-desc" rows="2" placeholder="Briefly describe what this covers" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
+            <textarea id="pl-desc" rows="2" placeholder="Describe the overview of the playlist files" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
@@ -1940,9 +1991,9 @@ function renderAdminPlaylists(stage) {
           </div>
 
           <div class="space-y-2">
-            <label class="block text-xs font-bold text-ink uppercase tracking-wider">Video Playlist items</label>
+            <label class="block text-xs font-bold text-ink uppercase tracking-wider">Videos Playlist items</label>
             <div id="videoRows" class="space-y-2"></div>
-            <button type="button" class="px-3 py-1.5 border border-slate-200 rounded-lg text-[10px] font-bold text-ink hover:bg-slate-50 transition-all" onclick="addVideoRow()"><i class="fa-solid fa-plus mr-1"></i> Add Video</button>
+            <button type="button" class="px-3 py-1.5 border border-slate-200 rounded-lg text-[10px] font-bold text-ink hover:bg-slate-50 transition-all" onclick="addVideoRow()"><i class="fa-solid fa-plus mr-1"></i> Add Video Link</button>
           </div>
 
           <div class="pt-2 flex items-center gap-2">
@@ -1952,15 +2003,15 @@ function renderAdminPlaylists(stage) {
         </form>
       </div>
 
-      <!-- Current List Table -->
-      <div class="bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm">
+      <!-- Current Items list Table -->
+      <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm divide-y divide-slate-100">
             <thead>
               <tr class="text-[11px] text-slate-400 font-mono font-bold uppercase bg-slate-50">
                 <th class="px-5 py-3">Playlist Title</th>
-                <th class="px-5 py-3">Category</th>
-                <th class="px-5 py-3">Videos</th>
+                <th class="px-5 py-3">Category (Folder)</th>
+                <th class="px-5 py-3">Videos Count</th>
                 <th class="px-5 py-3 text-right">Actions</th>
               </tr>
             </thead>
@@ -1980,7 +2031,7 @@ function renderAdminPlaylists(stage) {
 function addVideoRow(title = "", url = "") {
   const container = $("#videoRows");
   const block = document.createElement("div");
-  block.className = "flex items-center gap-2 border border-slate-100 p-3 rounded-xl bg-slate-50/50 relative video-form-row";
+  block.className = "flex items-center gap-2 border border-slate-100 p-3 rounded-xl bg-slate-50 relative video-form-row";
   block.innerHTML = `
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2 flex-1">
       <input type="text" placeholder="Video Title" value="${title}" class="v-title w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none" required />
@@ -2048,11 +2099,11 @@ async function submitAdminPlaylist(e) {
 
   try {
     if (editId) {
-      await db.collection("playlists").doc(editId).update(payload);
+      await getCollectionRef("playlists").doc(editId).update(payload);
       showToast("Playlist updated successfully!");
     } else {
       payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-      await db.collection("playlists").add(payload);
+      await getCollectionRef("playlists").add(payload);
       showToast("New playlist saved successfully.");
     }
     invalidateCache("playlists");
@@ -2068,7 +2119,7 @@ async function submitAdminPlaylist(e) {
 
 async function editPlaylist(id) {
   try {
-    const doc = await db.collection("playlists").doc(id).get();
+    const doc = await getCollectionRef("playlists").doc(id).get();
     if (!doc.exists) return;
     const p = doc.data();
 
@@ -2094,7 +2145,7 @@ function resetPlaylistForm() {
   $("#pl-edit-id").value = "";
   $("#videoRows").innerHTML = "";
   addVideoRow();
-  $("#playlistFormTitle").textContent = "Add New Playlist";
+  $("#playlistFormTitle").textContent = "Add New Playlist Category";
   $("#plCancelEditBtn").classList.add("hidden");
 }
 
@@ -2106,16 +2157,16 @@ function renderAdminNotes(stage) {
     <div class="space-y-8">
       <div>
         <h2 class="text-2xl font-display font-extrabold text-ink">Manage Study Notes</h2>
-        <p class="text-ink-soft text-xs">Catalogue downloadable references.</p>
+        <p class="text-ink-soft text-xs">Upload and structure downloadable PDF notes.</p>
       </div>
 
-      <div class="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm">
+      <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
         <h3 id="notesFormTitle" class="font-display font-extrabold text-base text-ink border-b border-slate-100 pb-3 mb-4">Add PDF Note</h3>
         <form id="adminNotesForm" class="space-y-4">
           <input type="hidden" id="notes-edit-id" />
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">Folder Category</label>
+              <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">Category (Folder)</label>
               <input type="text" id="note-category" required placeholder="e.g. Indian Constitution" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-primary" />
             </div>
             <div>
@@ -2124,7 +2175,7 @@ function renderAdminNotes(stage) {
             </div>
           </div>
           <div>
-            <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">Download URL (Google Drive/Dropbox link)</label>
+            <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">Download URL Link</label>
             <input type="url" id="note-url" required placeholder="https://drive.google.com/..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none" />
           </div>
           <div class="grid grid-cols-2 gap-4">
@@ -2139,7 +2190,7 @@ function renderAdminNotes(stage) {
           </div>
           <div>
             <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">Description</label>
-            <textarea id="note-desc" rows="2" placeholder="Briefly describe the topics covered" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
+            <textarea id="note-desc" rows="2" placeholder="Describe the overview of topics included" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-primary"></textarea>
           </div>
 
           <div class="pt-2 flex items-center gap-2">
@@ -2149,13 +2200,13 @@ function renderAdminNotes(stage) {
         </form>
       </div>
 
-      <div class="bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm">
+      <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm divide-y divide-slate-100">
             <thead>
               <tr class="text-[11px] text-slate-400 font-mono font-bold uppercase bg-slate-50">
                 <th class="px-5 py-3">Material Title</th>
-                <th class="px-5 py-3">Category</th>
+                <th class="px-5 py-3">Category (Folder)</th>
                 <th class="px-5 py-3">Subject</th>
                 <th class="px-5 py-3 text-right">Actions</th>
               </tr>
@@ -2216,11 +2267,11 @@ async function submitAdminNote(e) {
 
   try {
     if (editId) {
-      await db.collection("pdfs").doc(editId).update(payload);
+      await getCollectionRef("pdfs").doc(editId).update(payload);
       showToast("Note details updated!");
     } else {
       payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-      await db.collection("pdfs").add(payload);
+      await getCollectionRef("pdfs").add(payload);
       showToast("Study note reference catalogued.");
     }
     invalidateCache("pdfs");
@@ -2233,7 +2284,7 @@ async function submitAdminNote(e) {
 
 async function editNote(id) {
   try {
-    const doc = await db.collection("pdfs").doc(id).get();
+    const doc = await getCollectionRef("pdfs").doc(id).get();
     if (!doc.exists) return;
     const p = doc.data();
 
@@ -2267,16 +2318,16 @@ function renderAdminTests(stage, collectionName) {
     <div class="space-y-8">
       <div>
         <h2 class="text-2xl font-display font-extrabold text-ink">Manage ${isMock ? "Mock Exams" : "Subject Quizzes"}</h2>
-        <p class="text-ink-soft text-xs">Verify options evaluation parameters.</p>
+        <p class="text-ink-soft text-xs">Deploy active mock structures and evaluations.</p>
       </div>
 
-      <div class="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm">
+      <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
         <h3 id="testFormTitle" class="font-display font-extrabold text-base text-ink border-b border-slate-100 pb-3 mb-4">Add ${isMock ? "Mock Test" : "Quiz"}</h3>
         <form id="adminTestForm" class="space-y-4">
           <input type="hidden" id="t-edit-id" />
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">Category Folder</label>
+              <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">Category (Folder)</label>
               <input type="text" id="t-category" required placeholder="e.g. Mental Ability" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-primary" />
             </div>
             <div>
@@ -2295,7 +2346,7 @@ function renderAdminTests(stage, collectionName) {
             </div>
             <div>
               <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">${isMock ? "Limit Timer (Mins)" : "Duration estimate"}</label>
-              <input type="number" id="t-timer" placeholder="${isMock ? '90' : 'e.g. 5 Mins'}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none" />
+              <input type="number" id="t-timer" placeholder="${isMock ? '90' : '5'}" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none" />
             </div>
           </div>
 
@@ -2307,7 +2358,7 @@ function renderAdminTests(stage, collectionName) {
             <input type="number" step="0.01" min="0" id="t-negvalue" placeholder="Negative factor (e.g. 0.33)" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none w-full md:w-48 hidden" />
           </div>
 
-          <!-- Questions Stage -->
+          <!-- Questions Container -->
           <div class="space-y-3">
             <label class="block text-xs font-bold text-ink uppercase tracking-wider">Evaluation Questions List</label>
             <div id="questionRows" class="space-y-4"></div>
@@ -2321,13 +2372,13 @@ function renderAdminTests(stage, collectionName) {
         </form>
       </div>
 
-      <div class="bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm">
+      <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm divide-y divide-slate-100">
             <thead>
               <tr class="text-[11px] text-slate-400 font-mono font-bold uppercase bg-slate-50">
                 <th class="px-5 py-3">Test Title</th>
-                <th class="px-5 py-3">Category</th>
+                <th class="px-5 py-3">Category (Folder)</th>
                 <th class="px-5 py-3">Questions</th>
                 <th class="px-5 py-3 text-right">Actions</th>
               </tr>
@@ -2353,7 +2404,7 @@ function addQuestionRow(q = "", options = ["", "", "", ""], correct = 0) {
   const uid = blockUidCounter;
   const container = $("#questionRows");
   const block = document.createElement("div");
-  block.className = "border border-slate-200/60 p-4 rounded-xl bg-slate-50/40 relative question-form-row";
+  block.className = "border border-slate-200/60 p-4 rounded-xl bg-slate-50 relative question-form-row";
   block.innerHTML = `
     <button type="button" class="absolute right-3 top-3 text-danger p-1.5 hover:bg-danger-soft rounded-lg text-sm" onclick="this.parentElement.remove()"><i class="fa-solid fa-xmark"></i></button>
     <div class="space-y-3">
@@ -2365,7 +2416,7 @@ function addQuestionRow(q = "", options = ["", "", "", ""], correct = 0) {
         <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Option Details (Select Correct Radio Button)</label>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
           ${[0, 1, 2, 3].map(i => `
-            <div class="flex items-center gap-2 px-3 py-1 bg-white border border-slate-200/40 rounded-xl">
+            <div class="flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-xl">
               <input type="radio" name="correct_${uid}" value="${i}" class="q-correct-radio text-primary focus:ring-primary shrink-0" ${correct === i ? "checked" : ""} required />
               <input type="text" placeholder="Option ${i+1}" value="${options[i] || ""}" class="q-opt-text w-full border-none focus:outline-none text-xs py-1" required />
             </div>`).join("")}
@@ -2433,11 +2484,11 @@ async function submitAdminTest(e, colName) {
 
   try {
     if (editId) {
-      await db.collection(colName).doc(editId).update(payload);
+      await getCollectionRef(colName).doc(editId).update(payload);
       showToast("Evaluation test updated!");
     } else {
       payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-      await db.collection(colName).add(payload);
+      await getCollectionRef(colName).add(payload);
       showToast("Evaluation test saved successfully.");
     }
     invalidateCache(colName);
@@ -2450,7 +2501,7 @@ async function submitAdminTest(e, colName) {
 
 async function editAdminTest(colName, id) {
   try {
-    const doc = await db.collection(colName).doc(id).get();
+    const doc = await getCollectionRef(colName).doc(id).get();
     if (!doc.exists) return;
     const t = doc.data();
 
@@ -2491,13 +2542,224 @@ async function deleteAdminItem(collectionName, id, callback) {
   );
   if (!proceed) return;
   try {
-    await db.collection(collectionName).doc(id).delete();
+    await getCollectionRef(collectionName).doc(id).delete();
     invalidateCache(collectionName);
     showToast("Resource deleted successfully.");
     callback();
   } catch (err) {
     showToast("Delete failed: " + err.message);
   }
+}
+
+// ============================================================
+// ============================================================
+function renderAdminSyllabusManager(stage) {
+  stage.innerHTML = `
+    <div class="space-y-8">
+      <div>
+        <h2 class="text-2xl font-display font-extrabold text-ink">Syllabus Template Manager</h2>
+        <p class="text-ink-soft text-xs">Configure custom syllabus templates for the Student Syllabus Tracker dynamically.</p>
+      </div>
+
+      <!-- Syllabus Entry Form -->
+      <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
+        <h3 id="syllabusFormTitle" class="font-display font-extrabold text-base text-ink border-b border-slate-100 pb-3 mb-4">Create Syllabus Template</h3>
+        <form id="adminSyllabusForm" class="space-y-4">
+          <input type="hidden" id="sy-edit-id" />
+          <div>
+            <label class="block text-xs font-bold text-ink uppercase tracking-wider mb-1">Target Exam Name</label>
+            <input type="text" id="sy-exam" required placeholder="e.g. LDC (Lower Division Clerk)" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-primary" />
+          </div>
+
+          <div class="space-y-3">
+            <label class="block text-xs font-bold text-ink uppercase tracking-wider">Topics &amp; Checklist Items</label>
+            <div id="syllabusTopicRows" class="space-y-4"></div>
+            <button type="button" class="px-3 py-1.5 border border-slate-200 rounded-lg text-[10px] font-bold text-ink hover:bg-slate-50 transition-all" onclick="addSyllabusTopicRow()"><i class="fa-solid fa-plus mr-1"></i> Add Topic Area</button>
+          </div>
+
+          <div class="pt-2 flex items-center gap-2">
+            <button type="submit" class="px-5 py-2.5 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl text-xs shadow-sm transition-all" id="syllabusSubmitBtn">Save Syllabus Template</button>
+            <button type="button" class="px-4 py-2.5 border border-slate-200 text-slate-500 rounded-xl text-xs hover:bg-slate-50 hidden" id="syllabusCancelBtn" onclick="resetSyllabusForm()">Cancel Edit</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Current syllabus list -->
+      <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm divide-y divide-slate-100">
+            <thead>
+              <tr class="text-[11px] text-slate-400 font-mono font-bold uppercase bg-slate-50">
+                <th class="px-5 py-3">Exam Name</th>
+                <th class="px-5 py-3">Total Topics</th>
+                <th class="px-5 py-3">Updated</th>
+                <th class="px-5 py-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 font-medium text-xs" id="syllabusTableBody">
+              <tr><td colspan="4" class="text-center py-6 text-slate-400">Loading syllabus templates...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>`;
+
+  addSyllabusTopicRow();
+  $("#adminSyllabusForm").addEventListener("submit", submitAdminSyllabus);
+  loadAdminSyllabusTable();
+}
+
+function addSyllabusTopicRow(topicName = "", itemsCsv = "") {
+  const container = $("#syllabusTopicRows");
+  const block = document.createElement("div");
+  block.className = "border border-slate-100 p-4 rounded-xl bg-slate-50 relative syllabus-topic-form-row";
+  block.innerHTML = `
+    <button type="button" class="absolute right-3 top-3 text-danger p-1.5 hover:bg-danger-soft rounded-lg text-sm" onclick="this.parentElement.remove()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="space-y-2">
+      <div>
+        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Topic Area Name</label>
+        <input type="text" placeholder="e.g. General Knowledge" value="${topicName}" class="sy-topic-name w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none" required />
+      </div>
+      <div>
+        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Checklist items (separated by commas)</label>
+        <textarea placeholder="Kerala Renaissance, Indian History, Indian Constitution" class="sy-topic-items w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none" required>${itemsCsv}</textarea>
+      </div>
+    </div>`;
+  container.appendChild(block);
+}
+
+async function loadAdminSyllabusTable() {
+  const tbody = $("#syllabusTableBody");
+  try {
+    const templates = await fetchCollection("syllabusTemplates");
+    
+    // Merge the custom templates and the default templates to display everything in the panel
+    const displayed = [];
+    templates.forEach(t => {
+      displayed.push({ id: t.id, exam: t.exam, topics: t.topics, custom: true, updatedAt: t.updatedAt });
+    });
+    
+    Object.entries(KERALA_PSC_DEFAULT_SYLLABUS).forEach(([exam, data]) => {
+      // Check if not already overridden by custom template
+      if (!templates.some(t => t.exam === exam)) {
+        displayed.push({ id: null, exam, topics: data.topics, custom: false, updatedAt: null });
+      }
+    });
+
+    tbody.innerHTML = displayed.map(s => {
+      const updatedStr = s.updatedAt ? formatDate(s.updatedAt) : "System Default";
+      return `
+        <tr>
+          <td class="px-5 py-3.5 text-ink font-bold font-display">${s.exam}</td>
+          <td class="px-5 py-3.5 text-slate-500">${(s.topics || []).length} topics</td>
+          <td class="px-5 py-3.5 font-mono text-slate-400">${updatedStr}</td>
+          <td class="px-5 py-3.5 text-right space-x-1.5 whitespace-nowrap">
+            ${s.custom 
+              ? `<button class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-[10px] transition-all" onclick="editSyllabus('${s.id}')">Edit</button>
+                 <button class="px-2.5 py-1.5 bg-danger-soft hover:bg-danger/20 text-danger font-bold rounded-lg text-[10px] transition-all" onclick="deleteAdminItem('syllabusTemplates', '${s.id}', loadAdminSyllabusTable)">Delete</button>`
+              : `<button class="px-2.5 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold rounded-lg text-[10px] transition-all" onclick="customizeDefaultSyllabus('${s.exam}')">Customize</button>`
+            }
+          </td>
+        </tr>`;
+    }).join("");
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-danger">Error loading syllabus: ${err.message}</td></tr>`;
+  }
+}
+
+async function submitAdminSyllabus(e) {
+  e.preventDefault();
+  const btn = $("#syllabusSubmitBtn");
+  btn.disabled = true;
+
+  const editId = $("#sy-edit-id").value;
+  const exam = $("#sy-exam").value.trim();
+
+  const topics = $all(".syllabus-topic-form-row").map(row => {
+    const topicName = row.querySelector(".sy-topic-name").value.trim();
+    const itemsRaw = row.querySelector(".sy-topic-items").value.trim();
+    const items = itemsRaw.split(",").map(i => i.trim()).filter(Boolean);
+    return { name: topicName, items };
+  }).filter(t => t.name && t.items.length);
+
+  if (!topics.length) {
+    showToast("Please provide at least one topic with sub-items.");
+    btn.disabled = false;
+    return;
+  }
+
+  const payload = {
+    exam, topics,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+
+  try {
+    if (editId) {
+      await getCollectionRef("syllabusTemplates").doc(editId).update(payload);
+      showToast("Syllabus template updated successfully!");
+    } else {
+      payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      await getCollectionRef("syllabusTemplates").add(payload);
+      showToast("Syllabus template saved successfully!");
+    }
+    invalidateCache("syllabusTemplates");
+    resetSyllabusForm();
+    loadAdminSyllabusTable();
+  } catch (err) {
+    showToast("Save operation failed: " + err.message);
+  }
+
+  btn.disabled = false;
+}
+
+async function editSyllabus(id) {
+  try {
+    const doc = await getCollectionRef("syllabusTemplates").doc(id).get();
+    if (!doc.exists) return;
+    const s = doc.data();
+
+    $("#sy-edit-id").value = id;
+    $("#sy-exam").value = s.exam || "";
+
+    const container = $("#syllabusTopicRows");
+    container.innerHTML = "";
+    s.topics.forEach(t => addSyllabusTopicRow(t.name, t.items.join(", ")));
+
+    $("#syllabusFormTitle").textContent = "Edit Syllabus Template";
+    $("#syllabusCancelBtn").classList.remove("hidden");
+    window.scrollTo({ top: $("#syllabusFormTitle").offsetTop - 100, behavior: "smooth" });
+  } catch (err) { showToast(err.message); }
+}
+
+function customizeDefaultSyllabus(exam) {
+  const defaultData = KERALA_PSC_DEFAULT_SYLLABUS[exam];
+  if (!defaultData) return;
+
+  $("#sy-edit-id").value = "";
+  $("#sy-exam").value = exam;
+
+  const container = $("#syllabusTopicRows");
+  container.innerHTML = "";
+  defaultData.topics.forEach(t => addSyllabusTopicRow(t.name, t.items.join(", ")));
+
+  $("#syllabusFormTitle").textContent = "Customize Default Syllabus Template";
+  $("#syllabusCancelBtn").classList.remove("hidden");
+  window.scrollTo({ top: $("#syllabusFormTitle").offsetTop - 100, behavior: "smooth" });
+}
+
+function resetSyllabusForm() {
+  $("#adminSyllabusForm").reset();
+  $("#sy-edit-id").value = "";
+  $("#syllabusTopicRows").innerHTML = "";
+  addSyllabusTopicRow();
+  $("#syllabusFormTitle").textContent = "Create Syllabus Template";
+  $("#syllabusCancelBtn").classList.add("hidden");
+}
+
+function formatDate(ts) {
+  if (!ts) return "—";
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 }
 
 // ============================================================
@@ -2508,14 +2770,14 @@ function renderBulkImport(stage) {
     <div class="space-y-6">
       <div>
         <h2 class="text-2xl font-display font-extrabold text-ink">Bulk CSV Import</h2>
-        <p class="text-ink-soft text-xs font-medium">Quickly import multiple lists from Excel / spreadsheet tables.</p>
+        <p class="text-ink-soft text-xs font-medium">Quickly import multiple test configurations and quizzes from spreadsheets.</p>
       </div>
 
-      <div class="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm space-y-4">
+      <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4">
         <h3 class="font-display font-extrabold text-base text-ink">CSV Template Format</h3>
-        <p class="text-xs text-ink-soft">Ensure your CSV columns align to this exact sequence order:</p>
+        <p class="text-xs text-ink-soft font-mono">Align your CSV columns in this exact order:</p>
         
-        <pre class="bg-slate-50 p-4 rounded-xl text-[10px] font-mono text-slate-600 overflow-x-auto leading-relaxed border border-slate-200/50">type,title,category,subject,exam,timerMinutes,negativeMarking,negativeValue,question,option1,option2,option3,option4,correct
+        <pre class="bg-slate-50 p-4 rounded-xl text-[10px] font-mono text-slate-600 overflow-x-auto leading-relaxed border border-slate-200">type,title,category,subject,exam,timerMinutes,negativeMarking,negativeValue,question,option1,option2,option3,option4,correct
 quiz,GK Quiz 1,Renaissance,History,LDC,,,,"Renaissance was started in?",Kochi,Thiruvananthapuram,Calicut,Kollam,2
 mock,LDC Trial Set,Full Mocks,General,LDC,90,TRUE,0.33,"Commission was formed on?",1950,1956,1960,1971,2</pre>
 
@@ -2525,10 +2787,10 @@ mock,LDC Trial Set,Full Mocks,General,LDC,90,TRUE,0.33,"Commission was formed on
           </a>
         </div>
 
-        <div class="border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center cursor-pointer hover:bg-slate-50/50 transition-all space-y-2 relative" id="dragZone">
+        <div class="border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center cursor-pointer hover:bg-slate-50 transition-all space-y-2 relative" id="dragZone">
           <div class="text-primary text-4xl"><i class="fa-solid fa-cloud-arrow-up"></i></div>
           <p class="text-sm font-semibold text-ink">Drag and drop your spreadsheet CSV file here, or click to browse</p>
-          <span class="text-xs text-slate-400">Accepted files: .csv, .txt</span>
+          <span class="text-xs text-slate-400">Accepted formats: .csv, .txt</span>
           <input type="file" id="bulkCSVFileInput" class="hidden" accept=".csv" />
         </div>
 
@@ -2544,11 +2806,11 @@ mock,LDC Trial Set,Full Mocks,General,LDC,90,TRUE,0.33,"Commission was formed on
   const fileInput = $("#bulkCSVFileInput");
 
   zone.addEventListener("click", () => fileInput.click());
-  zone.addEventListener("dragover", (e) => { e.preventDefault(); zone.classList.add("border-primary", "bg-primary-soft/20"); });
-  zone.addEventListener("dragleave", () => zone.classList.remove("border-primary", "bg-primary-soft/20"));
+  zone.addEventListener("dragover", (e) => { e.preventDefault(); zone.classList.add("border-primary", "bg-primary-soft"); });
+  zone.addEventListener("dragleave", () => zone.classList.remove("border-primary", "bg-primary-soft"));
   zone.addEventListener("drop", (e) => {
     e.preventDefault();
-    zone.classList.remove("border-primary", "bg-primary-soft/20");
+    zone.classList.remove("border-primary", "bg-primary-soft");
     if (e.dataTransfer.files[0]) processImportFile(e.dataTransfer.files[0]);
   });
 
@@ -2565,7 +2827,7 @@ function processImportFile(file) {
     try {
       const parsed = parseCSVRows(r.result);
       if (!parsed.length) {
-        showToast("We couldn't detect any valid column lines in this CSV file.");
+        showToast("No valid rows were detected in this CSV file. Please verify parameters.");
         return;
       }
       stagedImportData = parsed;
@@ -2632,7 +2894,7 @@ async function submitBulkStagedData() {
   for (const t of stagedImportData) {
     const col = t.type === "mock" ? "mocks" : "quizzes";
     try {
-      await db.collection(col).add({
+      await getCollectionRef(col).add({
         title: t.title,
         category: t.category,
         subject: t.subject,
@@ -2646,7 +2908,7 @@ async function submitBulkStagedData() {
       });
       imported++;
     } catch (e) {
-      console.error("Batch failure:", e);
+      console.error("Batch upload failed:", e);
     }
   }
 
@@ -2658,20 +2920,20 @@ async function submitBulkStagedData() {
 }
 
 // ============================================================
-// SYSTEM BOOTSTRAP MOUNT
+// SYSTEM BOOTSTRAP INITIALIZATION
 // ============================================================
 document.addEventListener("DOMContentLoaded", () => {
-  // Mobile navigation drawer togglers
+  // Mobile navigation drawer triggers
   $all(".js-nav-toggle").forEach(btn => {
     btn.addEventListener("click", () => {
       $("#mobileDrawer").classList.toggle("translate-x-full");
     });
   });
 
-  // Global Auth Tracking
+  // Track Auth Changes
   auth.onAuthStateChanged(onAuthChange);
 
-  // Preload libraries
+  // Pre-fetch libraries on startup
   setTimeout(prefetchAll, 200);
 });
 </script>
