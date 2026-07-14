@@ -65,15 +65,15 @@ body {
 .font-display {
   font-family: 'Sora', sans-serif;
 }
-/* Visual cards transition styling */
+/* Visual hover cards transitions */
 .tt-box {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .tt-box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(11, 79, 108, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(11, 79, 108, 0.12);
 }
-/* Loading skeleton shimmer effects */
+/* Shimmer placeholders */
 .shimmer {
   background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
   background-size: 200% 100%;
@@ -82,6 +82,18 @@ body {
 @keyframes loading-shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+/* Clean custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
 }
 </style>
 </head>
@@ -96,14 +108,14 @@ body {
       </a>
       <!-- Desktop Navigation Menu -->
       <nav class="hidden lg:flex items-center gap-1">
-        <a href="/" data-nav="home" class="px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Home</a>
-        <a href="/videos" data-nav="videos" class="px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Video Classes</a>
-        <a href="/pdfs" data-nav="pdfs" class="px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Study Notes</a>
-        <a href="/quizzes" data-nav="quizzes" class="px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Quizzes</a>
-        <a href="/mocks" data-nav="mocks" class="px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Mock Tests</a>
-        <a href="/syllabus" data-nav="syllabus" class="px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Syllabus</a>
-        <a href="/dashboard" data-nav="dashboard" class="px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Dashboard</a>
-        <a href="/admin" data-nav="admin" id="navAdminLink" class="hidden px-3.5 py-1.5 rounded-full font-semibold text-[14.5px] text-accent hover:bg-amber-50 hover:text-accent-dark transition-all duration-200">Admin Panel</a>
+        <a href="/" data-nav="home" class="px-3.5 py-1.5 rounded-full font-semibold text-[14px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Home</a>
+        <a href="/videos" data-nav="videos" class="px-3.5 py-1.5 rounded-full font-semibold text-[14px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Video Classes</a>
+        <a href="/pdfs" data-nav="pdfs" class="px-3.5 py-1.5 rounded-full font-semibold text-[14px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Study Notes</a>
+        <a href="/quizzes" data-nav="quizzes" class="px-3.5 py-1.5 rounded-full font-semibold text-[14px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Quizzes</a>
+        <a href="/mocks" data-nav="mocks" class="px-3.5 py-1.5 rounded-full font-semibold text-[14px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Mock Tests</a>
+        <a href="/syllabus" data-nav="syllabus" class="px-3.5 py-1.5 rounded-full font-semibold text-[14px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Syllabus</a>
+        <a href="/dashboard" data-nav="dashboard" class="px-3.5 py-1.5 rounded-full font-semibold text-[14px] text-ink-soft hover:bg-primary-soft hover:text-primary-dark transition-all duration-200">Dashboard</a>
+        <a href="/admin" data-nav="admin" id="navAdminLink" class="hidden px-3.5 py-1.5 rounded-full font-semibold text-[14px] text-accent hover:bg-amber-50 hover:text-accent-dark transition-all duration-200">Admin Panel</a>
       </nav>
     </div>
     <div class="flex items-center gap-3">
@@ -124,7 +136,7 @@ body {
       </button>
     </div>
     
-    <!-- Profile picture display synced with Google Photo info -->
+    <!-- Mobile Profile Picture display synced with auth status -->
     <div id="mobileProfileSection" class="mb-5 p-4 bg-slate-50 rounded-xl border border-slate-100"></div>
 
     <nav class="flex flex-col gap-1 flex-1 overflow-y-auto">
@@ -144,7 +156,6 @@ body {
 
 <main class="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 py-8">
 
-  <!-- HOME VIEW -->
   <section class="page active" id="page-home">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-12">
       <div class="lg:col-span-7 space-y-5">
@@ -192,7 +203,6 @@ body {
       </div>
     </div>
 
-    <!-- Home section boxes (inspired by modern visual hierarchy) -->
     <div id="homeDynamic" class="space-y-12">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="shimmer h-[120px] rounded-2xl"></div>
@@ -202,7 +212,6 @@ body {
     </div>
   </section>
 
-  <!-- VIDEO CLASSES -->
   <section class="page" id="page-videos">
     <div class="space-y-6">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -218,7 +227,6 @@ body {
     </div>
   </section>
 
-  <!-- STUDY NOTES (PDFS) -->
   <section class="page" id="page-pdfs">
     <div class="space-y-6">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -234,35 +242,30 @@ body {
     </div>
   </section>
 
-  <!-- QUIZZES -->
   <section class="page" id="page-quizzes">
     <div class="space-y-6" id="quizzesContainer">
       <div class="shimmer h-48 rounded-2xl"></div>
     </div>
   </section>
 
-  <!-- MOCK TESTS -->
   <section class="page" id="page-mocks">
     <div class="space-y-6" id="mocksContainer">
       <div class="shimmer h-48 rounded-2xl"></div>
     </div>
   </section>
 
-  <!-- SYLLABUS TRACKER -->
   <section class="page" id="page-syllabus">
     <div class="space-y-6" id="syllabusContainer">
       <div class="shimmer h-48 rounded-2xl"></div>
     </div>
   </section>
 
-  <!-- STUDENT DASHBOARD -->
   <section class="page" id="page-dashboard">
     <div class="space-y-6" id="dashboardContainer">
       <div class="shimmer h-48 rounded-2xl"></div>
     </div>
   </section>
 
-  <!-- ADMIN PORTAL -->
   <section class="page" id="page-admin">
     <div id="adminRoot" class="space-y-6">
       <div class="shimmer h-48 rounded-2xl"></div>
@@ -286,7 +289,8 @@ body {
   </div>
 </footer>
 
-<!-- Video lightbox modal -->
+
+<!-- Video Lightbox modal -->
 <div class="fixed inset-0 bg-ink/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden" id="videoModal">
   <div class="bg-white rounded-2xl p-6 w-full max-w-3xl shadow-2xl relative flex flex-col gap-4">
     <div class="flex justify-between items-start gap-4">
@@ -305,7 +309,7 @@ body {
   </div>
 </div>
 
-<!-- Profile Creation Modal Overlay -->
+<!-- Profile Setup Modal Overlay -->
 <div class="fixed inset-0 bg-ink/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden" id="profileModal">
   <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl flex flex-col gap-4">
     <div class="text-center">
@@ -331,7 +335,7 @@ body {
   </div>
 </div>
 
-<!-- Custom confirmation dialogue popup (Rule-compliant replacement for confirm()) -->
+<!-- Custom Confirmation Modal Overlay (Complying with prompt safety guidelines) -->
 <div class="fixed inset-0 bg-ink/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4 hidden" id="customConfirmModal">
   <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-2xl flex flex-col gap-4 text-center">
     <div class="w-12 h-12 bg-amber-50 text-accent rounded-full flex items-center justify-center text-xl mx-auto">
@@ -350,11 +354,9 @@ body {
 
 <div class="toast fixed bottom-8 left-1/2 -translate-x-1/2 bg-ink text-white px-6 py-3.5 rounded-full shadow-xl text-sm font-semibold tracking-wide pointer-events-none opacity-0 translate-y-4 transition-all duration-300 z-[9999]" id="toast"></div>
 
-<!-- Firebase SDK Compat versions -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<!-- Chart.js for Admin Analytics -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
 <script>
@@ -368,12 +370,10 @@ const firebaseConfig = {
   measurementId: "G-11CWH58QB7"
 };
 
-// Initialize Firebase SDK Compat
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// Application Constants
 const ADMIN_EMAIL = "futureuapp@gmail.com";
 const KERALA_DISTRICTS = [
   "Thiruvananthapuram", "Kollam", "Pathanamthitta", "Alappuzha",
@@ -381,63 +381,71 @@ const KERALA_DISTRICTS = [
   "Malappuram", "Kozhikode", "Wayanad", "Kannur", "Kasaragod"
 ];
 
-// Fallback Default Syllabus Templates (Loaded if custom admin templates don't exist in database)
 const KERALA_PSC_DEFAULT_SYLLABUS = {
   "LDC (Lower Division Clerk)": {
-    topics: [
-      { name: "General Knowledge", items: ["Kerala Renaissance", "Indian History", "Geography of India & Kerala", "Indian Constitution", "Economics Basics", "Science & Technology", "Current Affairs"] },
-      { name: "General English", items: ["Grammar", "Vocabulary", "Comprehension", "Synonyms & Antonyms", "Idioms & Phrases"] },
-      { name: "Regional Language (Malayalam)", items: ["Grammar", "Literature", "Translation", "Proverbs & Idioms"] },
-      { name: "Quantitative Aptitude", items: ["Number System", "Percentage & Ratio", "Time & Work", "Profit & Loss", "Simple & Compound Interest", "Mensuration"] },
-      { name: "Mental Ability & Reasoning", items: ["Series", "Coding-Decoding", "Blood Relations", "Direction Sense", "Puzzles", "Logical Deduction"] }
+    subjects: [
+      {
+        name: "General Knowledge",
+        topics: [
+          { name: "Kerala History & Renaissance", subtopics: ["Sree Narayana Guru Movements", "Temple Entry Proclamation", "Vaikom Satyagraha", "Ayyankali & Sadhu Jana Paripalana Sangham"] },
+          { name: "Indian Polity", subtopics: ["Preamble & Fundamental Rights", "Directive Principles of State Policy", "Amendment Procedures", "Emergency Provisions"] },
+          { name: "Geography of Kerala", subtopics: ["River Systems & Dams", "Forests & National Parks", "Soil Types & Agriculture", "Climate Characteristics"] }
+        ]
+      },
+      {
+        name: "General English",
+        topics: [
+          { name: "Grammar Basics", subtopics: ["Subject-Verb Agreement", "Tenses & Active/Passive Voice", "Direct & Indirect Speech", "Prepositions & Articles"] },
+          { name: "Vocabulary & Phrases", subtopics: ["Synonyms & Antonyms", "Idioms & Phrases", "One Word Substitutes", "Spelling Corrections"] }
+        ]
+      },
+      {
+        name: "Quantitative Aptitude",
+        topics: [
+          { name: "Arithmetic Progression", subtopics: ["Number System & Simplification", "L.C.M & H.C.F", "Fractions & Decimal Numbers", "Percentage Calculations"] },
+          { name: "Algebra & Time Factors", subtopics: ["Time & Work", "Ratio & Proportion", "Profit & Loss", "Simple Interest & Compound Interest"] }
+        ]
+      }
     ]
   },
   "LGS (Last Grade Servants)": {
-    topics: [
-      { name: "General Knowledge", items: ["Kerala History & Culture", "Indian Polity", "Basic Science", "Current Affairs", "Sports & Awards"] },
-      { name: "General English", items: ["Basic Grammar", "Common Errors", "Fill in the Blanks", "Reading Comprehension"] },
-      { name: "Regional Language", items: ["Malayalam Grammar", "Word Meanings", "Sentence Correction"] },
-      { name: "Arithmetic", items: ["Addition & Subtraction", "Multiplication & Division", "Fractions", "Average", "Simple Interest"] }
-    ]
-  },
-  "Degree Level": {
-    topics: [
-      { name: "General Studies", items: ["Indian History", "World History", "Indian Geography", "Kerala Geography", "Indian Constitution", "Public Administration", "Economics", "Science & Environment"] },
-      { name: "Current Affairs", items: ["National News", "Kerala News", "International Affairs", "Government Schemes", "Reports & Indices"] },
-      { name: "Language & Literature", items: ["English Grammar", "Malayalam Literature", "Translation", "Essay Writing"] },
-      { name: "Quantitative Aptitude", items: ["Data Interpretation", "Probability", "Permutation & Combination", "Algebra", "Geometry"] },
-      { name: "Mental Ability", items: ["Analytical Reasoning", "Verbal Reasoning", "Non-Verbal Reasoning", "Syllogism", "Statement & Conclusion"] }
+    subjects: [
+      {
+        name: "General Science",
+        topics: [
+          { name: "Basic Biology", subtopics: ["Human Anatomy & Diseases", "Vitamins & Balanced Diet", "Plant Taxonomy", "Common Vaccines"] }
+        ]
+      },
+      {
+        name: "Arithmetic & Mental Ability",
+        topics: [
+          { name: "Simplification", subtopics: ["Fractions & Averages", "Percentage Calculations", "Basic Addition & Subtraction Tests"] }
+        ]
+      }
     ]
   }
 };
 
-// ============================================================
-// GLOBAL STATE MANAGEMENT
-// ============================================================
 let currentUser = null;
 let currentProfile = null;
 let isAdmin = false;
 let blockUidCounter = 0;
-let cache = { playlists: null, pdfs: null, quizzes: null, mocks: null, results: null, syllabusTemplates: null };
-const CACHE_TTL = 3 * 60 * 1000; // Local memory cache duration
+let cache = { playlists: null, pdfs: null, quizzes: null, mocks: null, syllabusTemplates: null };
+const CACHE_TTL = 3 * 60 * 1000;
 
 function $(sel, root = document) { return root.querySelector(sel); }
 function $all(sel, root = document) { return [...root.querySelectorAll(sel)]; }
 
-// ============================================================
-// COMPLYING RULE 1 & 3: SECURE FIRESTORE PATHS & AUTHENTICATION
-// ============================================================
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'pscfutureu';
 
-/**
- * Build clean nested collection references mapping safely to Rule 1:
- * /artifacts/{appId}/public/data/{collectionName}
- */
 function getCollectionRef(colName) {
   return db.collection('artifacts').doc(appId).collection('public').doc('data').collection(colName);
 }
 
-// Global anonymous or custom token initialization prior to queries (Rule 3)
+function getPrivateCollectionRef(userId, colName) {
+  return db.collection('artifacts').doc(appId).collection('users').doc(userId).collection(colName);
+}
+
 async function ensureAuthenticated() {
   if (auth.currentUser) return auth.currentUser;
   
@@ -455,9 +463,7 @@ async function ensureAuthenticated() {
   }
 }
 
-// ============================================================
-// REAL-TIME SESSION CACHE MANAGERS (ULTRA-FAST TRANSITIONS)
-// ============================================================
+// Cache Layer Managers
 function getCacheKey(name) { return "pfu_cache_" + name; }
 function readCache(name) {
   try {
@@ -476,23 +482,18 @@ function invalidateCache(name = null) {
     cache[name] = null;
     sessionStorage.removeItem(getCacheKey(name));
   } else {
-    ["playlists", "pdfs", "quizzes", "mocks", "results", "syllabusTemplates"].forEach(n => {
+    ["playlists", "pdfs", "quizzes", "mocks", "syllabusTemplates"].forEach(n => {
       cache[n] = null;
       sessionStorage.removeItem(getCacheKey(n));
     });
   }
 }
 
-// Pre-fetching all collections on page startup
 async function prefetchAll() {
   await ensureAuthenticated();
   await Promise.all(["playlists", "pdfs", "quizzes", "mocks", "syllabusTemplates"].map(c => fetchCollection(c)));
 }
 
-/**
- * Complying with RULE 2: No client-side complex queries.
- * We fetch all flat collections and perform filters, sortings, and slices locally.
- */
 async function fetchCollection(name) {
   if (cache[name]) return cache[name];
   const cachedData = readCache(name);
@@ -508,7 +509,6 @@ async function fetchCollection(name) {
     const snap = await getCollectionRef(name).get();
     let data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
 
-    // Rule 2 compliant sorting: In-Memory order sort on updatedAt or createdAt
     data.sort((a, b) => {
       const ta = a.updatedAt?.toMillis?.() || a.createdAt?.toMillis?.() || 0;
       const tb = b.updatedAt?.toMillis?.() || b.createdAt?.toMillis?.() || 0;
@@ -519,14 +519,11 @@ async function fetchCollection(name) {
     writeCache(name, data);
     return data;
   } catch (err) {
-    console.warn(`Exception reading collection: ${name}. This can happen on first-time setup:`, err.message);
+    console.warn(`Exception reading collection: ${name}. Setup fallback default templates.`, err.message);
     return [];
   }
 }
 
-// ============================================================
-// CUSTOM DIALOG CONTEXT (Replacing Native confirm() Dialogues)
-// ============================================================
 let customConfirmResolve = null;
 function showCustomConfirm(title, desc) {
   $("#confirmTitle").textContent = title;
@@ -545,15 +542,11 @@ $("#confirmProceedBtn").addEventListener("click", () => {
   if (customConfirmResolve) customConfirmResolve(true);
 });
 
-// ============================================================
-// AUTHENTICATION & PROFILE CREATION
-// ============================================================
 async function onAuthChange(user) {
   currentUser = user;
   currentProfile = null;
   isAdmin = false;
 
-  // Flush the restricted local cache memory on change of user session status
   invalidateCache("quizzes");
   invalidateCache("mocks");
   invalidateCache("results");
@@ -563,7 +556,6 @@ async function onAuthChange(user) {
   const mobileAuth = $("#mobileAuthButton");
 
   if (!user) {
-    // Unauthenticated view
     const signinButtonHTML = `
       <button class="px-4 py-2 bg-primary text-white font-bold rounded-xl shadow-md hover:bg-primary-dark transition-all text-sm flex items-center gap-2 js-google-signin">
         <i class="fa-brands fa-google"></i> Sign In
@@ -581,7 +573,6 @@ async function onAuthChange(user) {
     
     $all(".js-google-signin").forEach(btn => btn.addEventListener("click", signInWithGoogle));
     
-    // Reset home indicators
     $("#homeProfileName").textContent = "Guest Candidate";
     $("#homeProfileDetails").textContent = "Roll No. PFU/2026/0001 · Kerala";
     $("#homeProfilePic").innerHTML = `<i class="fa-regular fa-user text-primary-dark"></i>`;
@@ -592,10 +583,8 @@ async function onAuthChange(user) {
     return;
   }
 
-  // Authenticated state configuration
   isAdmin = (user.email === ADMIN_EMAIL);
   
-  // Show Admin links if applicable
   const adminLinks = [$("#navAdminLink"), $("#navAdminLinkMobile")];
   adminLinks.forEach(link => {
     if (link) {
@@ -604,6 +593,29 @@ async function onAuthChange(user) {
     }
   });
 
+  if (user.isAnonymous) {
+    const guestPicHTML = `<i class="fa-regular fa-user text-white text-lg"></i>`;
+    authArea.innerHTML = `
+      <button class="px-4 py-2 bg-primary text-white font-bold rounded-xl shadow-md hover:bg-primary-dark transition-all text-sm flex items-center gap-2 js-google-signin">
+        <i class="fa-brands fa-google"></i> Sign In
+      </button>`;
+    $all(".js-google-signin").forEach(btn => btn.addEventListener("click", signInWithGoogle));
+
+    mobileProfile.innerHTML = `
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-slate-400 text-white flex items-center justify-center"><i class="fa-solid fa-user"></i></div>
+        <div>
+          <h4 class="font-bold text-sm text-ink">Guest Candidate</h4>
+          <p class="text-xs text-ink-soft">Standard view mode</p>
+        </div>
+      </div>`;
+    mobileAuth.innerHTML = "";
+    
+    router();
+    return;
+  }
+
+  // Active Google Logged-In User Profile checks
   try {
     const doc = await getCollectionRef("users").doc(user.uid).get();
     if (doc.exists && doc.data().name && doc.data().phone && doc.data().district) {
@@ -623,7 +635,6 @@ async function onAuthChange(user) {
     ? `<img src="${photo}" alt="Profile" referrerpolicy="no-referrer" class="w-full h-full object-cover">`
     : `<span class="font-bold text-lg text-white">${initial}</span>`;
 
-  // Desktop header indicators
   authArea.innerHTML = `
     <div class="flex items-center gap-2 border border-slate-200 rounded-full pl-2 pr-4 py-1.5 bg-slate-50">
       <div class="w-7 h-7 rounded-full bg-primary text-white flex items-center justify-center overflow-hidden">
@@ -633,7 +644,6 @@ async function onAuthChange(user) {
     </div>
     <button class="text-xs font-bold text-danger hover:text-danger/80 px-2.5 py-1.5 hover:bg-danger-soft rounded-lg transition-all js-signout">Sign Out</button>`;
 
-  // Mobile Drawer Profile Card with Sign-Out integration
   mobileProfile.innerHTML = `
     <div class="flex items-center gap-3">
       <div class="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center overflow-hidden border border-slate-200">
@@ -650,39 +660,39 @@ async function onAuthChange(user) {
       <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
     </button>`;
 
-  // Update Home Admit Card details
   $("#homeProfileName").textContent = name;
   $("#homeProfileDetails").textContent = `Roll No. PFU/2026/${user.uid.slice(0, 4).toUpperCase()} · ${currentProfile?.district || "Kerala"}`;
   $("#homeProfilePic").innerHTML = userPicHTML;
 
-  // Wire actions
   $all(".js-signout").forEach(b => b.addEventListener("click", () => auth.signOut()));
 
-  // Render tracker status
   await renderHomeSyllabusProgress();
-
   router();
 }
 
 async function renderHomeSyllabusProgress() {
-  if (!currentUser) return;
+  if (!currentUser || currentUser.isAnonymous) return;
   try {
-    const doc = await getCollectionRef("syllabusProgress").doc(currentUser.uid).get();
+    const doc = await getPrivateCollectionRef(currentUser.uid, "syllabusProgress").doc("main").get();
     if (doc.exists) {
       const progress = doc.data();
       const exam = progress.exam;
       
-      // Determine exam source: custom template or default syllabus
       const templates = await fetchCollection("syllabusTemplates");
       const matchedTemplate = templates.find(t => t.exam === exam);
       const syllabus = matchedTemplate ? matchedTemplate : KERALA_PSC_DEFAULT_SYLLABUS[exam];
 
       if (syllabus) {
         let total = 0, done = 0;
-        syllabus.topics.forEach(t => t.items.forEach(item => {
-          total++;
-          if (progress.completed && progress.completed[t.name + "::" + item]) done++;
-        }));
+        syllabus.subjects.forEach(subject => {
+          subject.topics.forEach(topic => {
+            topic.subtopics.forEach(sub => {
+              total++;
+              const pathKey = `${subject.name}::${topic.name}::${sub}`;
+              if (progress.completed && progress.completed[pathKey]) done++;
+            });
+          });
+        });
         const percentage = total ? Math.round((done / total) * 100) : 0;
         $("#homeAdmitFill").style.width = percentage + "%";
         $("#homeAdmitPercentage").textContent = `${progress.exam} Progress: ${percentage}%`;
@@ -733,7 +743,7 @@ $("#profileForm").addEventListener("submit", async (e) => {
     currentProfile = { name, phone, district, email: currentUser.email };
     $("#profileModal").classList.add("hidden");
     $("#profileModal").classList.remove("flex");
-    showToast("Profile configured successfully! Welcome.");
+    showToast("Profile configured successfully!");
     onAuthChange(currentUser);
   } catch (err) {
     showToast("Error saving profile: " + err.message);
@@ -742,8 +752,6 @@ $("#profileForm").addEventListener("submit", async (e) => {
   }
 });
 
-// ============================================================
-// ============================================================
 const ROUTES = ["home", "videos", "pdfs", "quizzes", "mocks", "syllabus", "dashboard", "admin"];
 
 function currentRoute() {
@@ -820,7 +828,6 @@ function showToast(msg) {
   }, 2400);
 }
 
-// Category grouping utility
 function getCategory(item) {
   return (item.category || item.subject || "General").trim();
 }
@@ -871,9 +878,6 @@ function renderLongListView(categories, iconClass, itemType, queryParamKey) {
     </div>`;
 }
 
-// ============================================================
-// PAGE: HOME VIEW CONTROLLER
-// ============================================================
 async function loadHome() {
   const container = $("#homeDynamic");
   container.innerHTML = `
@@ -890,7 +894,6 @@ async function loadHome() {
     fetchCollection("mocks")
   ]);
 
-  // Clean aesthetic box layout inspired by the screenshot requirements (Clean, rounded, and hovering layout blocks)
   container.innerHTML = `
     <div class="text-center max-w-lg mx-auto py-2">
       <h2 class="text-2xl font-display font-black text-ink">Welcome To True Turn</h2>
@@ -898,7 +901,6 @@ async function loadHome() {
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- 1. Mock Tests -->
       <a href="/mocks" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-500 to-blue-600 text-white flex items-center justify-center text-2xl shadow-md shadow-blue-500/10">
@@ -912,7 +914,6 @@ async function loadHome() {
         <span class="text-slate-300 group-hover:text-primary transition-colors"><i class="fa-solid fa-arrow-right"></i></span>
       </a>
 
-      <!-- 2. Question Papers (Study Notes) -->
       <a href="/pdfs" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-600 text-white flex items-center justify-center text-2xl shadow-md shadow-rose-500/10">
@@ -926,7 +927,6 @@ async function loadHome() {
         <span class="text-slate-300 group-hover:text-primary transition-colors"><i class="fa-solid fa-arrow-right"></i></span>
       </a>
 
-      <!-- 3. Current Quizzes -->
       <a href="/quizzes" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-500 to-indigo-600 text-white flex items-center justify-center text-2xl shadow-md shadow-purple-500/10">
@@ -940,7 +940,6 @@ async function loadHome() {
         <span class="text-slate-300 group-hover:text-primary transition-colors"><i class="fa-solid fa-arrow-right"></i></span>
       </a>
 
-      <!-- 4. Syllabus Tracker -->
       <a href="/syllabus" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-600 text-white flex items-center justify-center text-2xl shadow-md shadow-amber-500/10">
@@ -954,7 +953,6 @@ async function loadHome() {
         <span class="text-slate-300 group-hover:text-primary transition-colors"><i class="fa-solid fa-arrow-right"></i></span>
       </a>
 
-      <!-- 5. Text Books (Videos) -->
       <a href="/videos" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center text-2xl shadow-md shadow-emerald-500/10">
@@ -968,7 +966,6 @@ async function loadHome() {
         <span class="text-slate-300 group-hover:text-primary transition-colors"><i class="fa-solid fa-arrow-right"></i></span>
       </a>
 
-      <!-- 6. Student Dashboard -->
       <a href="/dashboard" class="tt-box bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center gap-5 justify-between group">
         <div class="flex items-center gap-5">
           <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-slate-600 to-slate-700 text-white flex items-center justify-center text-2xl shadow-md shadow-slate-600/10">
@@ -983,7 +980,6 @@ async function loadHome() {
       </a>
     </div>
 
-    <!-- Stats Quick Counter -->
     <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
       <div>
         <h4 class="text-2xl font-mono font-bold text-primary">${pl.length}</h4>
@@ -1004,9 +1000,6 @@ async function loadHome() {
     </div>`;
 }
 
-// ============================================================
-// PAGE: VIDEOS PLAYLIST CONTROLLER
-// ============================================================
 async function loadVideos() {
   const content = $("#videoContent");
   content.innerHTML = `<div class="shimmer h-48 rounded-2xl"></div>`;
@@ -1100,9 +1093,6 @@ $(".js-close-video-modal").addEventListener("click", () => {
   $("#videoModalFrame").src = "";
 });
 
-// ============================================================
-// PAGE: STUDY NOTES (PDF)
-// ============================================================
 async function loadPdfs() {
   const content = $("#pdfContent");
   content.innerHTML = `<div class="shimmer h-48 rounded-2xl"></div>`;
@@ -1130,7 +1120,7 @@ async function loadPdfs() {
                 ${p.exam ? `<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-50 text-amber-700 border border-amber-100">${p.exam}</span>` : ""}
               </div>
             </div>
-            <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-dark transition-all self-start md:self-auto flex items-center gap-1.5 shadow-sm animate-pulse">
+            <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl hover:bg-primary-dark transition-all self-start md:self-auto flex items-center gap-1.5 shadow-sm">
               <i class="fa-solid fa-file-arrow-down"></i> Download PDF
             </a>
           </div>`).join("")}
@@ -1141,9 +1131,6 @@ async function loadPdfs() {
   }
 }
 
-// ============================================================
-// PAGE: QUIZZES & MOCK EXAMS
-// ============================================================
 let activeTest = null;
 
 async function loadQuizzes() {
@@ -1345,9 +1332,9 @@ async function submitRuntimeAnswers() {
   if (activeTest.timer) clearInterval(activeTest.timer);
   const { doc, answers, type } = activeTest;
   
-  let correct = 0, wrong = 0, skipped = 0;
+  let correct = 0, wrong = 0, unanswered = 0;
   doc.questions.forEach((q, idx) => {
-    if (answers[idx] === null) skipped++;
+    if (answers[idx] === null) unanswered++;
     else if (answers[idx] === q.correct) correct++;
     else wrong++;
   });
@@ -1356,7 +1343,8 @@ async function submitRuntimeAnswers() {
   const score = Math.max(0, parseFloat((correct - (wrong * factor)).toFixed(2)));
 
   try {
-    await getCollectionRef("results").add({
+    // Saved in Secure user private space (Rule 1)
+    await getPrivateCollectionRef(currentUser.uid, "results").add({
       uid: currentUser.uid,
       studentName: currentProfile?.name || currentUser.displayName || "Aspirant",
       type: type === "quiz" ? "quiz" : "mock",
@@ -1366,16 +1354,15 @@ async function submitRuntimeAnswers() {
       total: doc.questions.length,
       correct,
       wrong,
-      unanswered: skipped,
+      unanswered,
       date: firebase.firestore.FieldValue.serverTimestamp()
     });
-    // Invalidate local cache results to guarantee the Dashboard re-reads instantly
     invalidateCache("results");
   } catch (err) {
     console.error("Storing metrics failed", err);
   }
 
-  renderRuntimeResult(score, correct, wrong, skipped);
+  renderRuntimeResult(score, correct, wrong, unanswered);
 }
 
 function renderRuntimeResult(score, correct, wrong, skipped) {
@@ -1442,8 +1429,6 @@ function toggleAnswersReview() {
   $("#answersReview").classList.toggle("hidden");
 }
 
-// ============================================================
-// ============================================================
 async function loadSyllabus() {
   const container = $("#syllabusContainer");
   if (!currentUser) {
@@ -1455,19 +1440,16 @@ async function loadSyllabus() {
   
   let progress = { exam: null, completed: {} };
   try {
-    const doc = await getCollectionRef("syllabusProgress").doc(currentUser.uid).get();
+    const doc = await getPrivateCollectionRef(currentUser.uid, "syllabusProgress").doc("main").get();
     if (doc.exists) progress = doc.data();
   } catch (err) { console.error(err); }
 
-  // Read templates both from dynamic DB and hardcoded defaults
   const customTemplates = await fetchCollection("syllabusTemplates");
   const templatesMap = {};
   
-  // Populate from fallback default templates
   Object.entries(KERALA_PSC_DEFAULT_SYLLABUS).forEach(([k, v]) => {
     templatesMap[k] = v;
   });
-  // Overlay custom admin-uploaded syllabus templates
   customTemplates.forEach(t => {
     templatesMap[t.exam] = t;
   });
@@ -1495,16 +1477,21 @@ async function loadSyllabus() {
 
   const syllabus = templatesMap[progress.exam];
   if (!syllabus) {
-    // Graceful fallback if selected target is removed
     resetSyllabusExam();
     return;
   }
 
+  // Calculate deep nested syllabus items counts
   let total = 0, done = 0;
-  syllabus.topics.forEach(t => t.items.forEach(item => {
-    total++;
-    if (progress.completed && progress.completed[t.name + "::" + item]) done++;
-  }));
+  syllabus.subjects.forEach(subject => {
+    subject.topics.forEach(topic => {
+      topic.subtopics.forEach(sub => {
+        total++;
+        const pathKey = `${subject.name}::${topic.name}::${sub}`;
+        if (progress.completed && progress.completed[pathKey]) done++;
+      });
+    });
+  });
   const pct = total ? Math.round((done / total) * 100) : 0;
 
   container.innerHTML = `
@@ -1519,7 +1506,6 @@ async function loadSyllabus() {
         </button>
       </div>
 
-      <!-- Completeness indicators progress bar -->
       <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
@@ -1536,7 +1522,7 @@ async function loadSyllabus() {
           </div>
           <div>
             <h4 class="text-2xl font-mono font-bold text-ink">${total}</h4>
-            <span class="text-xs text-ink-soft">Total Topics</span>
+            <span class="text-xs text-ink-soft">Total Checklist</span>
           </div>
         </div>
         <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
@@ -1544,39 +1530,57 @@ async function loadSyllabus() {
         </div>
       </div>
 
-      <!-- Interactive Syllabus checklist -->
       <div class="space-y-4">
-        ${syllabus.topics.map(t => {
+        ${syllabus.subjects.map((subject, subIndex) => {
           return `
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-              <h3 class="font-display font-extrabold text-ink text-base border-b border-slate-100 pb-3 flex items-center justify-between">
-                <span>${t.name}</span>
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-slate-100 text-slate-500 border border-slate-200">
-                  ${t.items.filter(x => progress.completed && progress.completed[t.name + "::" + x]).length}/${t.items.length} Completed
-                </span>
-              </h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                ${t.items.map(item => {
-                  const key = t.name + "::" + item;
-                  const isDone = progress.completed && !!progress.completed[key];
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
+              <button class="w-full text-left font-display font-extrabold text-lg text-primary flex items-center justify-between pb-2 border-b border-slate-100" onclick="toggleAccordion('sub-panel-${subIndex}')">
+                <span>${subject.name}</span>
+                <i class="fa-solid fa-chevron-down text-sm"></i>
+              </button>
+              
+              <div id="sub-panel-${subIndex}" class="space-y-4 pt-2">
+                ${subject.topics.map((topic, topicIndex) => {
                   return `
-                    <button class="w-full text-left p-4 rounded-xl border flex items-center justify-between text-sm transition-all ${isDone ? "border-success-soft bg-success-soft/30 text-success-dark font-medium" : "border-slate-100 hover:border-slate-200 text-ink"}" onclick="toggleSyllabusTopic('${key}', ${!isDone})">
-                      <span>${item}</span>
-                      <span class="w-5 h-5 rounded-full border flex items-center justify-center ${isDone ? "bg-success border-success text-white" : "border-slate-200"}">
-                        ${isDone ? `<i class="fa-solid fa-check text-[10px]"></i>` : ""}
-                      </span>
-                    </button>`;
+                    <div class="bg-slate-50/50 border border-slate-100 rounded-xl p-4 space-y-3">
+                      <button class="w-full text-left font-bold text-sm text-ink flex items-center justify-between" onclick="toggleAccordion('topic-panel-${subIndex}-${topicIndex}')">
+                        <span>📚 ${topic.name}</span>
+                        <i class="fa-solid fa-plus text-xs text-primary"></i>
+                      </button>
+                      
+                      <div id="topic-panel-${subIndex}-${topicIndex}" class="grid grid-cols-1 md:grid-cols-2 gap-2.5 pt-2">
+                        ${topic.subtopics.map(sub => {
+                          const pathKey = `${subject.name}::${topic.name}::${sub}`;
+                          const isDone = progress.completed && !!progress.completed[pathKey];
+                          return `
+                            <button class="text-left px-4 py-3 bg-white border rounded-xl flex items-center justify-between text-xs transition-all ${isDone ? 'border-success-soft bg-success-soft/20 text-success' : 'border-slate-200/65 text-slate-700'}" onclick="toggleSyllabusTopic('${pathKey}', ${!isDone})">
+                              <span class="truncate pr-3">${sub}</span>
+                              <span class="w-5.5 h-5.5 rounded-full border flex items-center justify-center shrink-0 ${isDone ? 'bg-success border-success text-white' : 'border-slate-300'}">
+                                ${isDone ? '<i class="fa-solid fa-check text-[9px]"></i>' : ''}
+                              </span>
+                            </button>
+                          `;
+                        }).join("")}
+                      </div>
+                    </div>
+                  `;
                 }).join("")}
               </div>
-            </div>`;
+            </div>
+          `;
         }).join("")}
       </div>
     </div>`;
 }
 
+function toggleAccordion(id) {
+  const el = $("#" + id);
+  if (el) el.classList.toggle("hidden");
+}
+
 async function selectSyllabusExam(exam) {
   try {
-    await getCollectionRef("syllabusProgress").doc(currentUser.uid).set({
+    await getPrivateCollectionRef(currentUser.uid, "syllabusProgress").doc("main").set({
       exam,
       completed: {},
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1590,11 +1594,11 @@ async function selectSyllabusExam(exam) {
 async function resetSyllabusExam() {
   const proceed = await showCustomConfirm(
     "Change Target Exam?",
-    "Your current progress logs for this checklist series will be archived."
+    "Your current progress logs for this checklist series will be permanently reset."
   );
   if (!proceed) return;
   try {
-    await getCollectionRef("syllabusProgress").doc(currentUser.uid).delete();
+    await getPrivateCollectionRef(currentUser.uid, "syllabusProgress").doc("main").delete();
     loadSyllabus();
   } catch (err) {
     showToast("Reset operation failed: " + err.message);
@@ -1606,15 +1610,13 @@ async function toggleSyllabusTopic(key, value) {
   payload[`completed.${key}`] = value;
   payload.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
   try {
-    await getCollectionRef("syllabusProgress").doc(currentUser.uid).update(payload);
+    await getPrivateCollectionRef(currentUser.uid, "syllabusProgress").doc("main").update(payload);
     loadSyllabus();
   } catch (err) {
     showToast("Syllabus state sync failure: " + err.message);
   }
 }
 
-// ============================================================
-// ============================================================
 async function loadDashboard() {
   const container = $("#dashboardContainer");
   if (!currentUser) {
@@ -1624,14 +1626,12 @@ async function loadDashboard() {
 
   container.innerHTML = `<div class="shimmer h-48 rounded-2xl"></div>`;
 
-  // Complying strictly with RULE 2: Read flat results collection, and filter + sort in local memory
   let attempts = [];
   try {
-    const snap = await getCollectionRef("results").get();
-    let allResults = snap.docs.map(d => d.data());
-    attempts = allResults.filter(r => r.uid === currentUser.uid);
+    // Correct private location query maps strictly to Rule 1!
+    const snap = await getPrivateCollectionRef(currentUser.uid, "results").get();
+    attempts = snap.docs.map(d => d.data());
 
-    // Sort in-memory (Rule 2)
     attempts.sort((a, b) => {
       const da = a.date?.toMillis?.() || 0;
       const db = b.date?.toMillis?.() || 0;
@@ -1652,7 +1652,6 @@ async function loadDashboard() {
 
   container.innerHTML = `
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Profile Details Widget -->
       <div class="space-y-6">
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col items-center text-center space-y-4">
           <div class="w-20 h-20 rounded-2xl bg-primary text-white flex items-center justify-center overflow-hidden border-2 border-primary-soft shadow-inner">
@@ -1680,9 +1679,8 @@ async function loadDashboard() {
         </div>
       </div>
 
-      <!-- Attempt Records Table (Rule 2 slices result count in-memory) -->
       <div class="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-        <h3 class="font-display font-extrabold text-ink text-base">Recent Quiz attempts</h3>
+        <h3 class="font-display font-extrabold text-ink text-base">Recent attempts</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm divide-y divide-slate-100">
             <thead>
@@ -1713,8 +1711,6 @@ async function loadDashboard() {
     </div>`;
 }
 
-// ============================================================
-// ============================================================
 let activeAdminTab = "overview";
 let adminCharts = [];
 
@@ -1738,10 +1734,8 @@ function loadAdminPortal() {
     return;
   }
 
-  // Admin Sidebar & Workspace setup
   root.innerHTML = `
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <!-- Side navigation panel -->
       <aside class="lg:col-span-3 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-row lg:flex-col gap-1 overflow-x-auto">
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="overview"><i class="fa-solid fa-chart-pie"></i> Metrics Overview</button>
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="students"><i class="fa-solid fa-users"></i> Student Base</button>
@@ -1753,7 +1747,6 @@ function loadAdminPortal() {
         <button class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition-all shrink-0 lg:shrink" data-tab="bulk"><i class="fa-solid fa-cloud-arrow-up"></i> Bulk Import</button>
       </aside>
 
-      <!-- Main Stage -->
       <div class="lg:col-span-9" id="adminStage">
         <div class="shimmer h-48 rounded-2xl"></div>
       </div>
@@ -1792,19 +1785,15 @@ function updateAdminTabs() {
   else if (activeAdminTab === "bulk") renderBulkImport(stage);
 }
 
-// ============================================================
-// ADMIN TAB: OVERVIEW (Rule-compliant queries & rendering)
-// ============================================================
 async function renderAdminOverview(stage) {
   stage.innerHTML = `<div class="shimmer h-48 rounded-2xl"></div>`;
 
-  const [pl, pdfs, qz, mk, usersSnap, resultsSnap] = await Promise.all([
+  const [pl, pdfs, qz, mk, usersSnap] = await Promise.all([
     getCollectionRef("playlists").get(),
     getCollectionRef("pdfs").get(),
     getCollectionRef("quizzes").get(),
     getCollectionRef("mocks").get(),
-    getCollectionRef("users").get(),
-    getCollectionRef("results").get()
+    getCollectionRef("users").get()
   ]);
 
   const districtCounts = {};
@@ -1823,7 +1812,6 @@ async function renderAdminOverview(stage) {
         <span class="text-[10px] font-mono font-semibold bg-slate-100 text-slate-500 border border-slate-200 px-3 py-1 rounded-md">Live Stat</span>
       </div>
 
-      <!-- Quick metrics cards -->
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
           <span class="text-slate-400 text-xs font-mono">REGISTERED STUDENTS</span>
@@ -1833,13 +1821,8 @@ async function renderAdminOverview(stage) {
           <span class="text-slate-400 text-xs font-mono">TOTAL LIBRARY ITEMS</span>
           <h3 class="text-3xl font-mono font-bold text-ink mt-1">${pl.size + pdfs.size + qz.size + mk.size}</h3>
         </div>
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm col-span-2 lg:col-span-1">
-          <span class="text-slate-400 text-xs font-mono">EVALUATIONS ATTEMPTED</span>
-          <h3 class="text-3xl font-mono font-bold text-ink mt-1">${resultsSnap.size}</h3>
-        </div>
       </div>
 
-      <!-- Interactive Chart widgets -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm space-y-4">
           <h4 class="font-display font-bold text-xs text-ink-soft tracking-wider uppercase">District Wise Student Base</h4>
@@ -1896,9 +1879,6 @@ async function renderAdminOverview(stage) {
   }
 }
 
-// ============================================================
-// ADMIN TAB: STUDENTS BASE
-// ============================================================
 async function renderAdminStudents(stage) {
   stage.innerHTML = `<div class="shimmer h-48 rounded-2xl"></div>`;
 
@@ -1906,7 +1886,6 @@ async function renderAdminStudents(stage) {
     const snap = await getCollectionRef("users").get();
     let list = snap.docs.map(d => d.data());
 
-    // Sort in-memory to comply with Rule 2
     list.sort((a, b) => {
       const ta = a.createdAt?.toMillis?.() || 0;
       const tb = b.createdAt?.toMillis?.() || 0;
@@ -1945,13 +1924,10 @@ async function renderAdminStudents(stage) {
         </div>
       </div>`;
   } catch (err) {
-    stage.innerHTML = `<p class="text-sm text-danger">Failed to fetch students database: ${err.message}</p>`;
+    stage.innerHTML = `<p class="text-sm text-danger font-bold">Failed to fetch students database: ${err.message}</p>`;
   }
 }
 
-// ============================================================
-// ADMIN TAB: VIDEOS PLAYLIST MANAGEMENT (CRUD)
-// ============================================================
 function renderAdminPlaylists(stage) {
   stage.innerHTML = `
     <div class="space-y-8">
@@ -1960,7 +1936,6 @@ function renderAdminPlaylists(stage) {
         <p class="text-ink-soft text-xs">Configure and organize video reference categories.</p>
       </div>
 
-      <!-- Form Card -->
       <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
         <h3 id="playlistFormTitle" class="font-display font-extrabold text-base text-ink border-b border-slate-100 pb-3 mb-4">Add New Playlist Category</h3>
         <form id="adminPlaylistForm" class="space-y-4">
@@ -2003,7 +1978,6 @@ function renderAdminPlaylists(stage) {
         </form>
       </div>
 
-      <!-- Current Items list Table -->
       <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm divide-y divide-slate-100">
@@ -2149,9 +2123,6 @@ function resetPlaylistForm() {
   $("#plCancelEditBtn").classList.add("hidden");
 }
 
-// ============================================================
-// ADMIN TAB: STUDY NOTES (PDFS) CRUD
-// ============================================================
 function renderAdminNotes(stage) {
   stage.innerHTML = `
     <div class="space-y-8">
@@ -2309,9 +2280,6 @@ function resetNoteForm() {
   $("#noteCancelBtn").classList.add("hidden");
 }
 
-// ============================================================
-// ADMIN TAB: QUIZZES & MOCK EXAMS (CRUD)
-// ============================================================
 function renderAdminTests(stage, collectionName) {
   const isMock = collectionName === "mocks";
   stage.innerHTML = `
@@ -2358,7 +2326,6 @@ function renderAdminTests(stage, collectionName) {
             <input type="number" step="0.01" min="0" id="t-negvalue" placeholder="Negative factor (e.g. 0.33)" class="px-3 py-1.5 rounded-lg border border-slate-200 text-xs focus:outline-none w-full md:w-48 hidden" />
           </div>
 
-          <!-- Questions Container -->
           <div class="space-y-3">
             <label class="block text-xs font-bold text-ink uppercase tracking-wider">Evaluation Questions List</label>
             <div id="questionRows" class="space-y-4"></div>
@@ -2551,17 +2518,14 @@ async function deleteAdminItem(collectionName, id, callback) {
   }
 }
 
-// ============================================================
-// ============================================================
 function renderAdminSyllabusManager(stage) {
   stage.innerHTML = `
     <div class="space-y-8">
       <div>
         <h2 class="text-2xl font-display font-extrabold text-ink">Syllabus Template Manager</h2>
-        <p class="text-ink-soft text-xs">Configure custom syllabus templates for the Student Syllabus Tracker dynamically.</p>
+        <p class="text-ink-soft text-xs">Configure exam templates for the Student Syllabus Tracker dynamically.</p>
       </div>
 
-      <!-- Syllabus Entry Form -->
       <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm">
         <h3 id="syllabusFormTitle" class="font-display font-extrabold text-base text-ink border-b border-slate-100 pb-3 mb-4">Create Syllabus Template</h3>
         <form id="adminSyllabusForm" class="space-y-4">
@@ -2571,10 +2535,10 @@ function renderAdminSyllabusManager(stage) {
             <input type="text" id="sy-exam" required placeholder="e.g. LDC (Lower Division Clerk)" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-1 focus:ring-primary" />
           </div>
 
-          <div class="space-y-3">
-            <label class="block text-xs font-bold text-ink uppercase tracking-wider">Topics &amp; Checklist Items</label>
-            <div id="syllabusTopicRows" class="space-y-4"></div>
-            <button type="button" class="px-3 py-1.5 border border-slate-200 rounded-lg text-[10px] font-bold text-ink hover:bg-slate-50 transition-all" onclick="addSyllabusTopicRow()"><i class="fa-solid fa-plus mr-1"></i> Add Topic Area</button>
+          <div class="space-y-4">
+            <label class="block text-xs font-bold text-ink uppercase tracking-wider">Subjects, Topics &amp; Subtopics</label>
+            <div id="syllabusSubjectRows" class="space-y-4"></div>
+            <button type="button" class="px-3 py-1.5 border border-slate-200 rounded-lg text-[10px] font-bold text-ink hover:bg-slate-50 transition-all" onclick="addSyllabusSubjectRow()"><i class="fa-solid fa-plus mr-1"></i> Add Main Subject</button>
           </div>
 
           <div class="pt-2 flex items-center gap-2">
@@ -2584,65 +2548,89 @@ function renderAdminSyllabusManager(stage) {
         </form>
       </div>
 
-      <!-- Current syllabus list -->
       <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-sm divide-y divide-slate-100">
             <thead>
               <tr class="text-[11px] text-slate-400 font-mono font-bold uppercase bg-slate-50">
                 <th class="px-5 py-3">Exam Name</th>
-                <th class="px-5 py-3">Total Topics</th>
+                <th class="px-5 py-3">Subjects Count</th>
                 <th class="px-5 py-3">Updated</th>
                 <th class="px-5 py-3 text-right">Actions</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 font-medium text-xs" id="syllabusTableBody">
-              <tr><td colspan="4" class="text-center py-6 text-slate-400">Loading syllabus templates...</td></tr>
+              <tr><td colspan="4" class="text-center py-6 text-slate-400">Loading templates...</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>`;
 
-  addSyllabusTopicRow();
+  addSyllabusSubjectRow();
   $("#adminSyllabusForm").addEventListener("submit", submitAdminSyllabus);
   loadAdminSyllabusTable();
 }
 
-function addSyllabusTopicRow(topicName = "", itemsCsv = "") {
-  const container = $("#syllabusTopicRows");
+// Hierarchical Form Row Builders
+function addSyllabusSubjectRow(subjectName = "", topics = []) {
+  const container = $("#syllabusSubjectRows");
   const block = document.createElement("div");
-  block.className = "border border-slate-100 p-4 rounded-xl bg-slate-50 relative syllabus-topic-form-row";
+  block.className = "border border-slate-200 p-4 rounded-xl bg-slate-50 relative syllabus-subject-row space-y-3";
+  const uniqueId = `sub-topics-container-${Date.now()}-${Math.random()}`;
+  
   block.innerHTML = `
     <button type="button" class="absolute right-3 top-3 text-danger p-1.5 hover:bg-danger-soft rounded-lg text-sm" onclick="this.parentElement.remove()"><i class="fa-solid fa-xmark"></i></button>
+    <div>
+      <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Main Subject Name</label>
+      <input type="text" placeholder="e.g. Quantitative Aptitude" value="${subjectName}" class="sy-subject-name w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none" required />
+    </div>
     <div class="space-y-2">
-      <div>
-        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Topic Area Name</label>
-        <input type="text" placeholder="e.g. General Knowledge" value="${topicName}" class="sy-topic-name w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none" required />
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] font-mono font-bold text-slate-500 uppercase">Main Topics & Subtopics</span>
+        <button type="button" class="px-2 py-1 bg-white border border-slate-200 rounded text-[9px] font-bold" onclick="addSyllabusTopicEditor('${uniqueId}')">+ Add Main Topic</button>
       </div>
-      <div>
-        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Checklist items (separated by commas)</label>
-        <textarea placeholder="Kerala Renaissance, Indian History, Indian Constitution" class="sy-topic-items w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none" required>${itemsCsv}</textarea>
-      </div>
+      <div id="${uniqueId}" class="space-y-3"></div>
     </div>`;
   container.appendChild(block);
+
+  if (topics && topics.length) {
+    topics.forEach(t => addSyllabusTopicEditor(uniqueId, t.name, t.subtopics.join(", ")));
+  } else {
+    addSyllabusTopicEditor(uniqueId);
+  }
+}
+
+function addSyllabusTopicEditor(containerId, topicName = "", subtopicsCsv = "") {
+  const target = $("#" + containerId);
+  if (!target) return;
+  const block = document.createElement("div");
+  block.className = "border border-slate-200/50 p-3 rounded-lg bg-white relative syllabus-topic-row-item space-y-2";
+  block.innerHTML = `
+    <button type="button" class="absolute right-2 top-2 text-slate-400 hover:text-danger text-xs" onclick="this.parentElement.remove()">✕</button>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div>
+        <input type="text" placeholder="Main Topic Name (e.g. Percentage)" value="${topicName}" class="sy-topic-name w-full px-3 py-1.5 rounded border border-slate-200 text-xs focus:outline-none" required />
+      </div>
+      <div>
+        <input type="text" placeholder="Subtopics (comma-separated, e.g. Fractions, Profit)" value="${subtopicsCsv}" class="sy-topic-subtopics w-full px-3 py-1.5 rounded border border-slate-200 text-xs focus:outline-none" required />
+      </div>
+    </div>`;
+  target.appendChild(block);
 }
 
 async function loadAdminSyllabusTable() {
   const tbody = $("#syllabusTableBody");
   try {
     const templates = await fetchCollection("syllabusTemplates");
-    
-    // Merge the custom templates and the default templates to display everything in the panel
     const displayed = [];
     templates.forEach(t => {
-      displayed.push({ id: t.id, exam: t.exam, topics: t.topics, custom: true, updatedAt: t.updatedAt });
+      displayed.push({ id: t.id, exam: t.exam, subjects: t.subjects, custom: true, updatedAt: t.updatedAt });
     });
     
     Object.entries(KERALA_PSC_DEFAULT_SYLLABUS).forEach(([exam, data]) => {
-      // Check if not already overridden by custom template
       if (!templates.some(t => t.exam === exam)) {
-        displayed.push({ id: null, exam, topics: data.topics, custom: false, updatedAt: null });
+        displayed.push({ id: null, exam, subjects: data.subjects, custom: false, updatedAt: null });
       }
     });
 
@@ -2651,7 +2639,7 @@ async function loadAdminSyllabusTable() {
       return `
         <tr>
           <td class="px-5 py-3.5 text-ink font-bold font-display">${s.exam}</td>
-          <td class="px-5 py-3.5 text-slate-500">${(s.topics || []).length} topics</td>
+          <td class="px-5 py-3.5 text-slate-500">${(s.subjects || []).length} Subjects</td>
           <td class="px-5 py-3.5 font-mono text-slate-400">${updatedStr}</td>
           <td class="px-5 py-3.5 text-right space-x-1.5 whitespace-nowrap">
             ${s.custom 
@@ -2675,21 +2663,27 @@ async function submitAdminSyllabus(e) {
   const editId = $("#sy-edit-id").value;
   const exam = $("#sy-exam").value.trim();
 
-  const topics = $all(".syllabus-topic-form-row").map(row => {
-    const topicName = row.querySelector(".sy-topic-name").value.trim();
-    const itemsRaw = row.querySelector(".sy-topic-items").value.trim();
-    const items = itemsRaw.split(",").map(i => i.trim()).filter(Boolean);
-    return { name: topicName, items };
-  }).filter(t => t.name && t.items.length);
+  const subjects = $all(".syllabus-subject-row").map(row => {
+    const subjectName = row.querySelector(".sy-subject-name").value.trim();
+    const topicRows = $all(".syllabus-topic-row-item", row);
+    const topics = topicRows.map(tRow => {
+      const topicName = tRow.querySelector(".sy-topic-name").value.trim();
+      const subsRaw = tRow.querySelector(".sy-topic-subtopics").value.trim();
+      const subtopics = subsRaw.split(",").map(i => i.trim()).filter(Boolean);
+      return { name: topicName, subtopics };
+    }).filter(t => t.name && t.subtopics.length);
 
-  if (!topics.length) {
-    showToast("Please provide at least one topic with sub-items.");
+    return { name: subjectName, topics };
+  }).filter(s => s.name && s.topics.length);
+
+  if (!subjects.length) {
+    showToast("Please provide at least one subject with topics.");
     btn.disabled = false;
     return;
   }
 
   const payload = {
-    exam, topics,
+    exam, subjects,
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   };
 
@@ -2721,9 +2715,9 @@ async function editSyllabus(id) {
     $("#sy-edit-id").value = id;
     $("#sy-exam").value = s.exam || "";
 
-    const container = $("#syllabusTopicRows");
+    const container = $("#syllabusSubjectRows");
     container.innerHTML = "";
-    s.topics.forEach(t => addSyllabusTopicRow(t.name, t.items.join(", ")));
+    s.subjects.forEach(subject => addSyllabusSubjectRow(subject.name, subject.topics));
 
     $("#syllabusFormTitle").textContent = "Edit Syllabus Template";
     $("#syllabusCancelBtn").classList.remove("hidden");
@@ -2738,9 +2732,9 @@ function customizeDefaultSyllabus(exam) {
   $("#sy-edit-id").value = "";
   $("#sy-exam").value = exam;
 
-  const container = $("#syllabusTopicRows");
+  const container = $("#syllabusSubjectRows");
   container.innerHTML = "";
-  defaultData.topics.forEach(t => addSyllabusTopicRow(t.name, t.items.join(", ")));
+  defaultData.subjects.forEach(subject => addSyllabusSubjectRow(subject.name, subject.topics));
 
   $("#syllabusFormTitle").textContent = "Customize Default Syllabus Template";
   $("#syllabusCancelBtn").classList.remove("hidden");
@@ -2750,8 +2744,8 @@ function customizeDefaultSyllabus(exam) {
 function resetSyllabusForm() {
   $("#adminSyllabusForm").reset();
   $("#sy-edit-id").value = "";
-  $("#syllabusTopicRows").innerHTML = "";
-  addSyllabusTopicRow();
+  $("#syllabusSubjectRows").innerHTML = "";
+  addSyllabusSubjectRow();
   $("#syllabusFormTitle").textContent = "Create Syllabus Template";
   $("#syllabusCancelBtn").classList.add("hidden");
 }
@@ -2762,9 +2756,6 @@ function formatDate(ts) {
   return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 }
 
-// ============================================================
-// ADMIN TAB: EXCEL / CSV BULK IMPORT TOOL
-// ============================================================
 function renderBulkImport(stage) {
   stage.innerHTML = `
     <div class="space-y-6">
@@ -2919,21 +2910,15 @@ async function submitBulkStagedData() {
   loadAdminPortal();
 }
 
-// ============================================================
-// SYSTEM BOOTSTRAP INITIALIZATION
-// ============================================================
 document.addEventListener("DOMContentLoaded", () => {
-  // Mobile navigation drawer triggers
   $all(".js-nav-toggle").forEach(btn => {
     btn.addEventListener("click", () => {
       $("#mobileDrawer").classList.toggle("translate-x-full");
     });
   });
 
-  // Track Auth Changes
   auth.onAuthStateChanged(onAuthChange);
 
-  // Pre-fetch libraries on startup
   setTimeout(prefetchAll, 200);
 });
 </script>
