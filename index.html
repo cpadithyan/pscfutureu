@@ -679,7 +679,7 @@ function buildProfileModal() {
     btn.disabled = true; btn.textContent = "Saving…";
     try {
       await db.collection("users").doc(currentUser.uid).set({
-        name, phone, district, email: currentUser.email, photoURL: currentUser.photoURL || null,
+        name, nameLower: name.toLowerCase(), phone, district, email: currentUser.email, photoURL: currentUser.photoURL || null,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       }, { merge: true });
       currentProfile = { name, phone, district, email: currentUser.email };
@@ -906,6 +906,27 @@ async function fetchCollection(name, opts = {}) {
   writeLocalCache(name, cache[name]);
   return cache[name];
 }
+// Leaderboard docs (id = uid) don't have createdAt, so this mirrors
+// fetchCollection but without the orderBy — same stale-while-revalidate cache.
+async function fetchLeaderboard(opts = {}) {
+  const name = "leaderboard";
+  if (cache[name] && !opts.forceRefresh) return cache[name];
+  const local = !opts.forceRefresh && readLocalCache(name);
+  if (local) {
+    cache[name] = local.docs;
+    if (Date.now() - local.t > LOCAL_CACHE_TTL) {
+      db.collection(name).get().then(snap => {
+        cache[name] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        writeLocalCache(name, cache[name]);
+      }).catch(err => console.error("Leaderboard refresh failed:", err));
+    }
+    return cache[name];
+  }
+  const snap = await db.collection(name).get();
+  cache[name] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  writeLocalCache(name, cache[name]);
+  return cache[name];
+}
 function debounce(fn, ms) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; }
 // Call after any admin create/edit/delete so the public pages don't keep
 // serving stale cached data (memory or localStorage) for this collection.
@@ -1025,21 +1046,14 @@ async function buildHomeSummary() {
   const totalMax = myResults.reduce((s, r) => s + r.total, 0);
   const accuracy = totalMax ? Math.round((totalScore / totalMax) * 1000) / 10 : 0;
 
-  // Rank: compare against everyone else's overall accuracy, using a bounded
-  // recent-results sample (fine for a small/medium user base; swap for a
-  // Cloud Function aggregate if this ever needs to scale further).
+  // Rank: compare against a lightweight per-student aggregate (leaderboard/{uid})
+  // instead of scanning every result ever submitted. This is O(students), not
+  // O(attempts) — and it rides the same localStorage cache as public content,
+  // so most home page loads don't hit Firestore for this at all.
   let rank = null, rankOf = 0;
   try {
-    const snap = await db.collection("results").orderBy("date", "desc").limit(500).get();
-    const byUser = {};
-    snap.docs.forEach(d => {
-      const r = d.data();
-      if (!byUser[r.uid]) byUser[r.uid] = { score: 0, total: 0 };
-      byUser[r.uid].score += r.score;
-      byUser[r.uid].total += r.total;
-    });
-    const standings = Object.entries(byUser)
-      .map(([uid, v]) => ({ uid, acc: v.total ? v.score / v.total : 0 }))
+    const standings = (await fetchLeaderboard())
+      .map(u => ({ uid: u.id, acc: u.total ? u.score / u.total : 0 }))
       .sort((a, b) => b.acc - a.acc);
     rankOf = standings.length;
     const idx = standings.findIndex(s => s.uid === currentUser.uid);
@@ -1387,6 +1401,15 @@ async function submitTest(autoSubmitted) {
       score, total: doc.questions.length, correct, wrong, unanswered,
       date: firebase.firestore.FieldValue.serverTimestamp()
     });
+    // Keep the leaderboard aggregate in sync (cheap increments, not a full rescan).
+    await db.collection("leaderboard").doc(currentUser.uid).set({
+      name: currentProfile?.name || currentUser.displayName || "Student",
+      score: firebase.firestore.FieldValue.increment(score),
+      total: firebase.firestore.FieldValue.increment(doc.questions.length),
+      attempts: firebase.firestore.FieldValue.increment(1),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+    invalidateCollectionCache("leaderboard");
   } catch (err) {
     console.error("Could not save result:", err);
     saveFailed = true;
@@ -1976,46 +1999,100 @@ async function saveSyllabusTree() {
 
 // ---------------- USERS ADMIN ----------------
 let usersCache = null;
+const USERS_PAGE_SIZE = 50;
+let usersLastDoc = null;
+let usersHasMore = true;
+
 async function renderUsersAdmin() {
   const el = $("#adminContent");
   el.innerHTML = `<p class="muted">Loading…</p>`;
-  const snap = await db.collection("users").orderBy("createdAt", "desc").get();
-  usersCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  usersCache = [];
+  usersLastDoc = null;
+  usersHasMore = true;
 
   el.innerHTML = `
     <h2 style="margin-bottom:6px;">Signed-up Users</h2>
-    <p class="muted" style="margin-bottom:16px;">Name, district and phone number collected during sign-up. Deleting here removes their profile record only (not their Google account).</p>
+    <p class="muted" style="margin-bottom:16px;">Loaded 50 at a time so this stays fast even with thousands of sign-ups. Search looks up the start of a name across <em>everyone</em>, not just what's loaded.</p>
     <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:6px;">
-      <input type="search" class="search-inline" id="userSearch" placeholder="Search by name, phone or district…" style="margin-bottom:0;" />
-      <button class="btn btn-ghost btn-sm" id="exportUsersBtn">⬇ Export CSV</button>
+      <input type="search" class="search-inline" id="userSearch" placeholder="Search by name…" style="margin-bottom:0;" />
+      <button class="btn btn-ghost btn-sm" id="exportUsersBtn">⬇ Export CSV (all users)</button>
     </div>
     <table class="admin-table"><thead><tr><th>Name</th><th>District</th><th>Phone</th><th>Email</th><th>Joined</th><th></th></tr></thead>
-    <tbody id="usersTableBody"></tbody></table>`;
+    <tbody id="usersTableBody"></tbody></table>
+    <div style="text-align:center; margin-top:16px;"><button class="btn btn-ghost btn-sm" id="loadMoreUsersBtn">Load 50 more</button></div>`;
 
-  const renderRows = (query) => {
-    const q = (query || "").toLowerCase();
-    const filtered = usersCache.filter(u => !q ||
-      (u.name || "").toLowerCase().includes(q) || (u.phone || "").includes(q) || (u.district || "").toLowerCase().includes(q));
-    const tbody = $("#usersTableBody");
-    if (!filtered.length) { tbody.innerHTML = `<tr><td colspan="6">No matching users.</td></tr>`; return; }
-    tbody.innerHTML = filtered.map(u => `<tr>
-      <td>${u.name || "—"}</td><td>${u.district || "—"}</td><td>${u.phone || "—"}</td><td>${u.email || "—"}</td>
-      <td>${fmtDate(u.createdAt)}</td>
-      <td class="actions">
-        <button class="icon-btn js-edit-user" data-id="${u.id}">Edit</button>
-        <button class="icon-btn danger js-del-user" data-id="${u.id}">Delete</button>
-      </td></tr>`).join("");
-    $all(".js-del-user", tbody).forEach(b => b.addEventListener("click", async () => {
-      if (!confirm("Delete this user's profile record?")) return;
-      await db.collection("users").doc(b.dataset.id).delete();
-      showToast("User profile deleted.");
-      renderUsersAdmin();
-    }));
-    $all(".js-edit-user", tbody).forEach(b => b.addEventListener("click", () => openEditUserModal(usersCache.find(u => u.id === b.dataset.id))));
-  };
-  renderRows("");
-  $("#userSearch").addEventListener("input", debounce((e) => renderRows(e.target.value), 150));
-  $("#exportUsersBtn").addEventListener("click", () => exportUsersCSV(usersCache));
+  $("#userSearch").addEventListener("input", debounce((e) => {
+    const q = e.target.value.trim();
+    q ? searchUsersByName(q) : loadUsersPage(true);
+  }, 250));
+  $("#exportUsersBtn").addEventListener("click", exportAllUsersCSV);
+  $("#loadMoreUsersBtn").addEventListener("click", () => loadUsersPage(false));
+
+  loadUsersPage(true);
+}
+
+async function loadUsersPage(reset) {
+  const btn = $("#loadMoreUsersBtn");
+  if (reset) { usersCache = []; usersLastDoc = null; usersHasMore = true; $("#usersTableBody").innerHTML = `<tr><td colspan="6">Loading…</td></tr>`; }
+  if (!usersHasMore) { btn.style.display = "none"; return; }
+  btn.disabled = true; btn.textContent = "Loading…";
+  try {
+    let q = db.collection("users").orderBy("createdAt", "desc").limit(USERS_PAGE_SIZE);
+    if (usersLastDoc) q = q.startAfter(usersLastDoc);
+    const snap = await q.get();
+    usersLastDoc = snap.docs[snap.docs.length - 1] || usersLastDoc;
+    usersHasMore = snap.docs.length === USERS_PAGE_SIZE;
+    usersCache.push(...snap.docs.map(d => ({ id: d.id, ...d.data() })));
+    renderUsersTable(usersCache, { paginated: true });
+  } catch (err) { showToast("Couldn't load users: " + err.message); }
+  btn.disabled = false; btn.textContent = "Load 50 more";
+  btn.style.display = usersHasMore ? "" : "none";
+}
+
+async function searchUsersByName(query) {
+  $("#loadMoreUsersBtn").style.display = "none";
+  const tbody = $("#usersTableBody");
+  tbody.innerHTML = `<tr><td colspan="6">Searching…</td></tr>`;
+  const q = query.toLowerCase();
+  try {
+    const snap = await db.collection("users").orderBy("nameLower").startAt(q).endAt(q + "\uf8ff").limit(50).get();
+    usersCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (!usersCache.length) { tbody.innerHTML = `<tr><td colspan="6">No matches — note: search only finds users who've signed up/edited their profile since name-search was added (older profiles may not be indexed yet).</td></tr>`; return; }
+    renderUsersTable(usersCache, { paginated: false });
+  } catch (err) { showToast("Search failed: " + err.message); }
+}
+
+function renderUsersTable(users, { paginated }) {
+  const tbody = $("#usersTableBody");
+  if (!users.length) { tbody.innerHTML = `<tr><td colspan="6">No users yet.</td></tr>`; return; }
+  tbody.innerHTML = users.map(u => `<tr>
+    <td>${u.name || "—"}</td><td>${u.district || "—"}</td><td>${u.phone || "—"}</td><td>${u.email || "—"}</td>
+    <td>${fmtDate(u.createdAt)}</td>
+    <td class="actions">
+      <button class="icon-btn js-edit-user" data-id="${u.id}">Edit</button>
+      <button class="icon-btn danger js-del-user" data-id="${u.id}">Delete</button>
+    </td></tr>`).join("");
+  $all(".js-del-user", tbody).forEach(b => b.addEventListener("click", async () => {
+    if (!confirm("Delete this user's profile record?")) return;
+    await db.collection("users").doc(b.dataset.id).delete();
+    showToast("User profile deleted.");
+    usersCache = usersCache.filter(u => u.id !== b.dataset.id);
+    renderUsersTable(usersCache, { paginated });
+  }));
+  $all(".js-edit-user", tbody).forEach(b => b.addEventListener("click", () => openEditUserModal(usersCache.find(u => u.id === b.dataset.id))));
+}
+
+// Export pulls every user fresh (not just what's loaded on screen) — a
+// deliberate one-off full read, fine for an occasional admin action even at
+// thousands of rows, unlike doing this on every page load.
+async function exportAllUsersCSV() {
+  const btn = $("#exportUsersBtn");
+  btn.disabled = true; btn.textContent = "Exporting…";
+  try {
+    const snap = await db.collection("users").get();
+    exportUsersCSV(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+  } catch (err) { showToast("Export failed: " + err.message); }
+  btn.disabled = false; btn.textContent = "⬇ Export CSV (all users)";
 }
 
 function openEditUserModal(user) {
