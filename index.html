@@ -268,6 +268,12 @@ img { max-width: 100%; display: block; }
 .icon-btn { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; }
 .js-bookmark { flex-shrink: 0; font-size: 18px; line-height: 1; padding: 6px 9px; color: var(--color-ink-soft); }
 .js-bookmark.on { color: var(--color-accent-dark); border-color: var(--color-accent); background: #FEF6E8; }
+.md-toolbar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; background: var(--color-bg); border: 1px solid var(--color-border); border-bottom: none; border-radius: 10px 10px 0 0; padding: 8px; }
+.md-toolbar button { background: #fff; border: 1px solid var(--color-border); border-radius: 6px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--color-ink-soft); cursor: pointer; }
+.md-toolbar button:hover { color: var(--color-primary-dark); border-color: var(--color-primary); }
+.md-help { font-size: 11.5px; color: var(--color-ink-soft); margin-left: 4px; }
+.md-help code { background: #fff; border: 1px solid var(--color-border); border-radius: 4px; padding: 1px 4px; font-family: var(--font-mono); }
+#blog-content { border-radius: 0 0 10px 10px !important; }
 .icon-btn.danger { color: var(--color-danger); }
 .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: var(--color-ink); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 13.5px; font-weight: 600; z-index: 300; box-shadow: var(--shadow-md); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(-8px); }
@@ -494,6 +500,11 @@ img { max-width: 100%; display: block; }
 .icon-award { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSI3Ii8+PHBvbHlsaW5lIHBvaW50cz0iOC4yMSAxMy44OSA3IDIzIDEyIDIwIDE3IDIzIDE1Ljc5IDEzLjg4Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSI3Ii8+PHBvbHlsaW5lIHBvaW50cz0iOC4yMSAxMy44OSA3IDIzIDEyIDIwIDE3IDIzIDE1Ljc5IDEzLjg4Ii8+PC9zdmc+"); }
 .icon-slash { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48bGluZSB4MT0iNC45MyIgeTE9IjQuOTMiIHgyPSIxOS4wNyIgeTI9IjE5LjA3Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48bGluZSB4MT0iNC45MyIgeTE9IjQuOTMiIHgyPSIxOS4wNyIgeTI9IjE5LjA3Ii8+PC9zdmc+"); }
 .icon-users { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE3IDIxdi0yYTQgNCAwIDAgMC00LTRINWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSI5IiBjeT0iNyIgcj0iNCIvPjxwYXRoIGQ9Ik0yMyAyMXYtMmE0IDQgMCAwIDAtMy0zLjg3Ii8+PHBhdGggZD0iTTE2IDMuMTNhNCA0IDAgMCAxIDAgNy43NSIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE3IDIxdi0yYTQgNCAwIDAgMC00LTRINWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSI5IiBjeT0iNyIgcj0iNCIvPjxwYXRoIGQ9Ik0yMyAyMXYtMmE0IDQgMCAwIDAtMy0zLjg3Ii8+PHBhdGggZD0iTTE2IDMuMTNhNCA0IDAgMCAxIDAgNy43NSIvPjwvc3ZnPg=="); }
+.icon-bold { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTYgNGg4YTQgNCAwIDAgMSAwIDhINnoiLz48cGF0aCBkPSJNNiAxMmg5YTQgNCAwIDAgMSAwIDhINnoiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTYgNGg4YTQgNCAwIDAgMSAwIDhINnoiLz48cGF0aCBkPSJNNiAxMmg5YTQgNCAwIDAgMSAwIDhINnoiLz48L3N2Zz4="); }
+.icon-italic { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjE5IiB5MT0iNCIgeDI9IjEwIiB5Mj0iNCIvPjxsaW5lIHgxPSIxNCIgeTE9IjIwIiB4Mj0iNSIgeTI9IjIwIi8+PGxpbmUgeDE9IjE1IiB5MT0iNCIgeDI9IjkiIHkyPSIyMCIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjE5IiB5MT0iNCIgeDI9IjEwIiB5Mj0iNCIvPjxsaW5lIHgxPSIxNCIgeTE9IjIwIiB4Mj0iNSIgeTI9IjIwIi8+PGxpbmUgeDE9IjE1IiB5MT0iNCIgeDI9IjkiIHkyPSIyMCIvPjwvc3ZnPg=="); }
+.icon-link { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEwIDEzYTUgNSAwIDAgMCA3LjU0LjU0bDMtM2E1IDUgMCAwIDAtNy4wNy03LjA3bC0xLjcyIDEuNzEiLz48cGF0aCBkPSJNMTQgMTFhNSA1IDAgMCAwLTcuNTQtLjU0bC0zIDNhNSA1IDAgMCAwIDcuMDcgNy4wN2wxLjcxLTEuNzEiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEwIDEzYTUgNSAwIDAgMCA3LjU0LjU0bDMtM2E1IDUgMCAwIDAtNy4wNy03LjA3bC0xLjcyIDEuNzEiLz48cGF0aCBkPSJNMTQgMTFhNSA1IDAgMCAwLTcuNTQtLjU0bC0zIDNhNSA1IDAgMCAwIDcuMDcgNy4wN2wxLjcxLTEuNzEiLz48L3N2Zz4="); }
+.icon-image { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgcnk9IjIiLz48Y2lyY2xlIGN4PSI4LjUiIGN5PSI4LjUiIHI9IjEuNSIvPjxwb2x5bGluZSBwb2ludHM9IjIxIDE1IDE2IDEwIDUgMjEiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgcnk9IjIiLz48Y2lyY2xlIGN4PSI4LjUiIGN5PSI4LjUiIHI9IjEuNSIvPjxwb2x5bGluZSBwb2ludHM9IjIxIDE1IDE2IDEwIDUgMjEiLz48L3N2Zz4="); }
+.icon-list { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjgiIHkxPSI2IiB4Mj0iMjEiIHkyPSI2Ii8+PGxpbmUgeDE9IjgiIHkxPSIxMiIgeDI9IjIxIiB5Mj0iMTIiLz48bGluZSB4MT0iOCIgeTE9IjE4IiB4Mj0iMjEiIHkyPSIxOCIvPjxsaW5lIHgxPSIzIiB5MT0iNiIgeDI9IjMuMDEiIHkyPSI2Ii8+PGxpbmUgeDE9IjMiIHkxPSIxMiIgeDI9IjMuMDEiIHkyPSIxMiIvPjxsaW5lIHgxPSIzIiB5MT0iMTgiIHgyPSIzLjAxIiB5Mj0iMTgiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjgiIHkxPSI2IiB4Mj0iMjEiIHkyPSI2Ii8+PGxpbmUgeDE9IjgiIHkxPSIxMiIgeDI9IjIxIiB5Mj0iMTIiLz48bGluZSB4MT0iOCIgeTE9IjE4IiB4Mj0iMjEiIHkyPSIxOCIvPjxsaW5lIHgxPSIzIiB5MT0iNiIgeDI9IjMuMDEiIHkyPSI2Ii8+PGxpbmUgeDE9IjMiIHkxPSIxMiIgeDI9IjMuMDEiIHkyPSIxMiIvPjxsaW5lIHgxPSIzIiB5MT0iMTgiIHgyPSIzLjAxIiB5Mj0iMTgiLz48L3N2Zz4="); }
 .icon-info { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48bGluZSB4MT0iMTIiIHkxPSIxNiIgeDI9IjEyIiB5Mj0iMTIiLz48bGluZSB4MT0iMTIiIHkxPSI4IiB4Mj0iMTIuMDEiIHkyPSI4Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48bGluZSB4MT0iMTIiIHkxPSIxNiIgeDI9IjEyIiB5Mj0iMTIiLz48bGluZSB4MT0iMTIiIHkxPSI4IiB4Mj0iMTIuMDEiIHkyPSI4Ii8+PC9zdmc+"); }
 .icon-plus { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjEyIiB5MT0iNSIgeDI9IjEyIiB5Mj0iMTkiLz48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjEyIiB5MT0iNSIgeDI9IjEyIiB5Mj0iMTkiLz48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiIvPjwvc3ZnPg=="); }
 </style>
@@ -1892,11 +1903,31 @@ function renderTestResult(autoSubmitted, stats) {
 
 // ---------------- BLOG ----------------
 // Firestore: blogPosts/{id} — { title, slug, excerpt, content, author, publishedAt, createdAt, updatedAt }
-// Content is stored as plain paragraphs (one per blank-line-separated block) —
-// simple, safe (no HTML injection risk from admin input), good enough for
-// exam-update / syllabus-change / announcement style posts.
+// Content is stored as plain text with a small, safe markdown-lite syntax —
+// NOT raw HTML, so admin input can never inject a script tag. Supported:
+//   **bold**   *italic*   [link text](https://url)   ![alt text](https://image-url)
+//   "- item" lines (one per line) become a bullet list
+//   blank line = new paragraph, single newline = line break
+// generate-blog-pages.mjs has an identical copy of this function so static
+// pages render exactly the same as the live app — keep them in sync if you
+// ever change this.
+function inlineMarkdown(escapedText) {
+  return escapedText
+    .replace(/!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" style="max-width:100%;border-radius:10px;margin:10px 0;display:block;">')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:var(--color-primary-dark);font-weight:600;">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, "$1<em>$2</em>");
+}
 function paragraphsToHTML(text) {
-  return (text || "").split(/\n\s*\n/).map(p => `<p style="margin-bottom:14px; line-height:1.75;">${escapeHTML(p.trim()).replace(/\n/g, "<br>")}</p>`).join("");
+  return (text || "").split(/\n\s*\n/).map(block => {
+    const lines = block.split("\n").map(l => l.trim()).filter(Boolean);
+    const isList = lines.length > 0 && lines.every(l => /^[-*]\s+/.test(l));
+    if (isList) {
+      const items = lines.map(l => `<li>${inlineMarkdown(escapeHTML(l.replace(/^[-*]\s+/, "")))}</li>`).join("");
+      return `<ul style="margin:0 0 14px; padding-left:22px; line-height:1.75;">${items}</ul>`;
+    }
+    return `<p style="margin-bottom:14px; line-height:1.75;">${inlineMarkdown(escapeHTML(block.trim())).replace(/\n/g, "<br>")}</p>`;
+  }).join("");
 }
 function escapeHTML(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
 function slugify(s) { return (s || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""); }
@@ -1928,6 +1959,7 @@ function renderBlogList(container, posts) {
       <div class="card-tags"><span class="tag">${fmtDate(p.publishedAt)}</span></div>
       <h3>${p.title}</h3>
       <p class="muted">${p.excerpt || (p.content || "").slice(0, 140) + "…"}</p>
+      <a href="/blog/${encodeURIComponent(p.slug)}/" class="muted" style="font-size:12.5px;" onclick="event.stopPropagation();">Permalink ↗</a>
     </div></div>`).join("");
   $all(".js-open-post", container).forEach(el => el.addEventListener("click", () => {
     history.pushState({}, "", `/blog?post=${encodeURIComponent(el.dataset.slug)}`);
@@ -2618,7 +2650,21 @@ async function renderBlogAdmin() {
       <form id="blogForm">
         <div class="form-row"><label>Title</label><input type="text" id="blog-title" required placeholder="e.g. Kerala PSC LDC 2026 — Notification Details" /></div>
         <div class="form-row"><label>Short excerpt (shown in the post list)</label><input type="text" id="blog-excerpt" placeholder="One line summary" /></div>
-        <div class="form-row"><label>Content (leave a blank line between paragraphs)</label><textarea id="blog-content" rows="10" required></textarea></div>
+        <div class="form-row"><label>Content</label>
+          <div class="md-toolbar" id="blogMdToolbar">
+            <button type="button" data-md="bold" title="Bold"><i class='icon icon-bold'></i></button>
+            <button type="button" data-md="italic" title="Italic"><i class='icon icon-italic'></i></button>
+            <button type="button" data-md="link" title="Insert link"><i class='icon icon-link'></i></button>
+            <button type="button" data-md="image" title="Insert image (paste an image URL)"><i class='icon icon-image'></i></button>
+            <button type="button" data-md="list" title="Bullet list"><i class='icon icon-list'></i></button>
+            <span class="md-help">Select text, then click a button — or type <code>**bold**</code>, <code>*italic*</code>, <code>[text](url)</code>, <code>![alt](image-url)</code>, or lines starting with <code>- </code> for a list.</span>
+          </div>
+          <textarea id="blog-content" rows="10" required placeholder="Write your post here…"></textarea>
+        </div>
+        <div class="form-row">
+          <label>Preview</label>
+          <div class="form-card" id="blogPreview" style="background:var(--color-bg); min-height:60px;"><p class="muted" style="margin:0;">Nothing to preview yet — start typing above.</p></div>
+        </div>
         <div class="form-row"><label>Author (optional)</label><input type="text" id="blog-author" placeholder="e.g. FutureU Team" /></div>
         <div style="display:flex; gap:10px;">
           <button type="submit" class="btn btn-primary" id="blogSubmitBtn">Publish post</button>
@@ -2655,6 +2701,45 @@ async function renderBlogAdmin() {
   });
   $("#blogCancelEditBtn").addEventListener("click", () => renderBlogAdmin());
 
+  // ---- Formatting toolbar: wraps/inserts markdown-lite syntax at the cursor ----
+  const contentField = $("#blog-content");
+  $("#blogMdToolbar").addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-md]");
+    if (!btn) return;
+    const start = contentField.selectionStart, end = contentField.selectionEnd;
+    const selected = contentField.value.slice(start, end);
+    let before = "", after = "", placeholder = "text", collapse = false;
+    if (btn.dataset.md === "bold") { before = "**"; after = "**"; placeholder = "bold text"; }
+    else if (btn.dataset.md === "italic") { before = "*"; after = "*"; placeholder = "italic text"; }
+    else if (btn.dataset.md === "link") {
+      const url = prompt("Link URL (must start with http:// or https://):", "https://");
+      if (!url) return;
+      before = "["; after = `](${url})`; placeholder = "link text";
+    } else if (btn.dataset.md === "image") {
+      const url = prompt("Image URL (must start with http:// or https://):", "https://");
+      if (!url) return;
+      before = "!["; after = `](${url})`; placeholder = "image description";
+    } else if (btn.dataset.md === "list") {
+      const lines = (selected || placeholder).split("\n").map(l => `- ${l.replace(/^[-*]\s+/, "")}`).join("\n");
+      contentField.setRangeText(lines, start, end, "end");
+      contentField.dispatchEvent(new Event("input"));
+      contentField.focus();
+      return;
+    }
+    const insertText = selected || placeholder;
+    contentField.setRangeText(before + insertText + after, start, end, "select");
+    if (!selected) contentField.setSelectionRange(start + before.length, start + before.length + placeholder.length);
+    contentField.dispatchEvent(new Event("input"));
+    contentField.focus();
+  });
+
+  // ---- Live preview ----
+  const updatePreview = () => {
+    const val = contentField.value.trim();
+    $("#blogPreview").innerHTML = val ? paragraphsToHTML(val) : `<p class="muted" style="margin:0;">Nothing to preview yet — start typing above.</p>`;
+  };
+  contentField.addEventListener("input", updatePreview);
+
   renderBlogTable(posts);
 
   function renderBlogTable(posts) {
@@ -2670,6 +2755,7 @@ async function renderBlogAdmin() {
           editingBlogId = p.id;
           $("#blog-title").value = p.title || ""; $("#blog-excerpt").value = p.excerpt || "";
           $("#blog-content").value = p.content || ""; $("#blog-author").value = p.author || "";
+          $("#blog-content").dispatchEvent(new Event("input"));
           $("#blogFormTitle").textContent = "Edit post";
           $("#blogSubmitBtn").textContent = "Update post";
           $("#blogCancelEditBtn").style.display = "";

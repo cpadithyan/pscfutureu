@@ -1,0 +1,8 @@
+{
+  "name": "psc-futureu",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "node generate-blog-pages.mjs"
+  }
+}
