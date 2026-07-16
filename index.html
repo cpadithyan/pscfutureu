@@ -7,6 +7,13 @@
 <meta name="description" content="Video classes, downloadable notes, quizzes and full-length mock tests for Kerala PSC exam preparation — LDC, LGS, Degree Level and more." />
 <!-- TODO: replace pscfutureu.com below with your real domain once it's finalised -->
 <link rel="canonical" href="https://pscfutureu.com/" />
+<link rel="manifest" href="/manifest.json" />
+<link rel="icon" href="/icon-192.png" type="image/png" />
+<link rel="apple-touch-icon" href="/icon-192.png" />
+<meta name="theme-color" content="#0B4F6C" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="PSC FutureU" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="PSC FutureU" />
 <meta property="og:title" content="PSC FutureU — Kerala PSC Study Companion" />
@@ -255,6 +262,8 @@ img { max-width: 100%; display: block; }
 .admin-table th { background: var(--color-bg); font-family: var(--font-mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--color-ink-soft); }
 .admin-table td.actions { display: flex; gap: 8px; }
 .icon-btn { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; }
+.js-bookmark { flex-shrink: 0; font-size: 18px; line-height: 1; padding: 6px 9px; color: var(--color-ink-soft); }
+.js-bookmark.on { color: var(--color-accent-dark); border-color: var(--color-accent); background: #FEF6E8; }
 .icon-btn.danger { color: var(--color-danger); }
 .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: var(--color-ink); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 13.5px; font-weight: 600; z-index: 300; box-shadow: var(--shadow-md); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(-8px); }
@@ -474,6 +483,7 @@ img { max-width: 100%; display: block; }
       </nav>
     </div>
     <div class="header-actions">
+      <button class="btn btn-ghost btn-sm" id="pwaInstallBtn" style="display:none;">⬇ Install App</button>
       <button class="nav-toggle js-drawer-open" aria-label="Menu">☰</button>
       <div id="authArea"></div>
     </div>
@@ -495,6 +505,8 @@ img { max-width: 100%; display: block; }
     <a href="/quizzes" data-nav="quizzes">📝 Quizzes</a>
     <a href="/mocks" data-nav="mocks">⏱️ Mock Tests</a>
     <a href="/syllabus" data-nav="syllabus">✅ Syllabus Tracker</a>
+    <a href="/bookmarks" data-nav="bookmarks">★ My Bookmarks</a>
+    <a href="#" id="drawerInstallLink" style="display:none;">⬇ Install App</a>
     <a href="/dashboard" data-nav="dashboard">👤 Dashboard</a>
     <a href="/blog" data-nav="blog">📰 Blog</a>
     <a href="/about" data-nav="about">ℹ️ About Us</a>
@@ -570,6 +582,11 @@ img { max-width: 100%; display: block; }
   <!-- SYLLABUS TRACKER -->
   <section class="page" id="page-syllabus">
     <div class="section container" id="syllabusContainer"></div>
+  </section>
+
+  <!-- BOOKMARKS -->
+  <section class="page" id="page-bookmarks">
+    <div class="section container" id="bookmarksContainer"></div>
   </section>
 
   <!-- BLOG -->
@@ -741,6 +758,7 @@ function buildProfileModal() {
       currentProfile = { name, phone, district, email: currentUser.email };
       modal.classList.remove("show");
       broadcastAuth();
+      recordDailyActivity();
     } catch (err) {
       alert("Could not save profile: " + err.message);
       btn.disabled = false; btn.textContent = "Save & continue";
@@ -748,6 +766,27 @@ function buildProfileModal() {
   });
 }
 function showProfileModal() { buildProfileModal(); $("#profileModal").classList.add("show"); }
+
+// ---------------- STREAKS ----------------
+// One "active day" is counted the first time a signed-in user opens the app
+// on a given calendar day (local time). Stored on users/{uid}.streak so it
+// survives across devices.
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+function yesterdayStr() { return new Date(Date.now() - 86400000).toISOString().slice(0, 10); }
+
+async function recordDailyActivity() {
+  if (!currentUser) return;
+  const today = todayStr();
+  const streak = currentProfile?.streak || { count: 0, longest: 0, lastActiveDate: null };
+  if (streak.lastActiveDate === today) return; // already counted today
+  const newCount = streak.lastActiveDate === yesterdayStr() ? (streak.count || 0) + 1 : 1;
+  const newStreak = { count: newCount, longest: Math.max(streak.longest || 0, newCount), lastActiveDate: today };
+  try {
+    await db.collection("users").doc(currentUser.uid).set({ streak: newStreak }, { merge: true });
+    if (currentProfile) currentProfile.streak = newStreak;
+    document.dispatchEvent(new CustomEvent("streakUpdated", { detail: newStreak }));
+  } catch (err) { console.error("Couldn't update streak:", err); }
+}
 
 auth.onAuthStateChanged(async (user) => {
   currentUser = user; currentProfile = null; isAdmin = false;
@@ -758,6 +797,7 @@ auth.onAuthStateChanged(async (user) => {
     if (doc.exists && doc.data().name && doc.data().phone && doc.data().district) {
       currentProfile = doc.data();
       broadcastAuth();
+      recordDailyActivity();
     } else {
       broadcastAuth();
       showProfileModal();
@@ -778,7 +818,64 @@ document.addEventListener("DOMContentLoaded", () => {
   $("#videoModal").addEventListener("click", (e) => { if (e.target.id === "videoModal") closeVideoModal(); });
 });
 
+// ---------------- PWA install prompt ----------------
+let deferredInstallPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  const btn = $("#pwaInstallBtn"); if (btn) btn.style.display = "";
+  const link = $("#drawerInstallLink"); if (link) link.style.display = "";
+});
+async function triggerPWAInstall() {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  const btn = $("#pwaInstallBtn"); if (btn) btn.style.display = "none";
+  const link = $("#drawerInstallLink"); if (link) link.style.display = "none";
+}
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  showToast("App installed! You can now launch it from your home screen.");
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = $("#pwaInstallBtn"); if (btn) btn.addEventListener("click", triggerPWAInstall);
+  const link = $("#drawerInstallLink"); if (link) link.addEventListener("click", (e) => { e.preventDefault(); triggerPWAInstall(); });
+
+  // iOS Safari doesn't support beforeinstallprompt at all — show a one-time
+  // manual tip instead ("Add to Home Screen" via the Share sheet).
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
+  if (isIOS && !isStandalone && !localStorage.getItem("iosInstallTipShown")) {
+    localStorage.setItem("iosInstallTipShown", "1");
+    setTimeout(() => showToast("Tip: tap the Share icon, then \"Add to Home Screen\" to install this app."), 2500);
+  }
+});
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch((err) => console.error("SW registration failed:", err));
+  });
+}
+
+// ---------------- Copy protection (deterrents only — see note in chat) ----------------
+// This is a speed bump, not real DRM: it disables the easy/casual paths for
+// copying quiz text or right-click-saving content. Anyone using devtools or
+// their OS's screen recorder can still get around it.
+document.addEventListener("contextmenu", (e) => {
+  if (e.target.closest(".q-block, .option-row, .list-row, #videoModalFrame, .syl-topics")) e.preventDefault();
+});
+document.addEventListener("copy", (e) => {
+  if (document.getSelection().toString().length && document.activeElement?.closest?.(".q-block, .option-row, .syl-topics")) e.preventDefault();
+});
+document.addEventListener("DOMContentLoaded", () => {
+  ["#quizzesContainer", "#mocksContainer", "#syllabusContainer"].forEach(sel => {
+    const el = document.querySelector(sel);
+    if (el) el.style.userSelect = "none";
+  });
+});
+
 function showToast(msg) {
+
   const t = $("#toast");
   t.textContent = msg;
   t.classList.add("show");
@@ -863,12 +960,20 @@ let activeTest = null;
 // NOTE: for a direct browser visit / refresh on a path like /admin to work
 // (rather than 404), the host needs to rewrite all paths to this file
 // (a standard single-page-app rewrite). See firebase.json.
-const ROUTES = ["home", "videos", "pdfs", "quizzes", "mocks", "syllabus", "blog", "about", "dashboard", "admin"];
+const ROUTES = ["home", "videos", "pdfs", "quizzes", "mocks", "syllabus", "bookmarks", "blog", "about", "dashboard", "admin"];
 
 function currentRoute() {
   let path = location.pathname.replace(/^\/+|\/+$/g, "");
   if (!path) path = "home";
   return ROUTES.includes(path) ? path : "home";
+}
+
+// Pushes a history entry at the *same* URL. Used for in-page UI states that
+// don't have their own route (drilling into a category, starting a test) so
+// that the phone/browser back button steps back into the section instead of
+// jumping straight past it to whatever page came before.
+function pushSectionHistoryEntry() {
+  history.pushState({ uiSection: true }, "", location.pathname + location.search);
 }
 
 function navigateTo(pathAndQuery) {
@@ -880,6 +985,9 @@ function navigateTo(pathAndQuery) {
 }
 
 function router() {
+  if (activeTest) { if (activeTest.timerInterval) clearInterval(activeTest.timerInterval); activeTest = null; }
+  const videoModal = $("#videoModal");
+  if (videoModal && videoModal.classList.contains("show")) closeVideoModal();
   const route = currentRoute();
   $all(".page").forEach(p => p.classList.remove("active"));
   (document.getElementById("page-" + route) || document.getElementById("page-home")).classList.add("active");
@@ -921,6 +1029,7 @@ const PAGE_TITLES = {
   quizzes: "Quizzes | PSC FutureU",
   mocks: "Mock Tests | PSC FutureU",
   syllabus: "Syllabus Tracker | PSC FutureU",
+  bookmarks: "My Bookmarks | PSC FutureU",
   blog: "Blog | PSC FutureU",
   about: "About Us | PSC FutureU",
   dashboard: "Dashboard | PSC FutureU",
@@ -934,6 +1043,7 @@ function loadPage(route) {
   else if (route === "quizzes") loadQuizzes();
   else if (route === "mocks") loadMocks();
   else if (route === "syllabus") loadSyllabusPage();
+  else if (route === "bookmarks") loadBookmarksPage();
   else if (route === "blog") loadBlogPage();
   else if (route === "about") loadAboutPage();
   else if (route === "dashboard") loadDashboard();
@@ -945,7 +1055,7 @@ window.addEventListener("authReady", (e) => {
   const adminLink = $("#navAdminLink");
   if (adminLink) adminLink.style.display = e.detail.isAdmin ? "" : "none";
   const route = currentRoute();
-  if (["home", "quizzes", "mocks", "syllabus", "dashboard"].includes(route)) loadPage(route);
+  if (["home", "quizzes", "mocks", "syllabus", "bookmarks", "dashboard"].includes(route)) loadPage(route);
   if (route === "admin") renderAdminPage(e.detail);
 });
 
@@ -1099,6 +1209,8 @@ async function loadHome() {
         <div><strong>${summary.attempted}</strong><span>Tests attempted</span></div>
         <div><strong>${summary.attempted ? summary.accuracy + "%" : "—"}</strong><span>Accuracy</span></div>
         <div><strong>${summary.rank ? "#" + summary.rank : "—"}</strong><span>${summary.rank ? "Rank of " + summary.rankOf : "Not ranked yet"}</span></div>
+        <div><strong>${summary.streak ? "🔥 " + summary.streak : "—"}</strong><span>Day streak</span></div>
+        <div><strong>${summary.syllabusPct !== null ? summary.syllabusPct + "%" : "—"}</strong><span>${summary.syllabusGoalName ? summary.syllabusGoalName + " covered" : "Syllabus covered"}</span></div>
       </div>
     </div>
 
@@ -1113,7 +1225,7 @@ async function loadHome() {
 
 // Builds { attempted, accuracy, rank, rankOf, weakSubject, lastResult } for the current user.
 async function buildHomeSummary() {
-  const empty = { attempted: 0, accuracy: 0, rank: null, rankOf: 0, weakSubject: null, lastResult: null };
+  const empty = { attempted: 0, accuracy: 0, rank: null, rankOf: 0, weakSubject: null, lastResult: null, syllabusPct: null, syllabusGoalName: null, streak: currentProfile?.streak?.count || 0 };
   if (!currentUser) return empty;
 
   let myResults = [];
@@ -1127,7 +1239,28 @@ async function buildHomeSummary() {
     myResults = snap.docs.map(d => d.data()).sort((a, b) => (b.date?.toMillis?.() || 0) - (a.date?.toMillis?.() || 0)).slice(0, 50);
   } catch (err) { console.error("Could not load results:", err); showToast("Couldn't load your results — check your connection."); return empty; }
 
-  if (!myResults.length) return empty;
+  // Syllabus completion for whichever exam the student has set as their goal —
+  // computed regardless of quiz/mock attempts, since someone might only be
+  // using the syllabus tracker so far.
+  let syllabusPct = null, syllabusGoalName = null;
+  try {
+    const [examSnap, progressSnap] = await Promise.all([
+      db.collection("syllabus").get(),
+      db.collection("syllabusProgress").doc(currentUser.uid).get()
+    ]);
+    const exams = examSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const progressDoc = progressSnap.exists ? progressSnap.data() : null;
+    const goalExam = progressDoc && exams.find(e => e.id === progressDoc.goalExamId);
+    if (goalExam) {
+      const total = syllabusTotals(goalExam);
+      const checked = (progressDoc.progress?.[goalExam.id] || []).length;
+      syllabusPct = total ? Math.round((checked / total) * 100) : 0;
+      syllabusGoalName = goalExam.examName;
+    }
+  } catch (err) { console.error("Could not compute syllabus completion:", err); }
+  const streak = currentProfile?.streak?.count || 0;
+
+  if (!myResults.length) return { ...empty, syllabusPct, syllabusGoalName, streak };
 
   const totalScore = myResults.reduce((s, r) => s + r.score, 0);
   const totalMax = myResults.reduce((s, r) => s + r.total, 0);
@@ -1167,7 +1300,8 @@ async function buildHomeSummary() {
     if (ranked.length) weakSubject = ranked[0];
   } catch (err) { console.error("Could not compute weak subject:", err); }
 
-  return { attempted: myResults.length, accuracy, rank, rankOf, weakSubject, lastResult: myResults[0] };
+  // Syllabus completion & streak already computed above.
+  return { attempted: myResults.length, accuracy, rank, rankOf, weakSubject, lastResult: myResults[0], syllabusPct, syllabusGoalName, streak };
 }
 
 function suggestionsHTML(summary) {
@@ -1231,11 +1365,12 @@ async function loadVideos() {
       return `
       <div class="list-row js-open-playlist" data-id="${p.id}">
         ${thumb ? `<img src="${thumb}" alt="" loading="lazy" style="width:64px;height:40px;border-radius:8px;object-fit:cover;flex-shrink:0;">` : `<div class="lr-icon">🎬</div>`}
-        <div class="grow"><h4>${p.title}</h4><p class="muted">${(p.videos || []).length} video${(p.videos || []).length === 1 ? "" : "s"}${p.exam ? ` · ${p.exam}` : ""}</p></div>
+        <div class="grow"><h4>${p.title}</h4><p class="muted">${p.description ? p.description : `${(p.videos || []).length} video${(p.videos || []).length === 1 ? "" : "s"}${p.exam ? ` · ${p.exam}` : ""}`}</p></div>
+        ${bookmarkBtnHTML("playlists", p.id)}
         <span class="lr-action">▶</span>
       </div>`;
     },
-    wireRows: (body) => $all(".js-open-playlist", body).forEach(el => el.addEventListener("click", () => openPlaylistModal(el.dataset.id)))
+    wireRows: (body) => { $all(".js-open-playlist", body).forEach(el => el.addEventListener("click", () => openPlaylistModal(el.dataset.id))); wireBookmarkButtons(body); }
   });
 }
 
@@ -1245,6 +1380,16 @@ function openPlaylistModal(id) {
   const modal = $("#videoModal");
   $("#videoModalTag").textContent = [p.subject, p.exam].filter(Boolean).join(" · ") || "PLAYLIST";
   $("#videoModalTitle").textContent = p.title;
+  let descEl = $("#videoModalDesc");
+  if (!descEl) {
+    descEl = document.createElement("p");
+    descEl.id = "videoModalDesc";
+    descEl.className = "muted";
+    descEl.style.cssText = "margin:2px 0 0; font-size:13.5px;";
+    $("#videoModalTitle").insertAdjacentElement("afterend", descEl);
+  }
+  descEl.textContent = p.description || "";
+  descEl.style.display = p.description ? "" : "none";
   const playVideo = (idx) => {
     const vId = getYouTubeId(p.videos[idx].url);
     $("#videoModalFrame").src = vId ? `https://www.youtube.com/embed/${vId}?autoplay=1` : "";
@@ -1257,6 +1402,7 @@ function openPlaylistModal(id) {
     el.addEventListener("click", () => playVideo(Number(el.dataset.idx)))
   );
   playVideo(0);
+  pushSectionHistoryEntry();
   modal.classList.add("show");
 }
 function closeVideoModal() { $("#videoModal").classList.remove("show"); $("#videoModalFrame").src = ""; }
@@ -1275,10 +1421,78 @@ async function loadPdfs() {
       <div class="list-row">
         <div class="lr-icon">📄</div>
         <div class="grow"><h4>${p.title}</h4><p class="muted">${p.description || (p.exam || "")}</p></div>
+        ${bookmarkBtnHTML("pdfs", p.id)}
         <a href="${p.url}" target="_blank" rel="noopener" class="btn btn-primary btn-sm lr-action">Download</a>
       </div>`,
-    wireRows: () => {}
+    wireRows: (body) => wireBookmarkButtons(body)
   });
+}
+
+// ---------------- BOOKMARKS ----------------
+// Stored on users/{uid}.bookmarks.{type} = [id, id, ...]. `type` is one of
+// "playlists" | "pdfs" | "quizzes" | "mocks".
+function isBookmarked(type, id) { return !!(currentProfile?.bookmarks?.[type] || []).includes(id); }
+async function toggleBookmark(type, id) {
+  if (!currentUser) { showToast("Sign in to bookmark this."); return; }
+  const list = new Set(currentProfile?.bookmarks?.[type] || []);
+  const nowOn = !list.has(id);
+  nowOn ? list.add(id) : list.delete(id);
+  if (!currentProfile.bookmarks) currentProfile.bookmarks = {};
+  currentProfile.bookmarks[type] = [...list];
+  try {
+    await db.collection("users").doc(currentUser.uid).set({
+      bookmarks: { [type]: nowOn ? firebase.firestore.FieldValue.arrayUnion(id) : firebase.firestore.FieldValue.arrayRemove(id) }
+    }, { merge: true });
+  } catch (err) { showToast("Couldn't save bookmark: " + err.message); }
+  $all(`.js-bookmark[data-type="${type}"][data-id="${id}"]`).forEach(b => {
+    b.classList.toggle("on", nowOn);
+    b.textContent = nowOn ? "★" : "☆";
+  });
+}
+function bookmarkBtnHTML(type, id) {
+  const on = isBookmarked(type, id);
+  return `<button type="button" class="icon-btn js-bookmark ${on ? "on" : ""}" data-type="${type}" data-id="${id}" title="${on ? "Remove bookmark" : "Bookmark this"}" aria-label="Bookmark">${on ? "★" : "☆"}</button>`;
+}
+function wireBookmarkButtons(container) {
+  $all(".js-bookmark", container).forEach(b => b.addEventListener("click", (e) => {
+    e.stopPropagation(); e.preventDefault();
+    toggleBookmark(b.dataset.type, b.dataset.id);
+  }));
+}
+
+async function loadBookmarksPage() {
+  const el = $("#bookmarksContainer");
+  if (!currentUser) { el.innerHTML = lockGateHTML("your bookmarks"); wireGateButtons(el); return; }
+  el.innerHTML = `<p class="muted">Loading your bookmarks…</p>`;
+
+  const b = currentProfile?.bookmarks || {};
+  const [playlists, pdfs, quizzes, mocks] = await Promise.all([
+    fetchCollection("playlists"), fetchCollection("pdfs"), fetchCollection("quizzes"), fetchCollection("mocks")
+  ]);
+  const sections = [
+    { type: "playlists", icon: "🎬", label: "Video Playlists", items: playlists.filter(x => (b.playlists || []).includes(x.id)),
+      row: (p) => `<div class="list-row js-open-playlist" data-id="${p.id}"><div class="lr-icon">🎬</div><div class="grow"><h4>${p.title}</h4><p class="muted">${(p.videos || []).length} video${(p.videos || []).length === 1 ? "" : "s"}</p></div>${bookmarkBtnHTML("playlists", p.id)}<span class="lr-action">▶</span></div>`,
+      wire: (body) => { $all(".js-open-playlist", body).forEach(elm => elm.addEventListener("click", () => openPlaylistModal(elm.dataset.id))); wireBookmarkButtons(body); } },
+    { type: "pdfs", icon: "📄", label: "Study Notes", items: pdfs.filter(x => (b.pdfs || []).includes(x.id)),
+      row: (p) => `<div class="list-row"><div class="lr-icon">📄</div><div class="grow"><h4>${p.title}</h4><p class="muted">${p.description || (p.exam || "")}</p></div>${bookmarkBtnHTML("pdfs", p.id)}<a href="${p.url}" target="_blank" rel="noopener" class="btn btn-primary btn-sm lr-action">Download</a></div>`,
+      wire: (body) => wireBookmarkButtons(body) },
+    { type: "quizzes", icon: "📝", label: "Quizzes", items: quizzes.filter(x => (b.quizzes || []).includes(x.id)),
+      row: (i) => `<div class="list-row"><div class="lr-icon">📝</div><div class="grow"><h4>${i.title}</h4><p class="muted">${(i.questions || []).length} question${(i.questions || []).length === 1 ? "" : "s"}</p></div>${bookmarkBtnHTML("quizzes", i.id)}<button class="btn btn-primary btn-sm lr-action js-start-test" data-id="${i.id}">Start Quiz</button></div>`,
+      wire: (body) => { $all(".js-start-test", body).forEach(b2 => b2.addEventListener("click", () => startTest(b2.dataset.id, "quiz"))); wireBookmarkButtons(body); } },
+    { type: "mocks", icon: "⏱️", label: "Mock Tests", items: mocks.filter(x => (b.mocks || []).includes(x.id)),
+      row: (i) => `<div class="list-row"><div class="lr-icon">⏱️</div><div class="grow"><h4>${i.title}</h4><p class="muted">${(i.questions || []).length} question${(i.questions || []).length === 1 ? "" : "s"}</p></div>${bookmarkBtnHTML("mocks", i.id)}<button class="btn btn-primary btn-sm lr-action js-start-test" data-id="${i.id}">Start Test</button></div>`,
+      wire: (body) => { $all(".js-start-test", body).forEach(b2 => b2.addEventListener("click", () => startTest(b2.dataset.id, "mock"))); wireBookmarkButtons(body); } }
+  ];
+
+  const anyItems = sections.some(s => s.items.length);
+  el.innerHTML = `
+    <div class="section-head"><div><span class="eyebrow">Saved for later</span><h2>My Bookmarks</h2><p>Everything you've starred, in one place.</p></div></div>
+    ${anyItems ? sections.filter(s => s.items.length).map(s => `
+      <h3 style="margin:22px 0 10px;">${s.icon} ${s.label}</h3>
+      <div class="list-view">${s.items.map(s.row).join("")}</div>
+    `).join("") : emptyStateHTML("★", "Nothing bookmarked yet — tap the ☆ on any video, note, quiz or mock to save it here.")}`;
+
+  sections.filter(s => s.items.length).forEach(s => s.wire(el));
 }
 
 // ---------------- Category browser (shared by Videos / PDFs / Quizzes / Mocks) ----------------
@@ -1294,6 +1508,13 @@ function iconClassFor(name) {
 function groupBySubject(items) {
   const groups = {};
   items.forEach(i => { const key = (i.subject || "General").trim() || "General"; (groups[key] = groups[key] || []).push(i); });
+  return groups;
+}
+// Second-level grouping inside a category, e.g. History -> Kerala History / Indian History / World History.
+// Items without a topic set all fall into one "General" bucket so old content (no topic yet) keeps working.
+function groupByTopic(items) {
+  const groups = {};
+  items.forEach(i => { const key = (i.topic || "General").trim() || "General"; (groups[key] = groups[key] || []).push(i); });
   return groups;
 }
 function emptyStateHTML(glyph, msg) {
@@ -1332,18 +1553,41 @@ function initCategoryPage(container, items, opts) {
     container.innerHTML = `
       <div class="section-head"><div><span class="eyebrow">${opts.eyebrow}</span><h2>${opts.heading}</h2><p>${opts.sub}</p></div></div>
       <div id="catGridWrap"></div>`;
-    renderCategoryGrid($("#catGridWrap", container), groups, { icon: opts.icon, emptyMsg: opts.emptyMsg, onOpen: showList });
+    renderCategoryGrid($("#catGridWrap", container), groups, { icon: opts.icon, emptyMsg: opts.emptyMsg, onOpen: (cat) => { pushSectionHistoryEntry(); openCategory(cat); } });
   }
 
-  function showList(cat) {
+  // A category only gets its own sub-category screen if it actually has more
+  // than one distinct topic — otherwise (old content with no topic set, or a
+  // category that's deliberately flat) it goes straight to the list, so
+  // nothing changes for content that hasn't been given sub-categories yet.
+  function openCategory(cat) {
+    const catItems = groups[cat] || [];
+    const topicGroups = groupByTopic(catItems);
+    const topicKeys = Object.keys(topicGroups);
+    if (topicKeys.length <= 1) showList(cat, cat, catItems, showCategories);
+    else showTopics(cat, topicGroups);
+  }
+
+  function showTopics(cat, topicGroups) {
+    container.innerHTML = `
+      <div class="crumb-bar"><button class="js-back">← All categories</button><span>›</span><span>${cat}</span></div>
+      <div id="topicGridWrap"></div>`;
+    $(".js-back", container).addEventListener("click", showCategories);
+    renderCategoryGrid($("#topicGridWrap", container), topicGroups, {
+      icon: opts.icon, emptyMsg: opts.emptyMsg,
+      onOpen: (topic) => { pushSectionHistoryEntry(); showList(cat, topic === "General" ? cat : topic, topicGroups[topic], () => showTopics(cat, topicGroups)); }
+    });
+  }
+
+  function showList(cat, label, listItems, onBack) {
     container.innerHTML = `<div id="listHeadWrap"></div>`;
     const headWrap = $("#listHeadWrap", container);
     let visibleCount = LIST_PAGE_SIZE;
-    renderListHead(headWrap, { title: cat, onBack: showCategories, onSearch: (q) => { visibleCount = LIST_PAGE_SIZE; renderRows(q); } });
+    renderListHead(headWrap, { title: label, onBack, onSearch: (q) => { visibleCount = LIST_PAGE_SIZE; renderRows(q); } });
     renderRows("");
     function renderRows(query) {
       const body = $("#catListBody", container);
-      const fullList = (groups[cat] || []).filter(i => !query || i.title.toLowerCase().includes(query));
+      const fullList = listItems.filter(i => !query || i.title.toLowerCase().includes(query));
       if (!fullList.length) { body.innerHTML = emptyStateHTML(opts.icon, "Nothing matches your search."); return; }
       const list = fullList.slice(0, visibleCount);
       body.innerHTML = list.map(opts.renderRow).join("");
@@ -1357,7 +1601,7 @@ function initCategoryPage(container, items, opts) {
 
   const params = new URLSearchParams(location.search);
   const wanted = params.get("subject");
-  if (wanted && groups[wanted]) showList(wanted); else showCategories();
+  if (wanted && groups[wanted]) openCategory(wanted); else showCategories();
 }
 
 // ---------------- LOCK GATE ----------------
@@ -1404,9 +1648,10 @@ function renderTestList(el, items, type) {
           <h4>${i.title}</h4>
           <p class="muted">${(i.questions || []).length} question${(i.questions || []).length === 1 ? "" : "s"}${type === "mock" && i.timerMinutes ? ` · ${i.timerMinutes} min` : ""}${i.negativeMarking ? ` · Negative marking` : ""}${i.exam ? ` · ${i.exam}` : ""}</p>
         </div>
+        ${bookmarkBtnHTML(type === "quiz" ? "quizzes" : "mocks", i.id)}
         <button class="btn btn-primary btn-sm lr-action js-start-test" data-id="${i.id}">${type === "quiz" ? "Start Quiz" : "Start Test"}</button>
       </div>`,
-    wireRows: (body) => $all(".js-start-test", body).forEach(b => b.addEventListener("click", () => startTest(b.dataset.id, type)))
+    wireRows: (body) => { $all(".js-start-test", body).forEach(b => b.addEventListener("click", () => startTest(b.dataset.id, type))); wireBookmarkButtons(body); }
   });
 }
 
@@ -1415,6 +1660,7 @@ function startTest(id, type) {
   const doc = source.find(d => d.id === id);
   if (!doc || !doc.questions?.length) { showToast("This test has no questions yet."); return; }
   activeTest = { doc, type, index: 0, answers: new Array(doc.questions.length).fill(null), timerInterval: null, timeLeft: null };
+  pushSectionHistoryEntry();
   renderTestRuntime();
   if (type === "mock" && doc.timerMinutes) {
     activeTest.timeLeft = doc.timerMinutes * 60;
@@ -1691,6 +1937,9 @@ async function loadDashboard() {
           <h3 style="font-family:var(--font-mono);">${attempted}</h3>
           <p class="muted" style="margin:12px 0 4px;">Average score</p>
           <h3 style="font-family:var(--font-mono);">${avg}</h3>
+          <p class="muted" style="margin:12px 0 4px;">Current streak</p>
+          <h3 style="font-family:var(--font-mono);">🔥 ${currentProfile?.streak?.count || 0} day${(currentProfile?.streak?.count || 0) === 1 ? "" : "s"}</h3>
+          ${currentProfile?.streak?.longest ? `<p class="muted" style="margin:2px 0 0; font-size:12px;">Best: ${currentProfile.streak.longest} days</p>` : ""}
         </div></div>
       </div>
       <div class="card"><div class="card-body">
@@ -2076,12 +2325,30 @@ async function renderSyllabusAdmin() {
       </select>
       <button class="btn btn-danger btn-sm" id="deleteExamBtn" style="display:none;">Delete this exam</button>
     </div>
+
+    <div class="bulk-card">
+      <h3>⚡ Import syllabus from Excel</h3>
+      <p class="muted" style="margin:0;">One row per subtopic: Subject, Topic, Subtopic columns. Rows are merged into the currently-open exam below — download the template, fill it in, then upload.</p>
+      <div class="bulk-actions">
+        <button class="btn btn-ghost btn-sm" id="downloadSyllabusTemplateBtn">⬇ Download Excel template</button>
+        <label class="btn btn-accent btn-sm" style="cursor:pointer;">⬆ Upload filled template<input type="file" id="syllabusImportFile" accept=".xlsx,.xls" style="display:none;" /></label>
+      </div>
+      <p class="bulk-status" id="syllabusImportStatus"></p>
+    </div>
+
     <div id="syllabusEditorWrap"></div>`;
 
   $("#examPicker").addEventListener("change", (e) => {
     const id = e.target.value;
     if (!id) startNewExam();
     else openExamForEdit(exams.find(x => x.id === id));
+  });
+
+  $("#downloadSyllabusTemplateBtn").addEventListener("click", downloadSyllabusTemplate);
+  $("#syllabusImportFile").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file) handleSyllabusImportFile(file);
+    e.target.value = "";
   });
 
   startNewExam();
@@ -2107,6 +2374,66 @@ async function renderSyllabusAdmin() {
     showToast("Exam syllabus deleted.");
     renderSyllabusAdmin();
   });
+}
+
+// ---- Syllabus bulk import (Excel) ----
+async function downloadSyllabusTemplate() {
+  await ensureXLSX();
+  const rows = [
+    { Subject: "History", Topic: "Kerala History", Subtopic: "Punnapra-Vayalar Uprising" },
+    { Subject: "History", Topic: "Kerala History", Subtopic: "Formation of Kerala State" },
+    { Subject: "History", Topic: "Indian History", Subtopic: "Quit India Movement" },
+    { Subject: "Polity", Topic: "Constitution", Subtopic: "Fundamental Rights" }
+  ];
+  const ws = XLSX.utils.json_to_sheet(rows, { header: ["Subject", "Topic", "Subtopic"] });
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Syllabus");
+  XLSX.writeFile(wb, "syllabus-bulk-import-template.xlsx");
+}
+
+async function handleSyllabusImportFile(file) {
+  const statusEl = $("#syllabusImportStatus");
+  statusEl.textContent = "Reading file…";
+  try {
+    await ensureXLSX();
+    const buf = await file.arrayBuffer();
+    const wb = XLSX.read(buf, { type: "array" });
+    const sheet = wb.Sheets[wb.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+    if (!rows.length) { statusEl.textContent = "No rows found in that file."; return; }
+
+    if (!editingSyllabusTree.examName) {
+      statusEl.textContent = "Give this exam a name first (top of the form below), then import.";
+      return;
+    }
+
+    const tree = editingSyllabusTree;
+    let added = 0, skipped = 0;
+    rows.forEach(r => {
+      const subjectName = String(r["Subject"] || "").trim();
+      const topicName = String(r["Topic"] || "").trim();
+      const subtopicName = String(r["Subtopic"] || "").trim();
+      if (!subjectName || !topicName || !subtopicName) { skipped++; return; }
+
+      let subject = tree.subjects.find(s => (s.name || "").trim().toLowerCase() === subjectName.toLowerCase());
+      if (!subject) { subject = { name: subjectName, topics: [] }; tree.subjects.push(subject); }
+
+      let topic = (subject.topics || []).find(t => (t.name || "").trim().toLowerCase() === topicName.toLowerCase());
+      if (!topic) { topic = { name: topicName, subtopics: [] }; subject.topics = subject.topics || []; subject.topics.push(topic); }
+
+      const exists = (topic.subtopics || []).some(st => (st.name || "").trim().toLowerCase() === subtopicName.toLowerCase());
+      if (exists) { skipped++; return; }
+      topic.subtopics = topic.subtopics || [];
+      topic.subtopics.push({ id: uid(), name: subtopicName });
+      added++;
+    });
+
+    renderSyllabusEditor();
+    statusEl.textContent = `✅ Added ${added} subtopic${added === 1 ? "" : "s"}${skipped ? ` (${skipped} skipped — missing fields or already existed)` : ""}. Review below, then click "Save syllabus" to publish.`;
+    showToast("Syllabus imported — remember to save.");
+  } catch (err) {
+    statusEl.textContent = "Import failed: " + err.message + " — make sure you're uploading the filled template file.";
+  }
 }
 
 function renderSyllabusEditor() {
@@ -2480,9 +2807,13 @@ async function renderPlaylistsAdmin() {
         <div class="form-row"><label>Playlist title</label><input type="text" id="pl-title" required placeholder="e.g. Kerala Renaissance — Full Course" /></div>
         <div class="form-row"><label>Description (optional)</label><textarea id="pl-desc" rows="2" placeholder="Short description shown on the card"></textarea></div>
         <div class="form-row-inline">
-          <div class="form-row"><label>Subject / Category</label>
-            <input type="text" id="pl-subject" list="plSubjectList" placeholder="e.g. General Knowledge" />
+          <div class="form-row"><label>Category</label>
+            <input type="text" id="pl-subject" list="plSubjectList" placeholder="e.g. History" />
             <datalist id="plSubjectList">${[...new Set(existingPlaylists.map(p => p.subject).filter(Boolean))].sort().map(s => `<option value="${s}">`).join("")}</datalist>
+          </div>
+          <div class="form-row"><label>Sub-category (optional)</label>
+            <input type="text" id="pl-topic" list="plTopicList" placeholder="e.g. Kerala History" />
+            <datalist id="plTopicList">${[...new Set(existingPlaylists.map(p => p.topic).filter(Boolean))].sort().map(s => `<option value="${s}">`).join("")}</datalist>
           </div>
           <div class="form-row"><label>Exam</label><input type="text" id="pl-exam" placeholder="e.g. LDC" /></div>
         </div>
@@ -2559,6 +2890,7 @@ async function renderPlaylistsAdmin() {
         title: $("#pl-title").value.trim(),
         description: $("#pl-desc").value.trim(),
         subject: $("#pl-subject").value.trim(),
+        topic: $("#pl-topic").value.trim(),
         exam: $("#pl-exam").value.trim(),
         videos,
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -2584,6 +2916,7 @@ async function renderPlaylistsAdmin() {
     $("#pl-title").value = p.title || "";
     $("#pl-desc").value = p.description || "";
     $("#pl-subject").value = p.subject || "";
+    $("#pl-topic").value = p.topic || "";
     $("#pl-exam").value = p.exam || "";
     $("#videoRows").innerHTML = "";
     (p.videos || []).forEach(v => addVideoRow(v.title, v.url));
@@ -2628,7 +2961,9 @@ async function renderPdfsAdmin() {
   editingPdfId = null;
   const el = $("#adminContent");
   el.innerHTML = `<p class="muted">Loading…</p>`;
-  const existingSubjects = [...new Set((await db.collection("pdfs").get()).docs.map(d => d.data().subject).filter(Boolean))].sort();
+  const existingPdfDocs = (await db.collection("pdfs").get()).docs.map(d => d.data());
+  const existingSubjects = [...new Set(existingPdfDocs.map(d => d.subject).filter(Boolean))].sort();
+  const existingTopics = [...new Set(existingPdfDocs.map(d => d.topic).filter(Boolean))].sort();
 
   el.innerHTML = `
     <h2>Study Notes (PDFs)</h2>
@@ -2638,9 +2973,13 @@ async function renderPdfsAdmin() {
         <div class="form-row"><label>Title</label><input type="text" id="pdf-title" required placeholder="e.g. Indian Constitution — Short Notes" /></div>
         <div class="form-row"><label>Description (optional)</label><textarea id="pdf-desc" rows="2"></textarea></div>
         <div class="form-row-inline">
-          <div class="form-row"><label>Playlist / Category — pick existing or type a new one</label>
+          <div class="form-row"><label>Category</label>
             <input type="text" id="pdf-subject" list="pdfSubjectList" placeholder="e.g. Indian Polity" />
             <datalist id="pdfSubjectList">${existingSubjects.map(s => `<option value="${s}">`).join("")}</datalist>
+          </div>
+          <div class="form-row"><label>Sub-category (optional)</label>
+            <input type="text" id="pdf-topic" list="pdfTopicList" placeholder="e.g. Fundamental Rights" />
+            <datalist id="pdfTopicList">${existingTopics.map(s => `<option value="${s}">`).join("")}</datalist>
           </div>
           <div class="form-row"><label>Exam</label><input type="text" id="pdf-exam" placeholder="e.g. Degree Level" /></div>
         </div>
@@ -2666,6 +3005,7 @@ async function renderPdfsAdmin() {
         title: $("#pdf-title").value.trim(),
         description: $("#pdf-desc").value.trim(),
         subject: $("#pdf-subject").value.trim(),
+        topic: $("#pdf-topic").value.trim(),
         exam: $("#pdf-exam").value.trim(),
         url: $("#pdf-url").value.trim(),
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -2691,6 +3031,7 @@ async function renderPdfsAdmin() {
     $("#pdf-title").value = p.title || "";
     $("#pdf-desc").value = p.description || "";
     $("#pdf-subject").value = p.subject || "";
+    $("#pdf-topic").value = p.topic || "";
     $("#pdf-exam").value = p.exam || "";
     $("#pdf-url").value = p.url || "";
     $("#pdfSubmitBtn").textContent = "Update note";
@@ -2733,7 +3074,9 @@ async function renderTestAdmin(collectionName) {
   const isMock = collectionName === "mocks";
   const el = $("#adminContent");
   el.innerHTML = `<p class="muted">Loading…</p>`;
-  const existingSubjects = [...new Set((await db.collection(collectionName).get()).docs.map(d => d.data().subject).filter(Boolean))].sort();
+  const existingTestDocs = (await db.collection(collectionName).get()).docs.map(d => d.data());
+  const existingSubjects = [...new Set(existingTestDocs.map(d => d.subject).filter(Boolean))].sort();
+  const existingTopics = [...new Set(existingTestDocs.map(d => d.topic).filter(Boolean))].sort();
 
   el.innerHTML = `
     <h2>${isMock ? "Mock Tests" : "Quizzes"}</h2>
@@ -2753,9 +3096,13 @@ async function renderTestAdmin(collectionName) {
       <form id="testForm">
         <div class="form-row"><label>Title</label><input type="text" id="t-title" required placeholder="e.g. ${isMock ? "LDC Full Mock — Set 1" : "Indian History — Quiz 1"}" /></div>
         <div class="form-row-inline">
-          <div class="form-row"><label>Playlist / Category — pick existing or type a new one</label>
+          <div class="form-row"><label>Category</label>
             <input type="text" id="t-subject" list="testSubjectList" placeholder="e.g. History" />
             <datalist id="testSubjectList">${existingSubjects.map(s => `<option value="${s}">`).join("")}</datalist>
+          </div>
+          <div class="form-row"><label>Sub-category (optional)</label>
+            <input type="text" id="t-topic" list="testTopicList" placeholder="e.g. Kerala History" />
+            <datalist id="testTopicList">${existingTopics.map(s => `<option value="${s}">`).join("")}</datalist>
           </div>
           <div class="form-row"><label>Exam</label><input type="text" id="t-exam" placeholder="e.g. LDC" /></div>
         </div>
@@ -2827,6 +3174,7 @@ async function renderTestAdmin(collectionName) {
       const payload = {
         title: $("#t-title").value.trim(),
         subject: $("#t-subject").value.trim(),
+        topic: $("#t-topic").value.trim(),
         exam: $("#t-exam").value.trim(),
         negativeMarking: $("#t-negmark").checked,
         negativeValue: $("#t-negmark").checked ? Number($("#t-negvalue").value || 0) : 0,
@@ -2854,6 +3202,7 @@ async function renderTestAdmin(collectionName) {
     $("#testFormTitle").textContent = `Edit ${isMock ? "mock test" : "quiz"}`;
     $("#t-title").value = t.title || "";
     $("#t-subject").value = t.subject || "";
+    $("#t-topic").value = t.topic || "";
     $("#t-exam").value = t.exam || "";
     if (isMock && $("#t-timer")) $("#t-timer").value = t.timerMinutes || "";
     $("#t-negmark").checked = !!t.negativeMarking;
@@ -2872,14 +3221,14 @@ async function renderTestAdmin(collectionName) {
 async function downloadBulkTemplate(isMock) {
   await ensureXLSX();
   const rows = [
-    { Title: isMock ? "LDC Full Mock — Set 1" : "Indian History — Quiz 1", Subject: "History", Exam: "LDC",
+    { Title: isMock ? "LDC Full Mock — Set 1" : "Indian History — Quiz 1", Subject: "History", Topic: "Indian History", Exam: "LDC",
       ...(isMock ? { TimerMinutes: 90 } : {}), "NegativeMarking(Y/N)": "N", NegativeValue: "",
       Question: "Who built the Taj Mahal?", Option1: "Akbar", Option2: "Shah Jahan", Option3: "Aurangzeb", Option4: "Jahangir", "CorrectOption(1-4)": 2 },
-    { Title: isMock ? "LDC Full Mock — Set 1" : "Indian History — Quiz 1", Subject: "History", Exam: "LDC",
+    { Title: isMock ? "LDC Full Mock — Set 1" : "Indian History — Quiz 1", Subject: "History", Topic: "Indian History", Exam: "LDC",
       ...(isMock ? { TimerMinutes: 90 } : {}), "NegativeMarking(Y/N)": "N", NegativeValue: "",
       Question: "In which year did India gain independence?", Option1: "1945", Option2: "1946", Option3: "1947", Option4: "1948", "CorrectOption(1-4)": 3 }
   ];
-  const headers = ["Title", "Subject", "Exam", ...(isMock ? ["TimerMinutes"] : []), "NegativeMarking(Y/N)", "NegativeValue", "Question", "Option1", "Option2", "Option3", "Option4", "CorrectOption(1-4)"];
+  const headers = ["Title", "Subject", "Topic", "Exam", ...(isMock ? ["TimerMinutes"] : []), "NegativeMarking(Y/N)", "NegativeValue", "Question", "Option1", "Option2", "Option3", "Option4", "CorrectOption(1-4)"];
   const ws = XLSX.utils.json_to_sheet(rows, { header: headers });
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Questions");
@@ -2908,7 +3257,7 @@ async function handleBulkImportFile(file, collectionName, isMock) {
       if (opts.some(o => !o) || !correctNum || correctNum < 1 || correctNum > 4) { skipped++; return; }
       if (!groups[title]) {
         groups[title] = {
-          title, subject: String(r["Subject"] || "").trim(), exam: String(r["Exam"] || "").trim(),
+          title, subject: String(r["Subject"] || "").trim(), topic: String(r["Topic"] || "").trim(), exam: String(r["Exam"] || "").trim(),
           negativeMarking: String(r["NegativeMarking(Y/N)"] || "").trim().toUpperCase() === "Y",
           negativeValue: Number(r["NegativeValue"]) || 0,
           timerMinutes: isMock ? (Number(r["TimerMinutes"]) || null) : undefined,
