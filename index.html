@@ -2634,6 +2634,22 @@ async function saveSyllabusTree() {
 }
 
 // ---------------- BLOG ADMIN ----------------
+// ---------------- Vercel Deploy Hook ----------------
+// Triggers a fresh Vercel deployment, which reruns the build command
+// (generate-blog-pages.mjs) so newly published/edited/deleted blog posts get
+// their static, SEO-crawlable pages regenerated automatically — no manual
+// redeploy needed. `no-cors` is used because we don't need to read the
+// response, just fire the request; Vercel's endpoint doesn't need to send
+// CORS headers back for that to work.
+const DEPLOY_HOOK_URL = "https://api.vercel.com/v1/integrations/deploy/prj_XDZ58vKFyw21E28AYvsAjIxJPpZx/YshgR1iqID";
+async function triggerRedeploy() {
+  try {
+    await fetch(DEPLOY_HOOK_URL, { method: "POST", mode: "no-cors" });
+  } catch (err) {
+    console.error("Could not trigger a redeploy:", err);
+  }
+}
+
 let editingBlogId = null;
 async function renderBlogAdmin() {
   editingBlogId = null;
@@ -2695,7 +2711,8 @@ async function renderBlogAdmin() {
         payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
         await db.collection("blogPosts").add(payload);
       }
-      showToast("Post saved!");
+      showToast("Post saved! Your site is redeploying now — the live blog page usually updates within a minute or two.");
+      triggerRedeploy();
       renderBlogAdmin();
     } catch (err) { showToast("Error: " + err.message); btn.disabled = false; btn.textContent = "Publish post"; }
   });
@@ -2764,7 +2781,8 @@ async function renderBlogAdmin() {
         $all(".js-del", rowsWrap).forEach(b => b.addEventListener("click", async () => {
           if (!confirm("Delete this post?")) return;
           await db.collection("blogPosts").doc(b.dataset.id).delete();
-          showToast("Post deleted.");
+          showToast("Post deleted — site is redeploying to remove its page too.");
+          triggerRedeploy();
           renderBlogAdmin();
         }));
       }
