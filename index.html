@@ -4,7 +4,31 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 <title>PSC FutureU — Kerala PSC Study Companion</title>
-<meta name="description" content="Video classes, downloadable notes, quizzes and full-length mock tests for Kerala PSC exam preparation." />
+<meta name="description" content="Video classes, downloadable notes, quizzes and full-length mock tests for Kerala PSC exam preparation — LDC, LGS, Degree Level and more." />
+<!-- TODO: replace pscfutureu.com below with your real domain once it's finalised -->
+<link rel="canonical" href="https://pscfutureu.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="PSC FutureU" />
+<meta property="og:title" content="PSC FutureU — Kerala PSC Study Companion" />
+<meta property="og:description" content="Video classes, downloadable notes, quizzes and full-length mock tests for Kerala PSC exam preparation." />
+<meta property="og:url" content="https://pscfutureu.com/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="PSC FutureU — Kerala PSC Study Companion" />
+<meta name="twitter:description" content="Video classes, downloadable notes, quizzes and full-length mock tests for Kerala PSC exam preparation." />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "PSC FutureU",
+  "description": "Kerala PSC coaching institute offering video classes, study notes, quizzes and mock tests for LDC, LGS, Degree Level and other PSC exams.",
+  "url": "https://pscfutureu.com/",
+  "areaServed": { "@type": "State", "name": "Kerala" },
+  "location": [
+    { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Karuvarakundu", "addressRegion": "Kerala", "addressCountry": "IN" } },
+    { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Tuvvur", "addressRegion": "Kerala", "addressCountry": "IN" } }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -64,7 +88,7 @@ img { max-width: 100%; display: block; }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 19px; }
 .brand-mark { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(155deg, var(--color-primary), var(--color-primary-dark)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 14px; }
 .site-nav { display: flex; align-items: center; gap: 4px; }
-.site-nav a { padding: 9px 14px; border-radius: 999px; font-weight: 600; font-size: 14.5px; color: var(--color-ink-soft); transition: background .15s, color .15s; }
+.site-nav a { padding: 9px 14px; border-radius: 999px; font-weight: 600; font-size: 14.5px; color: var(--color-ink-soft); transition: background .15s, color .15s; white-space: nowrap; flex-shrink: 0; }
 .site-nav a:hover { background: var(--color-primary-soft); color: var(--color-primary-dark); }
 .site-nav a.active { background: var(--color-primary); color: #fff; }
 .nav-toggle { display: none; background: none; border: none; font-size: 22px; }
@@ -160,6 +184,25 @@ img { max-width: 100%; display: block; }
 .modal-card input:focus, .modal-card select:focus, .modal-card textarea:focus { border-color: var(--color-primary); }
 
 .quiz-shell { max-width: 720px; margin: 0 auto; }
+.quiz-shell.with-palette { max-width: 960px; display: grid; grid-template-columns: 1fr 220px; gap: 24px; align-items: start; }
+.q-palette { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 16px; position: sticky; top: calc(var(--header-h) + 16px); }
+.q-palette h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; font-family: var(--font-mono); color: var(--color-ink-soft); margin-bottom: 10px; }
+.q-palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 14px; }
+.q-palette-grid button { aspect-ratio: 1; border-radius: 8px; border: 1.5px solid var(--color-border); background: var(--color-bg); font-family: var(--font-mono); font-weight: 700; font-size: 12.5px; color: var(--color-ink-soft); cursor: pointer; }
+.q-palette-grid button.answered { background: var(--color-success-soft); border-color: var(--color-success); color: var(--color-success); }
+.q-palette-grid button.current { border-color: var(--color-primary); border-width: 2.5px; color: var(--color-primary); }
+.q-palette-legend { display: flex; flex-direction: column; gap: 6px; font-size: 11.5px; color: var(--color-ink-soft); margin-bottom: 14px; }
+.q-palette-legend span { display: flex; align-items: center; gap: 6px; }
+.q-palette-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1.5px solid var(--color-border); }
+.q-palette-legend i.answered { background: var(--color-success-soft); border-color: var(--color-success); }
+.q-palette-legend i.current { border-color: var(--color-primary); border-width: 2.5px; }
+.q-palette-toggle { display: none; }
+@media (max-width: 780px) {
+  .quiz-shell.with-palette { display: block; }
+  .q-palette { position: fixed; top: 0; right: 0; bottom: 0; width: 280px; max-width: 82vw; z-index: 220; border-radius: 0; transform: translateX(100%); transition: transform .2s ease; overflow-y: auto; }
+  .q-palette.show { transform: translateX(0); box-shadow: var(--shadow-lg); }
+  .q-palette-toggle { display: inline-flex; }
+}
 .quiz-meta-bar { display: flex; justify-content: space-between; align-items: center; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 20px; }
 .timer-pill { font-family: var(--font-mono); font-weight: 700; font-size: 16px; background: var(--color-primary-soft); color: var(--color-primary-dark); padding: 6px 14px; border-radius: 999px; }
 .timer-pill.low { background: var(--color-danger-soft); color: var(--color-danger); }
@@ -216,9 +259,9 @@ img { max-width: 100%; display: block; }
 .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: var(--color-ink); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 13.5px; font-weight: 600; z-index: 300; box-shadow: var(--shadow-md); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(-8px); }
 
-.site-footer { background: var(--color-primary-dark); color: #dfe9ee; padding: 40px 0 26px; margin-top: 40px; }
-.site-footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-.site-footer small { opacity: .7; }
+.site-footer { background: var(--color-primary-dark); color: #dfe9ee; padding: 22px 0; margin-top: 40px; text-align: center; }
+.site-footer small { opacity: .8; }
+.site-footer a { text-decoration: underline; }
 
 .tab-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--color-surface); border-top: 1px solid var(--color-border); z-index: 60; padding: 6px 4px; }
 .tab-bar-inner { display: flex; justify-content: space-around; }
@@ -268,11 +311,17 @@ img { max-width: 100%; display: block; }
   .admin-side { display: flex; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--color-border); }
   .admin-side a { white-space: nowrap; }
 }
-@media (max-width: 620px) {
-  .site-nav { position: fixed; top: var(--header-h); left: 0; right: 0; background: var(--color-surface); flex-direction: column; align-items: stretch; padding: 10px; border-bottom: 1px solid var(--color-border); display: none; gap: 2px; }
-  .site-nav.open { display: flex; }
-  .site-nav a { text-align: center; }
+@media (max-width: 960px) {
+  /* Above ~620px this used to try squeezing the full horizontal nav into a
+     shrinking header — fine on desktop, but on tablets and in-app webviews
+     (which often report a mid-range width, not a phone-narrow one) the nav
+     would overflow and misalign the header. Simplest fix: hand off to the
+     account drawer for the whole 0–960px range instead of a middle ground
+     that neither the horizontal nav nor the phone layout handled well. */
+  .site-nav { display: none; }
   .nav-toggle { display: block; }
+}
+@media (max-width: 620px) {
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .tab-bar { display: block; }
   body { padding-bottom: 70px; }
@@ -447,6 +496,8 @@ img { max-width: 100%; display: block; }
     <a href="/mocks" data-nav="mocks">⏱️ Mock Tests</a>
     <a href="/syllabus" data-nav="syllabus">✅ Syllabus Tracker</a>
     <a href="/dashboard" data-nav="dashboard">👤 Dashboard</a>
+    <a href="/blog" data-nav="blog">📰 Blog</a>
+    <a href="/about" data-nav="about">ℹ️ About Us</a>
     <a href="/admin" data-nav="admin" id="drawerAdminLink" style="display:none;">🛠️ Admin</a>
   </nav>
   <div class="drawer-foot" id="drawerFoot"></div>
@@ -521,6 +572,16 @@ img { max-width: 100%; display: block; }
     <div class="section container" id="syllabusContainer"></div>
   </section>
 
+  <!-- BLOG -->
+  <section class="page" id="page-blog">
+    <div class="section container" id="blogContainer"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="page" id="page-about">
+    <div class="section container" id="aboutContainer"></div>
+  </section>
+
   <!-- DASHBOARD -->
   <section class="page" id="page-dashboard">
     <div class="section container" id="dashboardContainer"></div>
@@ -533,13 +594,9 @@ img { max-width: 100%; display: block; }
 
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer" id="siteFooter">
   <div class="container">
-    <div>
-      <div class="brand" style="color:#fff;"><span class="brand-mark">PU</span> PSC FutureU</div>
-      <small>Built for Kerala PSC aspirants, by Kerala PSC aspirants.</small>
-    </div>
-    <small>© 2026 PSC FutureU</small>
+    <small>© 2026 PSC FutureU · <a href="/about" data-nav="about" style="color:inherit;">About Us</a></small>
   </div>
 </footer>
 
@@ -577,9 +634,8 @@ img { max-width: 100%; display: block; }
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<!-- Chart.js (admin analytics) + SheetJS (Excel bulk import/export) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<!-- Chart.js + SheetJS load on demand (see ensureChartJs/ensureXLSX) — no reason
+     every student's page load should pay for libraries only the admin uses. -->
 
 <script>
 // ============================================================
@@ -782,6 +838,21 @@ function renderDrawerAccount(detail) {
 // ROUTER
 // ============================================================
 const cache = { playlists: null, pdfs: null, quizzes: null, mocks: null };
+
+// Loads a CDN script once and caches the in-flight promise, so admin tabs
+// that need Chart.js/SheetJS multiple times in a session don't re-fetch it.
+const _scriptPromises = {};
+function loadScriptOnce(src) {
+  if (_scriptPromises[src]) return _scriptPromises[src];
+  _scriptPromises[src] = new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = src; s.onload = resolve; s.onerror = () => reject(new Error("Failed to load " + src));
+    document.head.appendChild(s);
+  });
+  return _scriptPromises[src];
+}
+async function ensureChartJs() { if (!window.Chart) await loadScriptOnce("https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"); }
+async function ensureXLSX() { if (!window.XLSX) await loadScriptOnce("https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"); }
 let activeTest = null;
 
 // Routes are real URL paths (domain.com/admin, domain.com/videos, ...),
@@ -792,7 +863,7 @@ let activeTest = null;
 // NOTE: for a direct browser visit / refresh on a path like /admin to work
 // (rather than 404), the host needs to rewrite all paths to this file
 // (a standard single-page-app rewrite). See firebase.json.
-const ROUTES = ["home", "videos", "pdfs", "quizzes", "mocks", "syllabus", "dashboard", "admin"];
+const ROUTES = ["home", "videos", "pdfs", "quizzes", "mocks", "syllabus", "blog", "about", "dashboard", "admin"];
 
 function currentRoute() {
   let path = location.pathname.replace(/^\/+|\/+$/g, "");
@@ -814,6 +885,7 @@ function router() {
   (document.getElementById("page-" + route) || document.getElementById("page-home")).classList.add("active");
   $all("[data-nav]").forEach(a => a.classList.toggle("active", a.dataset.nav === route));
   $all(".tab-bar [data-tab]").forEach(a => a.classList.toggle("active", a.dataset.tab === route));
+  const footer = $("#siteFooter"); if (footer) footer.style.display = route === "home" ? "" : "none";
   const nav = $(".site-nav"); if (nav) nav.classList.remove("open");
   window.scrollTo(0, 0);
   loadPage(route);
@@ -842,13 +914,28 @@ document.addEventListener("click", (e) => {
   navigateTo(href);
 });
 
+const PAGE_TITLES = {
+  home: "PSC FutureU — Kerala PSC Study Companion",
+  videos: "Video Classes | PSC FutureU",
+  pdfs: "Study Notes | PSC FutureU",
+  quizzes: "Quizzes | PSC FutureU",
+  mocks: "Mock Tests | PSC FutureU",
+  syllabus: "Syllabus Tracker | PSC FutureU",
+  blog: "Blog | PSC FutureU",
+  about: "About Us | PSC FutureU",
+  dashboard: "Dashboard | PSC FutureU",
+  admin: "Admin | PSC FutureU"
+};
 function loadPage(route) {
+  document.title = PAGE_TITLES[route] || PAGE_TITLES.home;
   if (route === "home") loadHome();
   else if (route === "videos") loadVideos();
   else if (route === "pdfs") loadPdfs();
   else if (route === "quizzes") loadQuizzes();
   else if (route === "mocks") loadMocks();
   else if (route === "syllabus") loadSyllabusPage();
+  else if (route === "blog") loadBlogPage();
+  else if (route === "about") loadAboutPage();
   else if (route === "dashboard") loadDashboard();
   else if (route === "admin") renderAdminPage(lastAuthDetail);
 }
@@ -1237,6 +1324,7 @@ function renderListHead(container, { title, onBack, onSearch }) {
 // Drives a two-level "folder" page: category grid first, then a searchable
 // long list view of everything inside a chosen category. Used for Videos,
 // PDFs, Quizzes and Mock Tests so they all share the same boxy-card pattern.
+const LIST_PAGE_SIZE = 20;
 function initCategoryPage(container, items, opts) {
   const groups = groupBySubject(items);
 
@@ -1250,14 +1338,20 @@ function initCategoryPage(container, items, opts) {
   function showList(cat) {
     container.innerHTML = `<div id="listHeadWrap"></div>`;
     const headWrap = $("#listHeadWrap", container);
-    renderListHead(headWrap, { title: cat, onBack: showCategories, onSearch: (q) => renderRows(q) });
+    let visibleCount = LIST_PAGE_SIZE;
+    renderListHead(headWrap, { title: cat, onBack: showCategories, onSearch: (q) => { visibleCount = LIST_PAGE_SIZE; renderRows(q); } });
     renderRows("");
     function renderRows(query) {
       const body = $("#catListBody", container);
-      const list = (groups[cat] || []).filter(i => !query || i.title.toLowerCase().includes(query));
-      if (!list.length) { body.innerHTML = emptyStateHTML(opts.icon, "Nothing matches your search."); return; }
+      const fullList = (groups[cat] || []).filter(i => !query || i.title.toLowerCase().includes(query));
+      if (!fullList.length) { body.innerHTML = emptyStateHTML(opts.icon, "Nothing matches your search."); return; }
+      const list = fullList.slice(0, visibleCount);
       body.innerHTML = list.map(opts.renderRow).join("");
       opts.wireRows(body, list);
+      if (fullList.length > visibleCount) {
+        body.insertAdjacentHTML("beforeend", `<button type="button" class="btn btn-ghost btn-block js-load-more" style="margin-top:6px;">Load more (${fullList.length - visibleCount} left)</button>`);
+        $(".js-load-more", body).addEventListener("click", () => { visibleCount += LIST_PAGE_SIZE; renderRows(query); });
+      }
     }
   }
 
@@ -1345,29 +1439,49 @@ function renderTestRuntime() {
   const { doc, index, answers } = activeTest;
   const q = doc.questions[index];
   const pct = Math.round(((index) / doc.questions.length) * 100);
+  const answeredCount = answers.filter(a => a !== null && a !== undefined).length;
+
   el.innerHTML = `
-    <div class="quiz-shell">
-      <div class="quiz-meta-bar">
-        <div><strong>${doc.title}</strong><div class="muted" style="font-size:12.5px;">Question ${index + 1} of ${doc.questions.length}</div></div>
-        ${activeTest.timeLeft !== null ? `<span class="timer-pill" id="testTimerPill">${Math.floor(activeTest.timeLeft / 60)}:${String(activeTest.timeLeft % 60).padStart(2, "0")}</span>` : ""}
-      </div>
-      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <div class="q-block">
-        <span class="q-num">Q${index + 1}</span>
-        <h3>${q.q}</h3>
-        <div id="optionsWrap">
-          ${q.options.map((opt, i) => `
-            <label class="option-row ${answers[index] === i ? "selected" : ""}" data-idx="${i}">
-              <input type="radio" name="opt" ${answers[index] === i ? "checked" : ""} />
-              <span>${opt}</span>
-            </label>`).join("")}
+    <div class="quiz-shell with-palette">
+      <div>
+        <div class="quiz-meta-bar">
+          <div><strong>${doc.title}</strong><div class="muted" style="font-size:12.5px;">Question ${index + 1} of ${doc.questions.length} · ${answeredCount} answered</div></div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            ${activeTest.timeLeft !== null ? `<span class="timer-pill" id="testTimerPill">${Math.floor(activeTest.timeLeft / 60)}:${String(activeTest.timeLeft % 60).padStart(2, "0")}</span>` : ""}
+            <button class="btn btn-ghost btn-sm q-palette-toggle" id="paletteToggleBtn">☰ Questions</button>
+          </div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+        <div class="q-block">
+          <span class="q-num">Q${index + 1}</span>
+          <h3>${q.q}</h3>
+          <div id="optionsWrap">
+            ${q.options.map((opt, i) => `
+              <label class="option-row ${answers[index] === i ? "selected" : ""}" data-idx="${i}">
+                <input type="radio" name="opt" ${answers[index] === i ? "checked" : ""} />
+                <span>${opt}</span>
+              </label>`).join("")}
+          </div>
+        </div>
+        <div class="quiz-nav-actions">
+          <button class="btn btn-ghost" id="testPrevBtn" ${index === 0 ? "disabled" : ""}>← Previous</button>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-accent" id="testSubmitBtn">Submit Test</button>
+            ${index < doc.questions.length - 1 ? `<button class="btn btn-primary" id="testNextBtn">Next →</button>` : ""}
+          </div>
         </div>
       </div>
-      <div class="quiz-nav-actions">
-        <button class="btn btn-ghost" id="testPrevBtn" ${index === 0 ? "disabled" : ""}>← Previous</button>
-        ${index === doc.questions.length - 1
-          ? `<button class="btn btn-accent" id="testSubmitBtn">Submit Test</button>`
-          : `<button class="btn btn-primary" id="testNextBtn">Next →</button>`}
+      <div class="q-palette" id="qPalette">
+        <h4>Jump to a question</h4>
+        <div class="q-palette-grid">
+          ${doc.questions.map((_, i) => `<button type="button" class="js-jump-q ${answers[i] !== null && answers[i] !== undefined ? "answered" : ""} ${i === index ? "current" : ""}" data-i="${i}">${i + 1}</button>`).join("")}
+        </div>
+        <div class="q-palette-legend">
+          <span><i class="answered"></i> Answered (${answeredCount})</span>
+          <span><i></i> Not answered (${doc.questions.length - answeredCount})</span>
+          <span><i class="current"></i> Current question</span>
+        </div>
+        <button class="btn btn-accent btn-block btn-sm" id="paletteSubmitBtn">Submit Test</button>
       </div>
     </div>`;
 
@@ -1377,7 +1491,16 @@ function renderTestRuntime() {
   }));
   const prevBtn = $("#testPrevBtn"); if (prevBtn) prevBtn.addEventListener("click", () => { activeTest.index--; renderTestRuntime(); });
   const nextBtn = $("#testNextBtn"); if (nextBtn) nextBtn.addEventListener("click", () => { activeTest.index++; renderTestRuntime(); });
-  const submitBtn = $("#testSubmitBtn"); if (submitBtn) submitBtn.addEventListener("click", () => submitTest(false));
+  $all(".js-jump-q", el).forEach(b => b.addEventListener("click", () => { activeTest.index = Number(b.dataset.i); renderTestRuntime(); $("#qPalette").classList.remove("show"); }));
+  const toggleBtn = $("#paletteToggleBtn"); if (toggleBtn) toggleBtn.addEventListener("click", () => $("#qPalette").classList.toggle("show"));
+
+  const confirmAndSubmit = () => {
+    const unanswered = doc.questions.length - answeredCount;
+    if (unanswered > 0 && !confirm(`You still have ${unanswered} unanswered question${unanswered === 1 ? "" : "s"}. Submit anyway?`)) return;
+    submitTest(false);
+  };
+  $("#testSubmitBtn").addEventListener("click", confirmAndSubmit);
+  $("#paletteSubmitBtn").addEventListener("click", confirmAndSubmit);
 }
 
 async function submitTest(autoSubmitted) {
@@ -1456,6 +1579,76 @@ function renderTestResult(autoSubmitted, stats) {
         }).join("")}
       </div>`).join("");
   });
+}
+
+// ---------------- BLOG ----------------
+// Firestore: blogPosts/{id} — { title, slug, excerpt, content, author, publishedAt, createdAt, updatedAt }
+// Content is stored as plain paragraphs (one per blank-line-separated block) —
+// simple, safe (no HTML injection risk from admin input), good enough for
+// exam-update / syllabus-change / announcement style posts.
+function paragraphsToHTML(text) {
+  return (text || "").split(/\n\s*\n/).map(p => `<p style="margin-bottom:14px; line-height:1.75;">${escapeHTML(p.trim()).replace(/\n/g, "<br>")}</p>`).join("");
+}
+function escapeHTML(s) { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+function slugify(s) { return (s || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""); }
+
+async function loadBlogPage() {
+  const container = $("#blogContainer");
+  container.innerHTML = `<div class="skel-grid">${"<div class=\"skel skel-card\"></div>".repeat(3)}</div>`;
+  const snap = await db.collection("blogPosts").orderBy("publishedAt", "desc").get();
+  const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+  const params = new URLSearchParams(location.search);
+  const wantedSlug = params.get("post");
+  const wanted = wantedSlug && posts.find(p => p.slug === wantedSlug);
+  wanted ? renderBlogPost(container, wanted, posts) : renderBlogList(container, posts);
+}
+
+function renderBlogList(container, posts) {
+  if (!posts.length) {
+    container.innerHTML = `
+      <div class="section-head"><div><span class="eyebrow">News & updates</span><h2>Blog</h2><p>Exam notifications, syllabus changes, and study tips.</p></div></div>
+      ${emptyStateHTML("📰", "No posts yet — check back soon.")}`;
+    return;
+  }
+  container.innerHTML = `
+    <div class="section-head"><div><span class="eyebrow">News & updates</span><h2>Blog</h2><p>Exam notifications, syllabus changes, and study tips.</p></div></div>
+    <div class="grid grid-2" id="blogListGrid"></div>`;
+  $("#blogListGrid").innerHTML = posts.map(p => `
+    <div class="card js-open-post" data-slug="${p.slug}" style="cursor:pointer;"><div class="card-body">
+      <div class="card-tags"><span class="tag">${fmtDate(p.publishedAt)}</span></div>
+      <h3>${p.title}</h3>
+      <p class="muted">${p.excerpt || (p.content || "").slice(0, 140) + "…"}</p>
+    </div></div>`).join("");
+  $all(".js-open-post", container).forEach(el => el.addEventListener("click", () => {
+    history.pushState({}, "", `/blog?post=${encodeURIComponent(el.dataset.slug)}`);
+    loadBlogPage();
+  }));
+}
+
+function renderBlogPost(container, post, allPosts) {
+  container.innerHTML = `
+    <div class="crumb-bar"><button class="js-back">← All posts</button></div>
+    <div class="form-card" style="max-width:760px;">
+      <span class="eyebrow">${fmtDate(post.publishedAt)}${post.author ? ` · ${post.author}` : ""}</span>
+      <h2 style="margin:8px 0 18px;">${post.title}</h2>
+      ${paragraphsToHTML(post.content)}
+    </div>`;
+  $(".js-back", container).addEventListener("click", () => {
+    history.pushState({}, "", "/blog");
+    renderBlogList(container, allPosts);
+  });
+}
+
+// ---------------- ABOUT ----------------
+function loadAboutPage() {
+  $("#aboutContainer").innerHTML = `
+    <div class="section-head"><div><span class="eyebrow">Who we are</span><h2>About PSC FutureU</h2></div></div>
+    <div class="form-card" style="max-width:720px;">
+      <p style="margin-bottom:14px; line-height:1.7;">PSC FutureU is a Kerala PSC coaching institute helping students prepare for LDC, LGS, Degree Level and other PSC exams — with branches in <strong>Karuvarakundu</strong> and <strong>Tuvvur</strong>, Kerala.</p>
+      <p style="margin-bottom:14px; line-height:1.7;">This site is our free companion app for students — video classes, downloadable notes, quizzes, full-length mock tests, and a syllabus tracker to help you see exactly how much of your exam you've covered.</p>
+      <p style="margin-bottom:0; line-height:1.7;">Have a question, or want to visit one of our centres? Reach out to us directly — <a href="https://wa.me/" target="_blank" rel="noopener" style="color:var(--color-primary); font-weight:700;">message us on WhatsApp</a> or drop by either branch.</p>
+    </div>`;
 }
 
 // ---------------- DASHBOARD ----------------
@@ -1732,6 +1925,7 @@ function renderAdminShell() {
         <a href="#" data-tab="quizzes">📝 Quizzes</a>
         <a href="#" data-tab="mocks">⏱️ Mock Tests</a>
         <a href="#" data-tab="syllabus">✅ Syllabus</a>
+        <a href="#" data-tab="blog">📰 Blog</a>
         <a href="#" data-tab="users">👥 Signed-up Users</a>
       </aside>
       <div class="admin-main" id="adminContent"></div>
@@ -1753,6 +1947,7 @@ function adminNavigate(tab) {
   else if (tab === "quizzes") renderTestAdmin("quizzes");
   else if (tab === "mocks") renderTestAdmin("mocks");
   else if (tab === "syllabus") renderSyllabusAdmin();
+  else if (tab === "blog") renderBlogAdmin();
   else if (tab === "users") renderUsersAdmin();
 }
 
@@ -1760,6 +1955,24 @@ function fmtDate(ts) {
   if (!ts) return "—";
   const d = ts.toDate ? ts.toDate() : new Date(ts);
   return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+}
+
+// Renders an admin table body in batches of 40 with a "Load more" row, so
+// tables with hundreds/thousands of rows don't all paint into the DOM at
+// once. `docs` is already fully fetched — this only paces the rendering.
+const ADMIN_TABLE_BATCH = 40;
+function renderBatchedAdminTable(tbody, docs, { row, wire, colspan }) {
+  let visible = ADMIN_TABLE_BATCH;
+  function draw() {
+    const slice = docs.slice(0, visible);
+    tbody.innerHTML = slice.map(row).join("");
+    wire(tbody, slice);
+    if (docs.length > visible) {
+      tbody.insertAdjacentHTML("beforeend", `<tr><td colspan="${colspan}" style="text-align:center;"><button type="button" class="btn btn-ghost btn-sm js-admin-load-more">Load more (${docs.length - visible} left)</button></td></tr>`);
+      $(".js-admin-load-more", tbody).addEventListener("click", () => { visible += ADMIN_TABLE_BATCH; draw(); });
+    }
+  }
+  draw();
 }
 
 async function renderOverview() {
@@ -1788,6 +2001,7 @@ async function renderOverview() {
       <div class="chart-card" style="grid-column:1/-1;"><h3>Sign-ups over the last 8 weeks</h3><canvas id="chartSignups"></canvas></div>
     </div>`;
 
+  await ensureChartJs();
   renderOverviewCharts(users.docs.map(d => d.data()), { pl: pl.size, pdfs: pdfs.size, qz: qz.size, mk: mk.size });
 }
 
@@ -1995,6 +2209,91 @@ async function saveSyllabusTree() {
     showToast("Syllabus saved!");
     renderSyllabusAdmin();
   } catch (err) { showToast("Error: " + err.message); btn.disabled = false; btn.textContent = "Save syllabus"; }
+}
+
+// ---------------- BLOG ADMIN ----------------
+let editingBlogId = null;
+async function renderBlogAdmin() {
+  editingBlogId = null;
+  const el = $("#adminContent");
+  el.innerHTML = `<p class="muted">Loading…</p>`;
+  const snap = await db.collection("blogPosts").orderBy("publishedAt", "desc").get();
+  const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+  el.innerHTML = `
+    <h2>Blog</h2>
+    <p class="muted" style="margin-bottom:16px;">Posts here also help the site show up in search for informational queries (syllabus updates, exam notifications, study tips) — the more useful, specific posts you publish, the better.</p>
+    <div class="form-card">
+      <h3 style="margin-bottom:14px;" id="blogFormTitle">Write a new post</h3>
+      <form id="blogForm">
+        <div class="form-row"><label>Title</label><input type="text" id="blog-title" required placeholder="e.g. Kerala PSC LDC 2026 — Notification Details" /></div>
+        <div class="form-row"><label>Short excerpt (shown in the post list)</label><input type="text" id="blog-excerpt" placeholder="One line summary" /></div>
+        <div class="form-row"><label>Content (leave a blank line between paragraphs)</label><textarea id="blog-content" rows="10" required></textarea></div>
+        <div class="form-row"><label>Author (optional)</label><input type="text" id="blog-author" placeholder="e.g. FutureU Team" /></div>
+        <div style="display:flex; gap:10px;">
+          <button type="submit" class="btn btn-primary" id="blogSubmitBtn">Publish post</button>
+          <button type="button" class="btn btn-ghost" id="blogCancelEditBtn" style="display:none;">Cancel edit</button>
+        </div>
+      </form>
+    </div>
+    <h3 style="margin-bottom:10px;">Published posts</h3>
+    <table class="admin-table"><thead><tr><th>Title</th><th>Published</th><th></th></tr></thead>
+    <tbody id="blogTableBody"></tbody></table>`;
+
+  const form = $("#blogForm");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = $("#blogSubmitBtn");
+    btn.disabled = true; btn.textContent = "Saving…";
+    const title = $("#blog-title").value.trim();
+    const payload = {
+      title, excerpt: $("#blog-excerpt").value.trim(), content: $("#blog-content").value.trim(),
+      author: $("#blog-author").value.trim(), updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    try {
+      if (editingBlogId) {
+        await db.collection("blogPosts").doc(editingBlogId).set(payload, { merge: true });
+      } else {
+        payload.slug = slugify(title) + "-" + Date.now().toString(36).slice(-4);
+        payload.publishedAt = firebase.firestore.FieldValue.serverTimestamp();
+        payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        await db.collection("blogPosts").add(payload);
+      }
+      showToast("Post saved!");
+      renderBlogAdmin();
+    } catch (err) { showToast("Error: " + err.message); btn.disabled = false; btn.textContent = "Publish post"; }
+  });
+  $("#blogCancelEditBtn").addEventListener("click", () => renderBlogAdmin());
+
+  renderBlogTable(posts);
+
+  function renderBlogTable(posts) {
+    const tbody = $("#blogTableBody");
+    if (!posts.length) { tbody.innerHTML = `<tr><td colspan="3">No posts yet.</td></tr>`; return; }
+    renderBatchedAdminTable(tbody, posts, {
+      row: p => `<tr><td>${p.title}</td><td class="updated-note">${fmtDate(p.publishedAt)}</td>
+        <td class="actions"><button class="icon-btn js-edit" data-id="${p.id}">Edit</button><button class="icon-btn danger js-del" data-id="${p.id}">Delete</button></td></tr>`,
+      colspan: 3,
+      wire: (rowsWrap) => {
+        $all(".js-edit", rowsWrap).forEach(b => b.addEventListener("click", () => {
+          const p = posts.find(x => x.id === b.dataset.id);
+          editingBlogId = p.id;
+          $("#blog-title").value = p.title || ""; $("#blog-excerpt").value = p.excerpt || "";
+          $("#blog-content").value = p.content || ""; $("#blog-author").value = p.author || "";
+          $("#blogFormTitle").textContent = "Edit post";
+          $("#blogSubmitBtn").textContent = "Update post";
+          $("#blogCancelEditBtn").style.display = "";
+          $("#blogForm").scrollIntoView({ behavior: "smooth" });
+        }));
+        $all(".js-del", rowsWrap).forEach(b => b.addEventListener("click", async () => {
+          if (!confirm("Delete this post?")) return;
+          await db.collection("blogPosts").doc(b.dataset.id).delete();
+          showToast("Post deleted.");
+          renderBlogAdmin();
+        }));
+      }
+    });
+  }
 }
 
 // ---------------- USERS ADMIN ----------------
@@ -2301,22 +2600,27 @@ async function loadPlaylistTable() {
   const snap = await db.collection("playlists").orderBy("createdAt", "desc").get();
   if (snap.empty) { tbody.innerHTML = `<tr><td colspan="6">No playlists yet.</td></tr>`; return; }
   const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  tbody.innerHTML = docs.map(p => `<tr>
+  renderBatchedAdminTable(tbody, docs, {
+    row: p => `<tr>
       <td>${p.title}</td><td>${p.subject || "—"}</td><td>${p.exam || "—"}</td><td>${(p.videos || []).length}</td>
       <td class="updated-note">${fmtDate(p.updatedAt || p.createdAt)}</td>
       <td class="actions">
         <button class="icon-btn js-edit" data-id="${p.id}">Edit</button>
         <button class="icon-btn danger js-del" data-id="${p.id}">Delete</button>
       </td>
-    </tr>`).join("");
-  $all(".js-edit", tbody).forEach(b => b.addEventListener("click", () => window._plFillFormForEdit(docs.find(p => p.id === b.dataset.id))));
-  $all(".js-del", tbody).forEach(b => b.addEventListener("click", async () => {
-    if (!confirm("Delete this playlist?")) return;
-    await db.collection("playlists").doc(b.dataset.id).delete();
-    invalidateCollectionCache("playlists");
-    showToast("Playlist deleted.");
-    loadPlaylistTable();
-  }));
+    </tr>`,
+    colspan: 6,
+    wire: (rowsWrap) => {
+      $all(".js-edit", rowsWrap).forEach(b => b.addEventListener("click", () => window._plFillFormForEdit(docs.find(p => p.id === b.dataset.id))));
+      $all(".js-del", rowsWrap).forEach(b => b.addEventListener("click", async () => {
+        if (!confirm("Delete this playlist?")) return;
+        await db.collection("playlists").doc(b.dataset.id).delete();
+        invalidateCollectionCache("playlists");
+        showToast("Playlist deleted.");
+        loadPlaylistTable();
+      }));
+    }
+  });
 }
 
 let editingPdfId = null;
@@ -2400,22 +2704,27 @@ async function loadPdfTable() {
   const snap = await db.collection("pdfs").orderBy("createdAt", "desc").get();
   if (snap.empty) { tbody.innerHTML = `<tr><td colspan="5">No notes yet.</td></tr>`; return; }
   const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  tbody.innerHTML = docs.map(p => `<tr>
+  renderBatchedAdminTable(tbody, docs, {
+    row: p => `<tr>
       <td>${p.title}</td><td>${p.subject || "—"}</td><td>${p.exam || "—"}</td>
       <td class="updated-note">${fmtDate(p.updatedAt || p.createdAt)}</td>
       <td class="actions">
         <button class="icon-btn js-edit" data-id="${p.id}">Edit</button>
         <button class="icon-btn danger js-del" data-id="${p.id}">Delete</button>
       </td>
-    </tr>`).join("");
-  $all(".js-edit", tbody).forEach(b => b.addEventListener("click", () => window._pdfFillFormForEdit(docs.find(p => p.id === b.dataset.id))));
-  $all(".js-del", tbody).forEach(b => b.addEventListener("click", async () => {
-    if (!confirm("Delete this note?")) return;
-    await db.collection("pdfs").doc(b.dataset.id).delete();
-    invalidateCollectionCache("pdfs");
-    showToast("Note deleted.");
-    loadPdfTable();
-  }));
+    </tr>`,
+    colspan: 5,
+    wire: (rowsWrap) => {
+      $all(".js-edit", rowsWrap).forEach(b => b.addEventListener("click", () => window._pdfFillFormForEdit(docs.find(p => p.id === b.dataset.id))));
+      $all(".js-del", rowsWrap).forEach(b => b.addEventListener("click", async () => {
+        if (!confirm("Delete this note?")) return;
+        await db.collection("pdfs").doc(b.dataset.id).delete();
+        invalidateCollectionCache("pdfs");
+        showToast("Note deleted.");
+        loadPdfTable();
+      }));
+    }
+  });
 }
 
 let editingTestId = null;
@@ -2560,7 +2869,8 @@ async function renderTestAdmin(collectionName) {
 }
 
 // ---- Bulk import (Excel) ----
-function downloadBulkTemplate(isMock) {
+async function downloadBulkTemplate(isMock) {
+  await ensureXLSX();
   const rows = [
     { Title: isMock ? "LDC Full Mock — Set 1" : "Indian History — Quiz 1", Subject: "History", Exam: "LDC",
       ...(isMock ? { TimerMinutes: 90 } : {}), "NegativeMarking(Y/N)": "N", NegativeValue: "",
@@ -2580,6 +2890,7 @@ async function handleBulkImportFile(file, collectionName, isMock) {
   const statusEl = $("#bulkStatus");
   statusEl.textContent = "Reading file…";
   try {
+    await ensureXLSX();
     const buf = await file.arrayBuffer();
     const wb = XLSX.read(buf, { type: "array" });
     const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -2635,22 +2946,27 @@ async function loadTestTable(collectionName) {
   const snap = await db.collection(collectionName).orderBy("createdAt", "desc").get();
   if (snap.empty) { tbody.innerHTML = `<tr><td colspan="6">Nothing added yet.</td></tr>`; return; }
   const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-  tbody.innerHTML = docs.map(t => `<tr>
+  renderBatchedAdminTable(tbody, docs, {
+    row: t => `<tr>
       <td>${t.title}</td><td>${t.subject || "—"}</td><td>${t.exam || "—"}</td><td>${(t.questions || []).length}</td>
       <td class="updated-note">${fmtDate(t.updatedAt || t.createdAt)}</td>
       <td class="actions">
         <button class="icon-btn js-edit" data-id="${t.id}">Edit</button>
         <button class="icon-btn danger js-del" data-id="${t.id}">Delete</button>
       </td>
-    </tr>`).join("");
-  $all(".js-edit", tbody).forEach(b => b.addEventListener("click", () => window._testFillFormForEdit(docs.find(t => t.id === b.dataset.id))));
-  $all(".js-del", tbody).forEach(b => b.addEventListener("click", async () => {
-    if (!confirm("Delete this?")) return;
-    await db.collection(collectionName).doc(b.dataset.id).delete();
-    invalidateCollectionCache(collectionName);
-    showToast("Deleted.");
-    loadTestTable(collectionName);
-  }));
+    </tr>`,
+    colspan: 6,
+    wire: (rowsWrap) => {
+      $all(".js-edit", rowsWrap).forEach(b => b.addEventListener("click", () => window._testFillFormForEdit(docs.find(t => t.id === b.dataset.id))));
+      $all(".js-del", rowsWrap).forEach(b => b.addEventListener("click", async () => {
+        if (!confirm("Delete this?")) return;
+        await db.collection(collectionName).doc(b.dataset.id).delete();
+        invalidateCollectionCache(collectionName);
+        showToast("Deleted.");
+        loadTestTable(collectionName);
+      }));
+    }
+  });
 }
 </script>
 </body>
