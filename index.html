@@ -10,7 +10,7 @@
 <link rel="manifest" href="/manifest.json" />
 <link rel="icon" href="/icon-192.png" type="image/png" />
 <link rel="apple-touch-icon" href="/icon-192.png" />
-<meta name="theme-color" content="#0B4F6C" />
+<meta name="theme-color" content="#379777" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="PSC FutureU" />
@@ -43,14 +43,14 @@
    DESIGN TOKENS
    ============================================================ */
 :root {
-  --color-primary: #0B4F6C;
-  --color-primary-dark: #083B52;
-  --color-primary-soft: #E4EEF2;
-  --color-accent: #E8A33D;
-  --color-accent-dark: #C9860F;
-  --color-bg: #F5F7FA;
+  --color-primary: #379777;
+  --color-primary-dark: #276C55;
+  --color-primary-soft: #EBF4F1;
+  --color-accent: #F4CE14;
+  --color-accent-dark: #AF940E;
+  --color-bg: #F5F7F6;
   --color-surface: #FFFFFF;
-  --color-ink: #142433;
+  --color-ink: #16181A;
   --color-ink-soft: #55697A;
   --color-border: #E1E6EB;
   --color-success: #2E7D5B;
@@ -93,7 +93,8 @@ img { max-width: 100%; display: block; }
 .site-header { position: sticky; top: 0; z-index: 50; background: rgba(245, 247, 250, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-border); height: var(--header-h); }
 .site-header .container { height: 100%; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 19px; }
-.brand-mark { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(155deg, var(--color-primary), var(--color-primary-dark)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 14px; }
+.brand-logo { height: 22px; width: auto; display: block; }
+.brand-tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: var(--color-primary-dark); background: var(--color-primary-soft); padding: 3px 8px; border-radius: 999px; letter-spacing: 0.06em; }
 .site-nav { display: flex; align-items: center; gap: 4px; }
 .site-nav a { padding: 9px 14px; border-radius: 999px; font-weight: 600; font-size: 14.5px; color: var(--color-ink-soft); transition: background .15s, color .15s; white-space: nowrap; flex-shrink: 0; }
 .site-nav a:hover { background: var(--color-primary-soft); color: var(--color-primary-dark); }
@@ -142,6 +143,9 @@ img { max-width: 100%; display: block; }
 .admit-card-body span { font-size: 12.5px; color: var(--color-ink-soft); }
 .admit-perforation { display: flex; gap: 3px; margin-top: 20px; }
 .admit-perforation i { flex: 1; height: 18px; background: repeating-linear-gradient(90deg, var(--color-border) 0 2px, transparent 2px 6px); border-radius: 2px; }
+.pass-features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; width: 100%; }
+.pass-features span { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--color-ink); }
+.pass-features .icon { color: var(--color-primary); flex-shrink: 0; }
 
 /* ---------------- Sections ---------------- */
 .section { padding: 52px 0; }
@@ -160,7 +164,7 @@ img { max-width: 100%; display: block; }
 .card-body { padding: 16px 18px 18px; }
 .card-tags { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
 .tag { font-size: 11px; font-weight: 700; letter-spacing: .03em; padding: 3px 9px; border-radius: 999px; background: var(--color-primary-soft); color: var(--color-primary-dark); }
-.tag.gold { background: #FBF0DA; color: var(--color-accent-dark); }
+.tag.gold { background: #FDF7DB; color: var(--color-accent-dark); }
 .card h3 { font-size: 16.5px; margin-bottom: 4px; }
 .card .muted { font-size: 13px; color: var(--color-ink-soft); margin: 0; }
 .video-thumb { position: relative; aspect-ratio: 16/9; background: var(--color-ink); }
@@ -297,7 +301,7 @@ img { max-width: 100%; display: block; }
 .greet-stats div span { font-size: 11.5px; color: #cfe0e7; }
 
 .suggest-card { display: flex; align-items: center; gap: 16px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 12px; }
-.suggest-card .qc-icon { width: 44px; height: 44px; border-radius: 12px; background: #FBF0DA; color: var(--color-accent-dark); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.suggest-card .qc-icon { width: 44px; height: 44px; border-radius: 12px; background: #FDF7DB; color: var(--color-accent-dark); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
 .suggest-card .grow { flex: 1; min-width: 0; }
 .suggest-card h4 { font-size: 15px; margin-bottom: 2px; }
 .suggest-card p { margin: 0; font-size: 12.5px; }
@@ -463,6 +467,35 @@ img { max-width: 100%; display: block; }
 .syl-editor-subtopic-row input { flex: 1; }
 .syl-editor-remove { background: var(--color-danger-soft); color: var(--color-danger); border: none; border-radius: 6px; width: 26px; height: 26px; font-weight: 700; flex-shrink: 0; cursor: pointer; }
 .syl-editor-add-sm { background: none; border: 1.5px dashed var(--color-border); border-radius: 8px; padding: 6px 12px; font-size: 12.5px; font-weight: 700; color: var(--color-primary); cursor: pointer; }
+.icon { display: inline-block; width: 1em; height: 1em; vertical-align: -0.15em; background-color: currentColor; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; flex-shrink: 0; }
+.icon-video { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlnb24gcG9pbnRzPSIyMyA3IDE2IDEyIDIzIDE3IDIzIDciLz48cmVjdCB4PSIxIiB5PSI1IiB3aWR0aD0iMTUiIGhlaWdodD0iMTQiIHJ4PSIyIiByeT0iMiIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlnb24gcG9pbnRzPSIyMyA3IDE2IDEyIDIzIDE3IDIzIDciLz48cmVjdCB4PSIxIiB5PSI1IiB3aWR0aD0iMTUiIGhlaWdodD0iMTQiIHJ4PSIyIiByeT0iMiIvPjwvc3ZnPg=="); }
+.icon-document { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE0IDJINmEyIDIgMCAwIDAtMiAydjE2YTIgMiAwIDAgMCAyIDJoMTJhMiAyIDAgMCAwIDItMlY4eiIvPjxwb2x5bGluZSBwb2ludHM9IjE0IDIgMTQgOCAyMCA4Ii8+PGxpbmUgeDE9IjE2IiB5MT0iMTMiIHgyPSI4IiB5Mj0iMTMiLz48bGluZSB4MT0iMTYiIHkxPSIxNyIgeDI9IjgiIHkyPSIxNyIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE0IDJINmEyIDIgMCAwIDAtMiAydjE2YTIgMiAwIDAgMCAyIDJoMTJhMiAyIDAgMCAwIDItMlY4eiIvPjxwb2x5bGluZSBwb2ludHM9IjE0IDIgMTQgOCAyMCA4Ii8+PGxpbmUgeDE9IjE2IiB5MT0iMTMiIHgyPSI4IiB5Mj0iMTMiLz48bGluZSB4MT0iMTYiIHkxPSIxNyIgeDI9IjgiIHkyPSIxNyIvPjwvc3ZnPg=="); }
+.icon-edit { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDIwaDkiLz48cGF0aCBkPSJNMTYuNSAzLjVhMi4xMjEgMi4xMjEgMCAwIDEgMyAzTDcgMTlsLTQgMSAxLTRaIi8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDIwaDkiLz48cGF0aCBkPSJNMTYuNSAzLjVhMi4xMjEgMi4xMjEgMCAwIDEgMyAzTDcgMTlsLTQgMSAxLTRaIi8+PC9zdmc+"); }
+.icon-clock { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cG9seWxpbmUgcG9pbnRzPSIxMiA2IDEyIDEyIDE2IDE0Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48cG9seWxpbmUgcG9pbnRzPSIxMiA2IDEyIDEyIDE2IDE0Ii8+PC9zdmc+"); }
+.icon-x { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjE4IiB5MT0iNiIgeDI9IjYiIHkyPSIxOCIvPjxsaW5lIHgxPSI2IiB5MT0iNiIgeDI9IjE4IiB5Mj0iMTgiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjE4IiB5MT0iNiIgeDI9IjYiIHkyPSIxOCIvPjxsaW5lIHgxPSI2IiB5MT0iNiIgeDI9IjE4IiB5Mj0iMTgiLz48L3N2Zz4="); }
+.icon-check-circle { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIyIDExLjA4VjEyYTEwIDEwIDAgMSAxLTUuOTMtOS4xNCIvPjxwb2x5bGluZSBwb2ludHM9IjIyIDQgMTIgMTQuMDEgOSAxMS4wMSIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIyIDExLjA4VjEyYTEwIDEwIDAgMSAxLTUuOTMtOS4xNCIvPjxwb2x5bGluZSBwb2ludHM9IjIyIDQgMTIgMTQuMDEgOSAxMS4wMSIvPjwvc3ZnPg=="); }
+.icon-download { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIxIDE1djRhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTQiLz48cG9seWxpbmUgcG9pbnRzPSI3IDEwIDEyIDE1IDE3IDEwIi8+PGxpbmUgeDE9IjEyIiB5MT0iMTUiIHgyPSIxMiIgeTI9IjMiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIxIDE1djRhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTQiLz48cG9seWxpbmUgcG9pbnRzPSI3IDEwIDEyIDE1IDE3IDEwIi8+PGxpbmUgeDE9IjEyIiB5MT0iMTUiIHgyPSIxMiIgeTI9IjMiLz48L3N2Zz4="); }
+.icon-upload { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIxIDE1djRhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTQiLz48cG9seWxpbmUgcG9pbnRzPSIxNyA4IDEyIDMgNyA4Ii8+PGxpbmUgeDE9IjEyIiB5MT0iMyIgeDI9IjEyIiB5Mj0iMTUiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIxIDE1djRhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTQiLz48cG9seWxpbmUgcG9pbnRzPSIxNyA4IDEyIDMgNyA4Ii8+PGxpbmUgeDE9IjEyIiB5MT0iMyIgeDI9IjEyIiB5Mj0iMTUiLz48L3N2Zz4="); }
+.icon-star-filled { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwMCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWdvbiBwb2ludHM9IjEyIDIgMTUuMDkgOC4yNiAyMiA5LjI3IDE3IDE0LjE0IDE4LjE4IDIxLjAyIDEyIDE3Ljc3IDUuODIgMjEuMDIgNyAxNC4xNCAyIDkuMjcgOC45MSA4LjI2IDEyIDIiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwMCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWdvbiBwb2ludHM9IjEyIDIgMTUuMDkgOC4yNiAyMiA5LjI3IDE3IDE0LjE0IDE4LjE4IDIxLjAyIDEyIDE3Ljc3IDUuODIgMjEuMDIgNyAxNC4xNCAyIDkuMjcgOC45MSA4LjI2IDEyIDIiLz48L3N2Zz4="); }
+.icon-star-outline { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlnb24gcG9pbnRzPSIxMiAyIDE1LjA5IDguMjYgMjIgOS4yNyAxNyAxNC4xNCAxOC4xOCAyMS4wMiAxMiAxNy43NyA1LjgyIDIxLjAyIDcgMTQuMTQgMiA5LjI3IDguOTEgOC4yNiAxMiAyIi8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlnb24gcG9pbnRzPSIxMiAyIDE1LjA5IDguMjYgMjIgOS4yNyAxNyAxNC4xNCAxOC4xOCAyMS4wMiAxMiAxNy43NyA1LjgyIDIxLjAyIDcgMTQuMTQgMiA5LjI3IDguOTEgOC4yNiAxMiAyIi8+PC9zdmc+"); }
+.icon-book-open { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIgM2g2YTQgNCAwIDAgMSA0IDR2MTRhMyAzIDAgMCAwLTMtM0gyeiIvPjxwYXRoIGQ9Ik0yMiAzaC02YTQgNCAwIDAgMC00IDR2MTRhMyAzIDAgMCAxIDMtM2g3eiIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIgM2g2YTQgNCAwIDAgMSA0IDR2MTRhMyAzIDAgMCAwLTMtM0gyeiIvPjxwYXRoIGQ9Ik0yMiAzaC02YTQgNCAwIDAgMC00IDR2MTRhMyAzIDAgMCAxIDMtM2g3eiIvPjwvc3ZnPg=="); }
+.icon-bar-chart { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjE4IiB5MT0iMjAiIHgyPSIxOCIgeTI9IjEwIi8+PGxpbmUgeDE9IjEyIiB5MT0iMjAiIHgyPSIxMiIgeTI9IjQiLz48bGluZSB4MT0iNiIgeTE9IjIwIiB4Mj0iNiIgeTI9IjE0Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjE4IiB5MT0iMjAiIHgyPSIxOCIgeTI9IjEwIi8+PGxpbmUgeDE9IjEyIiB5MT0iMjAiIHgyPSIxMiIgeTI9IjQiLz48bGluZSB4MT0iNiIgeTE9IjIwIiB4Mj0iNiIgeTI9IjE0Ii8+PC9zdmc+"); }
+.icon-menu { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjMiIHkxPSIxMiIgeDI9IjIxIiB5Mj0iMTIiLz48bGluZSB4MT0iMyIgeTE9IjYiIHgyPSIyMSIgeTI9IjYiLz48bGluZSB4MT0iMyIgeTE9IjE4IiB4Mj0iMjEiIHkyPSIxOCIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjMiIHkxPSIxMiIgeDI9IjIxIiB5Mj0iMTIiLz48bGluZSB4MT0iMyIgeTE9IjYiIHgyPSIyMSIgeTI9IjYiLz48bGluZSB4MT0iMyIgeTE9IjE4IiB4Mj0iMjEiIHkyPSIxOCIvPjwvc3ZnPg=="); }
+.icon-home { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTMgOWw5LTcgOSA3djExYTIgMiAwIDAgMS0yIDJINWEyIDIgMCAwIDEtMi0yeiIvPjxwb2x5bGluZSBwb2ludHM9IjkgMjIgOSAxMiAxNSAxMiAxNSAyMiIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTMgOWw5LTcgOSA3djExYTIgMiAwIDAgMS0yIDJINWEyIDIgMCAwIDEtMi0yeiIvPjxwb2x5bGluZSBwb2ludHM9IjkgMjIgOSAxMiAxNSAxMiAxNSAyMiIvPjwvc3ZnPg=="); }
+.icon-user { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIwIDIxdi0yYTQgNCAwIDAgMC00LTRIOGE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIwIDIxdi0yYTQgNCAwIDAgMC00LTRIOGE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4="); }
+.icon-flame { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTguNSAxNC41QTIuNSAyLjUgMCAwIDAgMTEgMTJjMC0xLjM4LS41LTItMS0zLTEuMDcyLTIuMTQzLS4yMjQtNC4wNTQgMi02IC41IDIuNSAyIDQuOSA0IDYuNSAyIDEuNiAzIDMuNSAzIDUuNWE3IDcgMCAxIDEtMTQgMGMwLTEuMTUzLjQzMy0yLjI5NCAxLTNhMi41IDIuNSAwIDAgMCAyLjUgMi41eiIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTguNSAxNC41QTIuNSAyLjUgMCAwIDAgMTEgMTJjMC0xLjM4LS41LTItMS0zLTEuMDcyLTIuMTQzLS4yMjQtNC4wNTQgMi02IC41IDIuNSAyIDQuOSA0IDYuNSAyIDEuNiAzIDMuNSAzIDUuNWE3IDcgMCAxIDEtMTQgMGMwLTEuMTUzLjQzMy0yLjI5NCAxLTNhMi41IDIuNSAwIDAgMCAyLjUgMi41eiIvPjwvc3ZnPg=="); }
+.icon-target { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI2Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI2Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMiIvPjwvc3ZnPg=="); }
+.icon-lock { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMTEiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxMSIgcng9IjIiIHJ5PSIyIi8+PHBhdGggZD0iTTcgMTFWN2E1IDUgMCAwIDEgMTAgMHY0Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMTEiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxMSIgcng9IjIiIHJ5PSIyIi8+PHBhdGggZD0iTTcgMTFWN2E1IDUgMCAwIDEgMTAgMHY0Ii8+PC9zdmc+"); }
+.icon-zap { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlnb24gcG9pbnRzPSIxMyAyIDMgMTQgMTIgMTQgMTEgMjIgMjEgMTAgMTIgMTAgMTMgMiIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlnb24gcG9pbnRzPSIxMyAyIDMgMTQgMTIgMTQgMTEgMjIgMjEgMTAgMTIgMTAgMTMgMiIvPjwvc3ZnPg=="); }
+.icon-tool { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE0LjcgNi4zYTEgMSAwIDAgMCAwIDEuNGwxLjYgMS42YTEgMSAwIDAgMCAxLjQgMGwzLjc3LTMuNzdhNiA2IDAgMCAxLTcuOTQgNy45NGwtNi45MSA2LjkxYTIuMTIgMi4xMiAwIDAgMS0zLTNsNi45MS02LjkxYTYgNiAwIDAgMSA3Ljk0LTcuOTRsLTMuNzYgMy43NnoiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE0LjcgNi4zYTEgMSAwIDAgMCAwIDEuNGwxLjYgMS42YTEgMSAwIDAgMCAxLjQgMGwzLjc3LTMuNzdhNiA2IDAgMCAxLTcuOTQgNy45NGwtNi45MSA2LjkxYTIuMTIgMi4xMiAwIDAgMS0zLTNsNi45MS02LjkxYTYgNiAwIDAgMSA3Ljk0LTcuOTRsLTMuNzYgMy43NnoiLz48L3N2Zz4="); }
+.icon-log-out { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTkgMjFINWEyIDIgMCAwIDEtMi0yVjVhMiAyIDAgMCAxIDItMmg0Ii8+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTcgMjEgMTIgMTYgNyIvPjxsaW5lIHgxPSIyMSIgeTE9IjEyIiB4Mj0iOSIgeTI9IjEyIi8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTkgMjFINWEyIDIgMCAwIDEtMi0yVjVhMiAyIDAgMCAxIDItMmg0Ii8+PHBvbHlsaW5lIHBvaW50cz0iMTYgMTcgMjEgMTIgMTYgNyIvPjxsaW5lIHgxPSIyMSIgeTE9IjEyIiB4Mj0iOSIgeTI9IjEyIi8+PC9zdmc+"); }
+.icon-refresh { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iMjMgNCAyMyAxMCAxNyAxMCIvPjxwb2x5bGluZSBwb2ludHM9IjEgMjAgMSAxNCA3IDE0Ii8+PHBhdGggZD0iTTMuNTEgOWE5IDkgMCAwIDEgMTQuODUtMy4zNkwyMyAxME0xIDE0bDQuNjQgNC4zNkE5IDkgMCAwIDAgMjAuNDkgMTUiLz48L3N2Zz4="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iMjMgNCAyMyAxMCAxNyAxMCIvPjxwb2x5bGluZSBwb2ludHM9IjEgMjAgMSAxNCA3IDE0Ii8+PHBhdGggZD0iTTMuNTEgOWE5IDkgMCAwIDEgMTQuODUtMy4zNkwyMyAxME0xIDE0bDQuNjQgNC4zNkE5IDkgMCAwIDAgMjAuNDkgMTUiLz48L3N2Zz4="); }
+.icon-alert-triangle { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEwLjI5IDMuODZMMS44MiAxOGEyIDIgMCAwIDAgMS43MSAzaDE2Ljk0YTIgMiAwIDAgMCAxLjcxLTNMMTMuNzEgMy44NmEyIDIgMCAwIDAtMy40MiAweiIvPjxsaW5lIHgxPSIxMiIgeTE9IjkiIHgyPSIxMiIgeTI9IjEzIi8+PGxpbmUgeDE9IjEyIiB5MT0iMTciIHgyPSIxMi4wMSIgeTI9IjE3Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEwLjI5IDMuODZMMS44MiAxOGEyIDIgMCAwIDAgMS43MSAzaDE2Ljk0YTIgMiAwIDAgMCAxLjcxLTNMMTMuNzEgMy44NmEyIDIgMCAwIDAtMy40MiAweiIvPjxsaW5lIHgxPSIxMiIgeTE9IjkiIHgyPSIxMiIgeTI9IjEzIi8+PGxpbmUgeDE9IjEyIiB5MT0iMTciIHgyPSIxMi4wMSIgeTI9IjE3Ii8+PC9zdmc+"); }
+.icon-award { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSI3Ii8+PHBvbHlsaW5lIHBvaW50cz0iOC4yMSAxMy44OSA3IDIzIDEyIDIwIDE3IDIzIDE1Ljc5IDEzLjg4Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSI4IiByPSI3Ii8+PHBvbHlsaW5lIHBvaW50cz0iOC4yMSAxMy44OSA3IDIzIDEyIDIwIDE3IDIzIDE1Ljc5IDEzLjg4Ii8+PC9zdmc+"); }
+.icon-slash { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48bGluZSB4MT0iNC45MyIgeTE9IjQuOTMiIHgyPSIxOS4wNyIgeTI9IjE5LjA3Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48bGluZSB4MT0iNC45MyIgeTE9IjQuOTMiIHgyPSIxOS4wNyIgeTI9IjE5LjA3Ii8+PC9zdmc+"); }
+.icon-users { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE3IDIxdi0yYTQgNCAwIDAgMC00LTRINWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSI5IiBjeT0iNyIgcj0iNCIvPjxwYXRoIGQ9Ik0yMyAyMXYtMmE0IDQgMCAwIDAtMy0zLjg3Ii8+PHBhdGggZD0iTTE2IDMuMTNhNCA0IDAgMCAxIDAgNy43NSIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTE3IDIxdi0yYTQgNCAwIDAgMC00LTRINWE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSI5IiBjeT0iNyIgcj0iNCIvPjxwYXRoIGQ9Ik0yMyAyMXYtMmE0IDQgMCAwIDAtMy0zLjg3Ii8+PHBhdGggZD0iTTE2IDMuMTNhNCA0IDAgMCAxIDAgNy43NSIvPjwvc3ZnPg=="); }
+.icon-info { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48bGluZSB4MT0iMTIiIHkxPSIxNiIgeDI9IjEyIiB5Mj0iMTIiLz48bGluZSB4MT0iMTIiIHkxPSI4IiB4Mj0iMTIuMDEiIHkyPSI4Ii8+PC9zdmc+"); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz48bGluZSB4MT0iMTIiIHkxPSIxNiIgeDI9IjEyIiB5Mj0iMTIiLz48bGluZSB4MT0iMTIiIHkxPSI4IiB4Mj0iMTIuMDEiIHkyPSI4Ii8+PC9zdmc+"); }
+.icon-plus { -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjEyIiB5MT0iNSIgeDI9IjEyIiB5Mj0iMTkiLz48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiIvPjwvc3ZnPg=="); mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGxpbmUgeDE9IjEyIiB5MT0iNSIgeDI9IjEyIiB5Mj0iMTkiLz48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiIvPjwvc3ZnPg=="); }
 </style>
 </head>
 <body>
@@ -470,7 +503,7 @@ img { max-width: 100%; display: block; }
 <header class="site-header">
   <div class="container">
     <div style="display:flex; align-items:center; gap:28px;">
-      <a href="/" class="brand"><span class="brand-mark">PU</span> PSC FutureU</a>
+      <a href="/" class="brand"><img src="/logo-wordmark.png" alt="FutureU" class="brand-logo" /><span class="brand-tag">PSC</span></a>
       <nav class="site-nav">
         <a href="/" data-nav="home">Home</a>
         <a href="/videos" data-nav="videos">Video Classes</a>
@@ -483,8 +516,8 @@ img { max-width: 100%; display: block; }
       </nav>
     </div>
     <div class="header-actions">
-      <button class="btn btn-ghost btn-sm" id="pwaInstallBtn" style="display:none;">⬇ Install App</button>
-      <button class="nav-toggle js-drawer-open" aria-label="Menu">☰</button>
+      <button class="btn btn-ghost btn-sm" id="pwaInstallBtn" style="display:none;"><i class=&quot;icon icon-download&quot;></i> Install App</button>
+      <button class="nav-toggle js-drawer-open" aria-label="Menu"><i class=&quot;icon icon-menu&quot;></i></button>
       <div id="authArea"></div>
     </div>
   </div>
@@ -494,23 +527,23 @@ img { max-width: 100%; display: block; }
 <div class="drawer-overlay js-drawer-close" id="drawerOverlay"></div>
 <aside class="drawer" id="accountDrawer">
   <div class="drawer-head">
-    <div class="brand" style="font-size:16px;"><span class="brand-mark" style="width:28px;height:28px;font-size:12px;">PU</span> PSC FutureU</div>
-    <button class="drawer-close js-drawer-close" aria-label="Close menu">✕</button>
+    <div class="brand" style="font-size:16px;"><img src="/logo-wordmark.png" alt="FutureU" class="brand-logo" style="height:19px;" /><span class="brand-tag">PSC</span></div>
+    <button class="drawer-close js-drawer-close" aria-label="Close menu"><i class=&quot;icon icon-x&quot;></i></button>
   </div>
   <div id="drawerProfile"></div>
   <nav class="drawer-nav">
-    <a href="/" data-nav="home">🏠 Home</a>
-    <a href="/videos" data-nav="videos">🎬 Video Classes</a>
-    <a href="/pdfs" data-nav="pdfs">📄 Study Notes</a>
-    <a href="/quizzes" data-nav="quizzes">📝 Quizzes</a>
-    <a href="/mocks" data-nav="mocks">⏱️ Mock Tests</a>
-    <a href="/syllabus" data-nav="syllabus">✅ Syllabus Tracker</a>
-    <a href="/bookmarks" data-nav="bookmarks">★ My Bookmarks</a>
-    <a href="#" id="drawerInstallLink" style="display:none;">⬇ Install App</a>
-    <a href="/dashboard" data-nav="dashboard">👤 Dashboard</a>
-    <a href="/blog" data-nav="blog">📰 Blog</a>
-    <a href="/about" data-nav="about">ℹ️ About Us</a>
-    <a href="/admin" data-nav="admin" id="drawerAdminLink" style="display:none;">🛠️ Admin</a>
+    <a href="/" data-nav="home"><i class=&quot;icon icon-home&quot;></i> Home</a>
+    <a href="/videos" data-nav="videos"><i class=&quot;icon icon-video&quot;></i> Video Classes</a>
+    <a href="/pdfs" data-nav="pdfs"><i class=&quot;icon icon-document&quot;></i> Study Notes</a>
+    <a href="/quizzes" data-nav="quizzes"><i class=&quot;icon icon-edit&quot;></i> Quizzes</a>
+    <a href="/mocks" data-nav="mocks"><i class=&quot;icon icon-clock&quot;></i> Mock Tests</a>
+    <a href="/syllabus" data-nav="syllabus"><i class=&quot;icon icon-check-circle&quot;></i> Syllabus Tracker</a>
+    <a href="/bookmarks" data-nav="bookmarks"><i class=&quot;icon icon-star-filled&quot;></i> My Bookmarks</a>
+    <a href="#" id="drawerInstallLink" style="display:none;"><i class=&quot;icon icon-download&quot;></i> Install App</a>
+    <a href="/dashboard" data-nav="dashboard"><i class=&quot;icon icon-user&quot;></i> Dashboard</a>
+    <a href="/blog" data-nav="blog"><i class=&quot;icon icon-book-open&quot;></i> Blog</a>
+    <a href="/about" data-nav="about"><i class=&quot;icon icon-info&quot;></i> About Us</a>
+    <a href="/admin" data-nav="admin" id="drawerAdminLink" style="display:none;"><i class=&quot;icon icon-tool&quot;></i> Admin</a>
   </nav>
   <div class="drawer-foot" id="drawerFoot"></div>
 </aside>
@@ -538,15 +571,16 @@ img { max-width: 100%; display: block; }
         </div>
         <div class="admit-card">
           <div class="admit-card-top">
-            <span class="tag">STUDY ADMIT CARD</span>
-            <span class="tag" style="background:#FBF0DA;color:#C9860F;">2026</span>
+            <span class="tag">FUTUREU PASS</span>
+            <span class="tag" style="background:#FDF7DB;color:#AF940E;">FREE</span>
           </div>
-          <div class="admit-card-body">
-            <div class="admit-photo"></div>
-            <div>
-              <h4>Your PSC Journey</h4>
-              <span>Roll No. PFU/2026/0001</span><br/>
-              <span>Candidate · Kerala</span>
+          <div class="admit-card-body" style="flex-direction:column; align-items:flex-start; gap:12px;">
+            <h4 style="margin:0;">Everything you need, one plan</h4>
+            <div class="pass-features">
+              <span><i class=&quot;icon icon-video&quot;></i> Video Classes</span>
+              <span><i class=&quot;icon icon-document&quot;></i> Study Notes</span>
+              <span><i class=&quot;icon icon-edit&quot;></i> Quizzes</span>
+              <span><i class=&quot;icon icon-clock&quot;></i> Mock Tests</span>
             </div>
           </div>
           <div class="admit-perforation"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -619,12 +653,12 @@ img { max-width: 100%; display: block; }
 
 <nav class="tab-bar">
   <div class="tab-bar-inner">
-    <a href="/" data-tab="home"><span class="ic">🏠</span>Home</a>
-    <a href="/videos" data-tab="videos"><span class="ic">🎬</span>Videos</a>
-    <a href="/pdfs" data-tab="pdfs"><span class="ic">📄</span>Notes</a>
-    <a href="/quizzes" data-tab="quizzes"><span class="ic">📝</span>Quiz</a>
-    <a href="/syllabus" data-tab="syllabus"><span class="ic">✅</span>Syllabus</a>
-    <a href="/dashboard" data-tab="dashboard"><span class="ic">👤</span>Profile</a>
+    <a href="/" data-tab="home"><span class="ic"><i class=&quot;icon icon-home&quot;></i></span>Home</a>
+    <a href="/videos" data-tab="videos"><span class="ic"><i class=&quot;icon icon-video&quot;></i></span>Videos</a>
+    <a href="/pdfs" data-tab="pdfs"><span class="ic"><i class=&quot;icon icon-document&quot;></i></span>Notes</a>
+    <a href="/quizzes" data-tab="quizzes"><span class="ic"><i class=&quot;icon icon-edit&quot;></i></span>Quiz</a>
+    <a href="/syllabus" data-tab="syllabus"><span class="ic"><i class=&quot;icon icon-check-circle&quot;></i></span>Syllabus</a>
+    <a href="/dashboard" data-tab="dashboard"><span class="ic"><i class=&quot;icon icon-user&quot;></i></span>Profile</a>
   </div>
 </nav>
 
@@ -636,7 +670,7 @@ img { max-width: 100%; display: block; }
         <span class="modal-eyebrow" id="videoModalTag">PLAYLIST</span>
         <h2 id="videoModalTitle" style="font-size:19px;"></h2>
       </div>
-      <button class="icon-btn js-close-video-modal" aria-label="Close">✕</button>
+      <button class="icon-btn js-close-video-modal" aria-label="Close"><i class=&quot;icon icon-x&quot;></i></button>
     </div>
     <div style="aspect-ratio:16/9; border-radius:12px; overflow:hidden; margin:14px 0; background:#000;">
       <iframe id="videoModalFrame" width="100%" height="100%" src="" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -655,6 +689,35 @@ img { max-width: 100%; display: block; }
      every student's page load should pay for libraries only the admin uses. -->
 
 <script>
+const ICONS = {
+  "video": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"23 7 16 12 23 17 23 7\"/><rect x=\"1\" y=\"5\" width=\"15\" height=\"14\" rx=\"2\" ry=\"2\"/></svg>",
+  "document": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><polyline points=\"14 2 14 8 20 8\"/><line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\"/><line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\"/></svg>",
+  "edit": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 20h9\"/><path d=\"M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z\"/></svg>",
+  "clock": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/></svg>",
+  "x": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"/></svg>",
+  "check-circle": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"/><polyline points=\"22 4 12 14.01 9 11.01\"/></svg>",
+  "download": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"7 10 12 15 17 10\"/><line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"/></svg>",
+  "upload": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"17 8 12 3 7 8\"/><line x1=\"12\" y1=\"3\" x2=\"12\" y2=\"15\"/></svg>",
+  "star-filled": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/></svg>",
+  "star-outline": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/></svg>",
+  "book-open": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"/><path d=\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"/></svg>",
+  "bar-chart": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"18\" y1=\"20\" x2=\"18\" y2=\"10\"/><line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"4\"/><line x1=\"6\" y1=\"20\" x2=\"6\" y2=\"14\"/></svg>",
+  "menu": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"3\" y1=\"12\" x2=\"21\" y2=\"12\"/><line x1=\"3\" y1=\"6\" x2=\"21\" y2=\"6\"/><line x1=\"3\" y1=\"18\" x2=\"21\" y2=\"18\"/></svg>",
+  "home": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/></svg>",
+  "user": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg>",
+  "flame": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\"/></svg>",
+  "target": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><circle cx=\"12\" cy=\"12\" r=\"6\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/></svg>",
+  "lock": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"11\" width=\"18\" height=\"11\" rx=\"2\" ry=\"2\"/><path d=\"M7 11V7a5 5 0 0 1 10 0v4\"/></svg>",
+  "zap": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"/></svg>",
+  "tool": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"/></svg>",
+  "log-out": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><polyline points=\"16 17 21 12 16 7\"/><line x1=\"21\" y1=\"12\" x2=\"9\" y2=\"12\"/></svg>",
+  "refresh": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"23 4 23 10 17 10\"/><polyline points=\"1 20 1 14 7 14\"/><path d=\"M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15\"/></svg>",
+  "alert-triangle": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/></svg>",
+  "award": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8\" r=\"7\"/><polyline points=\"8.21 13.89 7 23 12 20 17 23 15.79 13.88\"/></svg>",
+  "slash": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"4.93\" y1=\"4.93\" x2=\"19.07\" y2=\"19.07\"/></svg>",
+  "users": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M23 21v-2a4 4 0 0 0-3-3.87\"/><path d=\"M16 3.13a4 4 0 0 1 0 7.75\"/></svg>",
+  "plus": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg>",
+};
 // ============================================================
 // FIREBASE CONFIG
 // ============================================================
@@ -927,7 +990,7 @@ function renderDrawerAccount(detail) {
         <p class="muted">${detail.user.email}</p>
       </div>
     </div>`;
-  foot.innerHTML = `<button class="btn-danger-ghost js-signout">⎋ Sign out</button>`;
+  foot.innerHTML = `<button class="btn-danger-ghost js-signout"><i class=&quot;icon icon-log-out&quot;></i> Sign out</button>`;
   $(".js-signout", foot).addEventListener("click", () => { closeDrawer(); signOutUser(); });
 }
 
@@ -1147,12 +1210,12 @@ function getYouTubeId(url) {
 // ---------------- HOME ----------------
 function quickAccessGridHTML(pl, pdfs, qz, mk) {
   const items = [
-    { href: "/videos", icon: "🎬", cls: "c1", title: "Video Classes", sub: `${pl.length} playlist${pl.length === 1 ? "" : "s"}` },
-    { href: "/pdfs", icon: "📄", cls: "c2", title: "Study Notes", sub: `${pdfs.length} note${pdfs.length === 1 ? "" : "s"}` },
-    { href: "/quizzes", icon: "📝", cls: "c3", title: "Quizzes", sub: `${qz.length} quiz${qz.length === 1 ? "" : "zes"}` },
-    { href: "/mocks", icon: "⏱️", cls: "c4", title: "Mock Tests", sub: `${mk.length} test${mk.length === 1 ? "" : "s"}` },
-    { href: "/syllabus", icon: "✅", cls: "c6", title: "Syllabus Tracker", sub: "Track what's covered" },
-    { href: "/dashboard", icon: "📊", cls: "c5", title: "Dashboard", sub: "Your progress & rank" }
+    { href: "/videos", icon: "<i class=&quot;icon icon-video&quot;></i>", cls: "c1", title: "Video Classes", sub: `${pl.length} playlist${pl.length === 1 ? "" : "s"}` },
+    { href: "/pdfs", icon: "<i class=&quot;icon icon-document&quot;></i>", cls: "c2", title: "Study Notes", sub: `${pdfs.length} note${pdfs.length === 1 ? "" : "s"}` },
+    { href: "/quizzes", icon: "<i class=&quot;icon icon-edit&quot;></i>", cls: "c3", title: "Quizzes", sub: `${qz.length} quiz${qz.length === 1 ? "" : "zes"}` },
+    { href: "/mocks", icon: "<i class=&quot;icon icon-clock&quot;></i>", cls: "c4", title: "Mock Tests", sub: `${mk.length} test${mk.length === 1 ? "" : "s"}` },
+    { href: "/syllabus", icon: "<i class=&quot;icon icon-check-circle&quot;></i>", cls: "c6", title: "Syllabus Tracker", sub: "Track what's covered" },
+    { href: "/dashboard", icon: "<i class=&quot;icon icon-bar-chart&quot;></i>", cls: "c5", title: "Dashboard", sub: "Your progress & rank" }
   ];
   return `
     <div class="section-head">
@@ -1202,14 +1265,14 @@ async function loadHome() {
   container.innerHTML = `
     <div class="greet-banner">
       <div>
-        <h2>Welcome back, ${firstName} 👋</h2>
+        <h2>Welcome back, ${firstName}</h2>
         <p>${summary.attempted ? "Here's where you stand and what to study next." : "Take your first quiz or mock test to start tracking your progress."}</p>
       </div>
       <div class="greet-stats">
         <div><strong>${summary.attempted}</strong><span>Tests attempted</span></div>
         <div><strong>${summary.attempted ? summary.accuracy + "%" : "—"}</strong><span>Accuracy</span></div>
         <div><strong>${summary.rank ? "#" + summary.rank : "—"}</strong><span>${summary.rank ? "Rank of " + summary.rankOf : "Not ranked yet"}</span></div>
-        <div><strong>${summary.streak ? "🔥 " + summary.streak : "—"}</strong><span>Day streak</span></div>
+        <div><strong>${summary.streak ? "<i class=&quot;icon icon-flame&quot;></i> " + summary.streak : "—"}</strong><span>Day streak</span></div>
         <div><strong>${summary.syllabusPct !== null ? summary.syllabusPct + "%" : "—"}</strong><span>${summary.syllabusGoalName ? summary.syllabusGoalName + " covered" : "Syllabus covered"}</span></div>
       </div>
     </div>
@@ -1308,12 +1371,12 @@ function suggestionsHTML(summary) {
   if (!summary.attempted) {
     return `
       <div class="suggest-card">
-        <div class="qc-icon">📝</div>
+        <div class="qc-icon"><i class=&quot;icon icon-edit&quot;></i></div>
         <div class="grow"><h4>Take your first quiz</h4><p class="muted">Quick subject-wise quizzes are the fastest way to see where you stand.</p></div>
         <a href="/quizzes" class="btn btn-primary btn-sm">Start a quiz</a>
       </div>
       <div class="suggest-card">
-        <div class="qc-icon">🎬</div>
+        <div class="qc-icon"><i class=&quot;icon icon-video&quot;></i></div>
         <div class="grow"><h4>Not sure where to begin?</h4><p class="muted">Browse video classes organised by subject and exam.</p></div>
         <a href="/videos" class="btn btn-ghost btn-sm">Browse videos</a>
       </div>`;
@@ -1325,7 +1388,7 @@ function suggestionsHTML(summary) {
     const acc = Math.round(summary.weakSubject.acc * 100);
     cards.push(`
       <div class="suggest-card">
-        <div class="qc-icon">🎯</div>
+        <div class="qc-icon"><i class=&quot;icon icon-target&quot;></i></div>
         <div class="grow"><h4>Focus on ${subj}</h4><p class="muted">Your accuracy here is ${acc}% — your weakest subject so far. Revise notes, then re-test.</p></div>
         <a href="/pdfs?subject=${encodeURIComponent(subj)}" class="btn btn-ghost btn-sm">Notes</a>
         <a href="/quizzes?subject=${encodeURIComponent(subj)}" class="btn btn-primary btn-sm">Quiz</a>
@@ -1335,14 +1398,14 @@ function suggestionsHTML(summary) {
     const r = summary.lastResult;
     cards.push(`
       <div class="suggest-card">
-        <div class="qc-icon">🔁</div>
+        <div class="qc-icon"><i class=&quot;icon icon-refresh&quot;></i></div>
         <div class="grow"><h4>Retake "${r.title}"</h4><p class="muted">Last score: ${r.score}/${r.total}. A second attempt helps it stick.</p></div>
         <a href="/${r.type === "quiz" ? "quizzes" : "mocks"}" class="btn btn-ghost btn-sm">Retake</a>
       </div>`);
   }
   cards.push(`
     <div class="suggest-card">
-      <div class="qc-icon">⏱️</div>
+      <div class="qc-icon"><i class=&quot;icon icon-clock&quot;></i></div>
       <div class="grow"><h4>Try a full-length mock</h4><p class="muted">Simulate real exam conditions with a timed, full-length test.</p></div>
       <a href="/mocks" class="btn btn-ghost btn-sm">Mock tests</a>
     </div>`);
@@ -1357,14 +1420,14 @@ async function loadVideos() {
 
   initCategoryPage(container, playlists, {
     eyebrow: "Public · No login needed", heading: "Video Classes",
-    sub: "Pick a subject to see its playlists.", icon: "🎬",
+    sub: "Pick a subject to see its playlists.", icon: "<i class=&quot;icon icon-video&quot;></i>",
     emptyMsg: "No playlists yet — check back soon.",
     renderRow: (p) => {
       const firstId = p.videos?.[0] ? getYouTubeId(p.videos[0].url) : null;
       const thumb = firstId ? `https://img.youtube.com/vi/${firstId}/hqdefault.jpg` : "";
       return `
       <div class="list-row js-open-playlist" data-id="${p.id}">
-        ${thumb ? `<img src="${thumb}" alt="" loading="lazy" style="width:64px;height:40px;border-radius:8px;object-fit:cover;flex-shrink:0;">` : `<div class="lr-icon">🎬</div>`}
+        ${thumb ? `<img src="${thumb}" alt="" loading="lazy" style="width:64px;height:40px;border-radius:8px;object-fit:cover;flex-shrink:0;">` : `<div class="lr-icon"><i class=&quot;icon icon-video&quot;></i></div>`}
         <div class="grow"><h4>${p.title}</h4><p class="muted">${p.description ? p.description : `${(p.videos || []).length} video${(p.videos || []).length === 1 ? "" : "s"}${p.exam ? ` · ${p.exam}` : ""}`}</p></div>
         ${bookmarkBtnHTML("playlists", p.id)}
         <span class="lr-action">▶</span>
@@ -1415,11 +1478,11 @@ async function loadPdfs() {
 
   initCategoryPage(container, pdfs, {
     eyebrow: "Public · No login needed", heading: "Study Notes",
-    sub: "Pick a subject to see its downloadable notes.", icon: "📄",
+    sub: "Pick a subject to see its downloadable notes.", icon: "<i class=&quot;icon icon-document&quot;></i>",
     emptyMsg: "No notes yet — check back soon.",
     renderRow: (p) => `
       <div class="list-row">
-        <div class="lr-icon">📄</div>
+        <div class="lr-icon"><i class=&quot;icon icon-document&quot;></i></div>
         <div class="grow"><h4>${p.title}</h4><p class="muted">${p.description || (p.exam || "")}</p></div>
         ${bookmarkBtnHTML("pdfs", p.id)}
         <a href="${p.url}" target="_blank" rel="noopener" class="btn btn-primary btn-sm lr-action">Download</a>
@@ -1446,12 +1509,12 @@ async function toggleBookmark(type, id) {
   } catch (err) { showToast("Couldn't save bookmark: " + err.message); }
   $all(`.js-bookmark[data-type="${type}"][data-id="${id}"]`).forEach(b => {
     b.classList.toggle("on", nowOn);
-    b.textContent = nowOn ? "★" : "☆";
+    b.innerHTML = nowOn ? ICONS["star-filled"] : ICONS["star-outline"];
   });
 }
 function bookmarkBtnHTML(type, id) {
   const on = isBookmarked(type, id);
-  return `<button type="button" class="icon-btn js-bookmark ${on ? "on" : ""}" data-type="${type}" data-id="${id}" title="${on ? "Remove bookmark" : "Bookmark this"}" aria-label="Bookmark">${on ? "★" : "☆"}</button>`;
+  return `<button type="button" class="icon-btn js-bookmark ${on ? "on" : ""}" data-type="${type}" data-id="${id}" title="${on ? "Remove bookmark" : "Bookmark this"}" aria-label="Bookmark">${on ? "<i class=&quot;icon icon-star-filled&quot;></i>" : "<i class=&quot;icon icon-star-outline&quot;></i>"}</button>`;
 }
 function wireBookmarkButtons(container) {
   $all(".js-bookmark", container).forEach(b => b.addEventListener("click", (e) => {
@@ -1470,17 +1533,17 @@ async function loadBookmarksPage() {
     fetchCollection("playlists"), fetchCollection("pdfs"), fetchCollection("quizzes"), fetchCollection("mocks")
   ]);
   const sections = [
-    { type: "playlists", icon: "🎬", label: "Video Playlists", items: playlists.filter(x => (b.playlists || []).includes(x.id)),
-      row: (p) => `<div class="list-row js-open-playlist" data-id="${p.id}"><div class="lr-icon">🎬</div><div class="grow"><h4>${p.title}</h4><p class="muted">${(p.videos || []).length} video${(p.videos || []).length === 1 ? "" : "s"}</p></div>${bookmarkBtnHTML("playlists", p.id)}<span class="lr-action">▶</span></div>`,
+    { type: "playlists", icon: "<i class=&quot;icon icon-video&quot;></i>", label: "Video Playlists", items: playlists.filter(x => (b.playlists || []).includes(x.id)),
+      row: (p) => `<div class="list-row js-open-playlist" data-id="${p.id}"><div class="lr-icon"><i class=&quot;icon icon-video&quot;></i></div><div class="grow"><h4>${p.title}</h4><p class="muted">${(p.videos || []).length} video${(p.videos || []).length === 1 ? "" : "s"}</p></div>${bookmarkBtnHTML("playlists", p.id)}<span class="lr-action">▶</span></div>`,
       wire: (body) => { $all(".js-open-playlist", body).forEach(elm => elm.addEventListener("click", () => openPlaylistModal(elm.dataset.id))); wireBookmarkButtons(body); } },
-    { type: "pdfs", icon: "📄", label: "Study Notes", items: pdfs.filter(x => (b.pdfs || []).includes(x.id)),
-      row: (p) => `<div class="list-row"><div class="lr-icon">📄</div><div class="grow"><h4>${p.title}</h4><p class="muted">${p.description || (p.exam || "")}</p></div>${bookmarkBtnHTML("pdfs", p.id)}<a href="${p.url}" target="_blank" rel="noopener" class="btn btn-primary btn-sm lr-action">Download</a></div>`,
+    { type: "pdfs", icon: "<i class=&quot;icon icon-document&quot;></i>", label: "Study Notes", items: pdfs.filter(x => (b.pdfs || []).includes(x.id)),
+      row: (p) => `<div class="list-row"><div class="lr-icon"><i class=&quot;icon icon-document&quot;></i></div><div class="grow"><h4>${p.title}</h4><p class="muted">${p.description || (p.exam || "")}</p></div>${bookmarkBtnHTML("pdfs", p.id)}<a href="${p.url}" target="_blank" rel="noopener" class="btn btn-primary btn-sm lr-action">Download</a></div>`,
       wire: (body) => wireBookmarkButtons(body) },
-    { type: "quizzes", icon: "📝", label: "Quizzes", items: quizzes.filter(x => (b.quizzes || []).includes(x.id)),
-      row: (i) => `<div class="list-row"><div class="lr-icon">📝</div><div class="grow"><h4>${i.title}</h4><p class="muted">${(i.questions || []).length} question${(i.questions || []).length === 1 ? "" : "s"}</p></div>${bookmarkBtnHTML("quizzes", i.id)}<button class="btn btn-primary btn-sm lr-action js-start-test" data-id="${i.id}">Start Quiz</button></div>`,
+    { type: "quizzes", icon: "<i class=&quot;icon icon-edit&quot;></i>", label: "Quizzes", items: quizzes.filter(x => (b.quizzes || []).includes(x.id)),
+      row: (i) => `<div class="list-row"><div class="lr-icon"><i class=&quot;icon icon-edit&quot;></i></div><div class="grow"><h4>${i.title}</h4><p class="muted">${(i.questions || []).length} question${(i.questions || []).length === 1 ? "" : "s"}</p></div>${bookmarkBtnHTML("quizzes", i.id)}<button class="btn btn-primary btn-sm lr-action js-start-test" data-id="${i.id}">Start Quiz</button></div>`,
       wire: (body) => { $all(".js-start-test", body).forEach(b2 => b2.addEventListener("click", () => startTest(b2.dataset.id, "quiz"))); wireBookmarkButtons(body); } },
-    { type: "mocks", icon: "⏱️", label: "Mock Tests", items: mocks.filter(x => (b.mocks || []).includes(x.id)),
-      row: (i) => `<div class="list-row"><div class="lr-icon">⏱️</div><div class="grow"><h4>${i.title}</h4><p class="muted">${(i.questions || []).length} question${(i.questions || []).length === 1 ? "" : "s"}</p></div>${bookmarkBtnHTML("mocks", i.id)}<button class="btn btn-primary btn-sm lr-action js-start-test" data-id="${i.id}">Start Test</button></div>`,
+    { type: "mocks", icon: "<i class=&quot;icon icon-clock&quot;></i>", label: "Mock Tests", items: mocks.filter(x => (b.mocks || []).includes(x.id)),
+      row: (i) => `<div class="list-row"><div class="lr-icon"><i class=&quot;icon icon-clock&quot;></i></div><div class="grow"><h4>${i.title}</h4><p class="muted">${(i.questions || []).length} question${(i.questions || []).length === 1 ? "" : "s"}</p></div>${bookmarkBtnHTML("mocks", i.id)}<button class="btn btn-primary btn-sm lr-action js-start-test" data-id="${i.id}">Start Test</button></div>`,
       wire: (body) => { $all(".js-start-test", body).forEach(b2 => b2.addEventListener("click", () => startTest(b2.dataset.id, "mock"))); wireBookmarkButtons(body); } }
   ];
 
@@ -1490,7 +1553,7 @@ async function loadBookmarksPage() {
     ${anyItems ? sections.filter(s => s.items.length).map(s => `
       <h3 style="margin:22px 0 10px;">${s.icon} ${s.label}</h3>
       <div class="list-view">${s.items.map(s.row).join("")}</div>
-    `).join("") : emptyStateHTML("★", "Nothing bookmarked yet — tap the ☆ on any video, note, quiz or mock to save it here.")}`;
+    `).join("") : emptyStateHTML("<i class=&quot;icon icon-star-filled&quot;></i>", "Nothing bookmarked yet — tap the <i class=&quot;icon icon-star-outline&quot;></i> on any video, note, quiz or mock to save it here.")}`;
 
   sections.filter(s => s.items.length).forEach(s => s.wire(el));
 }
@@ -1608,7 +1671,7 @@ function initCategoryPage(container, items, opts) {
 function lockGateHTML(what) {
   return `
     <div class="lock-gate">
-      <div class="glyph">🔒</div>
+      <div class="glyph"><i class=&quot;icon icon-lock&quot;></i></div>
       <h2>Sign in to access ${what}</h2>
       <p>Create a free account with Google to attempt ${what} and track your scores on your dashboard.</p>
       <button class="btn btn-primary js-gate-signin">Sign in with Google</button>
@@ -1639,11 +1702,11 @@ function renderTestList(el, items, type) {
   initCategoryPage(el, items, {
     eyebrow: type === "quiz" ? "Practice" : "Timed · Full length",
     heading: type === "quiz" ? "Quizzes" : "Mock Tests",
-    sub: "Pick a subject to see its tests.", icon: "📝",
+    sub: "Pick a subject to see its tests.", icon: "<i class=&quot;icon icon-edit&quot;></i>",
     emptyMsg: `No ${type === "quiz" ? "quizzes" : "mock tests"} available yet — check back soon.`,
     renderRow: (i) => `
       <div class="list-row">
-        <div class="lr-icon">${type === "quiz" ? "📝" : "⏱️"}</div>
+        <div class="lr-icon">${type === "quiz" ? "<i class=&quot;icon icon-edit&quot;></i>" : "<i class=&quot;icon icon-clock&quot;></i>"}</div>
         <div class="grow">
           <h4>${i.title}</h4>
           <p class="muted">${(i.questions || []).length} question${(i.questions || []).length === 1 ? "" : "s"}${type === "mock" && i.timerMinutes ? ` · ${i.timerMinutes} min` : ""}${i.negativeMarking ? ` · Negative marking` : ""}${i.exam ? ` · ${i.exam}` : ""}</p>
@@ -1694,7 +1757,7 @@ function renderTestRuntime() {
           <div><strong>${doc.title}</strong><div class="muted" style="font-size:12.5px;">Question ${index + 1} of ${doc.questions.length} · ${answeredCount} answered</div></div>
           <div style="display:flex; align-items:center; gap:10px;">
             ${activeTest.timeLeft !== null ? `<span class="timer-pill" id="testTimerPill">${Math.floor(activeTest.timeLeft / 60)}:${String(activeTest.timeLeft % 60).padStart(2, "0")}</span>` : ""}
-            <button class="btn btn-ghost btn-sm q-palette-toggle" id="paletteToggleBtn">☰ Questions</button>
+            <button class="btn btn-ghost btn-sm q-palette-toggle" id="paletteToggleBtn"><i class=&quot;icon icon-menu&quot;></i> Questions</button>
           </div>
         </div>
         <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
@@ -1783,7 +1846,7 @@ async function submitTest(autoSubmitted) {
     console.error("Could not save result:", err);
     saveFailed = true;
   }
-  if (saveFailed) showToast("⚠️ Your score wasn't saved (connection or permissions issue) — it won't show on your dashboard.");
+  if (saveFailed) showToast("<i class=&quot;icon icon-alert-triangle&quot;></i> Your score wasn't saved (connection or permissions issue) — it won't show on your dashboard.");
 
   renderTestResult(autoSubmitted, { correct, wrong, unanswered, score });
 }
@@ -1792,7 +1855,7 @@ function renderTestResult(autoSubmitted, stats) {
   const el = getRuntimeContainer();
   const { doc, answers, type } = activeTest;
   el.innerHTML = `
-    ${autoSubmitted ? `<p class="muted" style="text-align:center;">⏱️ Time's up — your test was submitted automatically.</p>` : ""}
+    ${autoSubmitted ? `<p class="muted" style="text-align:center;"><i class=&quot;icon icon-clock&quot;></i> Time's up — your test was submitted automatically.</p>` : ""}
     <div class="result-card">
       <div class="result-card-top">
         <div class="eyebrow" style="color:#fff; opacity:.8;">${doc.title}</div>
@@ -1854,7 +1917,7 @@ function renderBlogList(container, posts) {
   if (!posts.length) {
     container.innerHTML = `
       <div class="section-head"><div><span class="eyebrow">News & updates</span><h2>Blog</h2><p>Exam notifications, syllabus changes, and study tips.</p></div></div>
-      ${emptyStateHTML("📰", "No posts yet — check back soon.")}`;
+      ${emptyStateHTML("<i class=&quot;icon icon-book-open&quot;></i>", "No posts yet — check back soon.")}`;
     return;
   }
   container.innerHTML = `
@@ -1920,7 +1983,7 @@ async function loadDashboard() {
         <div class="admit-card" style="transform:none;">
           <div class="admit-card-top">
             <span class="tag">STUDENT PROFILE</span>
-            <span class="tag" style="background:#FBF0DA;color:#C9860F;">${currentProfile?.district || ""}</span>
+            <span class="tag" style="background:#FDF7DB;color:#AF940E;">${currentProfile?.district || ""}</span>
           </div>
           <div class="admit-card-body">
             <div class="admit-photo" style="display:flex;align-items:center;justify-content:center;overflow:hidden;color:#fff;font-family:var(--font-mono);font-weight:700;">${currentUser.photoURL ? `<img src="${currentUser.photoURL}" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;">` : initial}</div>
@@ -1938,7 +2001,7 @@ async function loadDashboard() {
           <p class="muted" style="margin:12px 0 4px;">Average score</p>
           <h3 style="font-family:var(--font-mono);">${avg}</h3>
           <p class="muted" style="margin:12px 0 4px;">Current streak</p>
-          <h3 style="font-family:var(--font-mono);">🔥 ${currentProfile?.streak?.count || 0} day${(currentProfile?.streak?.count || 0) === 1 ? "" : "s"}</h3>
+          <h3 style="font-family:var(--font-mono);"><i class=&quot;icon icon-flame&quot;></i> ${currentProfile?.streak?.count || 0} day${(currentProfile?.streak?.count || 0) === 1 ? "" : "s"}</h3>
           ${currentProfile?.streak?.longest ? `<p class="muted" style="margin:2px 0 0; font-size:12px;">Best: ${currentProfile.streak.longest} days</p>` : ""}
         </div></div>
       </div>
@@ -1952,7 +2015,7 @@ async function loadDashboard() {
                 <p class="muted">${r.type === "quiz" ? "Quiz" : "Mock Test"} · ${r.date?.toDate ? r.date.toDate().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : ""}</p>
               </div>
               <span class="history-score">${r.score}/${r.total}</span>
-            </div>`).join("") : `<div class="empty-state"><div class="glyph">📊</div><p>No attempts yet — take a quiz or mock test to see your history here.</p></div>`}
+            </div>`).join("") : `<div class="empty-state"><div class="glyph"><i class=&quot;icon icon-bar-chart&quot;></i></div><p>No attempts yet — take a quiz or mock test to see your history here.</p></div>`}
         </div>
       </div></div>
     </div>`;
@@ -2005,7 +2068,7 @@ function renderSyllabusPage() {
     if (!exams.length) {
       el.innerHTML = `
         <div class="section-head"><div><span class="eyebrow">Track your prep</span><h2>Syllabus Tracker</h2><p>Set an exam as your goal and tick off topics as you cover them.</p></div></div>
-        ${emptyStateHTML("✅", "No syllabus has been added yet — check back once the admin publishes one.")}`;
+        ${emptyStateHTML("<i class=&quot;icon icon-check-circle&quot;></i>", "No syllabus has been added yet — check back once the admin publishes one.")}`;
       return;
     }
     el.innerHTML = `
@@ -2013,7 +2076,7 @@ function renderSyllabusPage() {
       <div class="box-grid" id="goalGrid"></div>`;
     $("#goalGrid").innerHTML = exams.map(e => `
       <div class="box-card js-pick-goal" data-id="${e.id}">
-        <div class="box-icon ${iconClassFor(e.examName)}">🎯</div>
+        <div class="box-icon ${iconClassFor(e.examName)}"><i class=&quot;icon icon-target&quot;></i></div>
         <div><h3>${e.examName}</h3><p>${syllabusTotals(e)} topics</p></div>
         <span class="box-arrow">→</span>
       </div>`).join("");
@@ -2103,7 +2166,7 @@ function renderSyllabusRemaining(exam, checkedIds) {
   }).filter(x => x.left > 0);
   box.innerHTML = `<h3>What's left, by subject</h3>` + (items.length
     ? items.map(i => `<div class="syl-remaining-item"><span>${i.name}</span><strong>${i.left} left</strong></div>`).join("")
-    : `<p class="muted">Everything's ticked off — great work! 🎉</p>`);
+    : `<p class="muted">Everything's ticked off — great work! <i class=&quot;icon icon-award&quot;></i></p>`);
 }
 
 async function setGoalExam(examId) {
@@ -2141,7 +2204,7 @@ function renderAdminPage(detail) {
   if (!detail.user) {
     root.innerHTML = `
       <div class="lock-gate" style="margin-top:40px;">
-        <div class="glyph">🔒</div>
+        <div class="glyph"><i class=&quot;icon icon-lock&quot;></i></div>
         <h2>Admin sign-in required</h2>
         <p>Sign in with the admin Google account to manage videos, notes, quizzes and mock tests.</p>
         <button class="btn btn-primary js-google-signin">Sign in with Google</button>
@@ -2152,7 +2215,7 @@ function renderAdminPage(detail) {
   if (!detail.isAdmin) {
     root.innerHTML = `
       <div class="lock-gate" style="margin-top:40px;">
-        <div class="glyph">⛔</div>
+        <div class="glyph"><i class=&quot;icon icon-slash&quot;></i></div>
         <h2>Not authorised</h2>
         <p>You're signed in as ${detail.user.email}, which isn't the admin account for this site.</p>
         <button class="btn btn-ghost js-signout">Sign out</button>
@@ -2168,14 +2231,14 @@ function renderAdminShell() {
   root.innerHTML = `
     <div class="admin-shell">
       <aside class="admin-side">
-        <a href="#" data-tab="overview">📊 Overview</a>
-        <a href="#" data-tab="playlists">🎬 Video Playlists</a>
-        <a href="#" data-tab="pdfs">📄 Study Notes</a>
-        <a href="#" data-tab="quizzes">📝 Quizzes</a>
-        <a href="#" data-tab="mocks">⏱️ Mock Tests</a>
-        <a href="#" data-tab="syllabus">✅ Syllabus</a>
-        <a href="#" data-tab="blog">📰 Blog</a>
-        <a href="#" data-tab="users">👥 Signed-up Users</a>
+        <a href="#" data-tab="overview"><i class=&quot;icon icon-bar-chart&quot;></i> Overview</a>
+        <a href="#" data-tab="playlists"><i class=&quot;icon icon-video&quot;></i> Video Playlists</a>
+        <a href="#" data-tab="pdfs"><i class=&quot;icon icon-document&quot;></i> Study Notes</a>
+        <a href="#" data-tab="quizzes"><i class=&quot;icon icon-edit&quot;></i> Quizzes</a>
+        <a href="#" data-tab="mocks"><i class=&quot;icon icon-clock&quot;></i> Mock Tests</a>
+        <a href="#" data-tab="syllabus"><i class=&quot;icon icon-check-circle&quot;></i> Syllabus</a>
+        <a href="#" data-tab="blog"><i class=&quot;icon icon-book-open&quot;></i> Blog</a>
+        <a href="#" data-tab="users"><i class=&quot;icon icon-users&quot;></i> Signed-up Users</a>
       </aside>
       <div class="admin-main" id="adminContent"></div>
     </div>`;
@@ -2266,7 +2329,7 @@ function renderOverviewCharts(users, counts) {
   if (districtLabels.length) {
     chartInstances.district = new Chart($("#chartDistrict"), {
       type: "pie",
-      data: { labels: districtLabels, datasets: [{ data: districtLabels.map(k => byDistrict[k]), backgroundColor: ["#4C8DFF","#F0568C","#A65CF2","#F5A428","#28C29B","#4A5568","#EF4444","#2FB4E8","#0B4F6C","#E8A33D","#2E7D5B","#C1443D","#7E33D6","#159578"] }] },
+      data: { labels: districtLabels, datasets: [{ data: districtLabels.map(k => byDistrict[k]), backgroundColor: ["#4C8DFF","#F0568C","#A65CF2","#F5A428","#28C29B","#4A5568","#EF4444","#2FB4E8","#379777","#F4CE14","#2E7D5B","#C1443D","#7E33D6","#159578"] }] },
       options: { responsive: true, plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } } } }
     });
   } else { $("#chartDistrict").parentElement.innerHTML = `<h3>Students by district</h3><p class="muted">No student sign-ups yet.</p>`; }
@@ -2296,7 +2359,7 @@ function renderOverviewCharts(users, counts) {
   killChart("signups");
   chartInstances.signups = new Chart($("#chartSignups"), {
     type: "bar",
-    data: { labels: weekBuckets.map(w => w.label), datasets: [{ label: "New sign-ups", data: weekBuckets.map(w => w.count), backgroundColor: "#0B4F6C", borderRadius: 6 }] },
+    data: { labels: weekBuckets.map(w => w.label), datasets: [{ label: "New sign-ups", data: weekBuckets.map(w => w.count), backgroundColor: "#379777", borderRadius: 6 }] },
     options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
   });
 }
@@ -2327,11 +2390,11 @@ async function renderSyllabusAdmin() {
     </div>
 
     <div class="bulk-card">
-      <h3>⚡ Import syllabus from Excel</h3>
+      <h3><i class=&quot;icon icon-zap&quot;></i> Import syllabus from Excel</h3>
       <p class="muted" style="margin:0;">One row per subtopic: Subject, Topic, Subtopic columns. Rows are merged into the currently-open exam below — download the template, fill it in, then upload.</p>
       <div class="bulk-actions">
-        <button class="btn btn-ghost btn-sm" id="downloadSyllabusTemplateBtn">⬇ Download Excel template</button>
-        <label class="btn btn-accent btn-sm" style="cursor:pointer;">⬆ Upload filled template<input type="file" id="syllabusImportFile" accept=".xlsx,.xls" style="display:none;" /></label>
+        <button class="btn btn-ghost btn-sm" id="downloadSyllabusTemplateBtn"><i class=&quot;icon icon-download&quot;></i> Download Excel template</button>
+        <label class="btn btn-accent btn-sm" style="cursor:pointer;"><i class=&quot;icon icon-upload&quot;></i> Upload filled template<input type="file" id="syllabusImportFile" accept=".xlsx,.xls" style="display:none;" /></label>
       </div>
       <p class="bulk-status" id="syllabusImportStatus"></p>
     </div>
@@ -2429,7 +2492,7 @@ async function handleSyllabusImportFile(file) {
     });
 
     renderSyllabusEditor();
-    statusEl.textContent = `✅ Added ${added} subtopic${added === 1 ? "" : "s"}${skipped ? ` (${skipped} skipped — missing fields or already existed)` : ""}. Review below, then click "Save syllabus" to publish.`;
+    statusEl.innerHTML = `${ICONS["check-circle"]} Added ${added} subtopic${added === 1 ? "" : "s"}${skipped ? ` (${skipped} skipped — missing fields or already existed)` : ""}. Review below, then click "Save syllabus" to publish.`;
     showToast("Syllabus imported — remember to save.");
   } catch (err) {
     statusEl.textContent = "Import failed: " + err.message + " — make sure you're uploading the filled template file.";
@@ -2462,18 +2525,18 @@ function renderSubjectsEditor() {
     <div class="syl-editor-subject" data-si="${si}">
       <div style="display:flex; gap:8px;">
         <input type="text" class="subj-name" value="${s.name || ""}" placeholder="Subject name, e.g. Kerala History" style="flex:1;" />
-        <button type="button" class="syl-editor-remove js-remove-subject">✕</button>
+        <button type="button" class="syl-editor-remove js-remove-subject"><i class=&quot;icon icon-x&quot;></i></button>
       </div>
       ${(s.topics || []).map((t, ti) => `
         <div class="syl-editor-topic" data-ti="${ti}">
           <div style="display:flex; gap:8px;">
             <input type="text" class="topic-name" value="${t.name || ""}" placeholder="Topic, e.g. Freedom Struggle in Kerala" style="flex:1;" />
-            <button type="button" class="syl-editor-remove js-remove-topic">✕</button>
+            <button type="button" class="syl-editor-remove js-remove-topic"><i class=&quot;icon icon-x&quot;></i></button>
           </div>
           ${(t.subtopics || []).map((st, sti) => `
             <div class="syl-editor-subtopic-row" data-sti="${sti}">
               <input type="text" class="subtopic-name" value="${st.name || ""}" placeholder="Subtopic, e.g. Punnapra-Vayalar Uprising" />
-              <button type="button" class="syl-editor-remove js-remove-subtopic">✕</button>
+              <button type="button" class="syl-editor-remove js-remove-subtopic"><i class=&quot;icon icon-x&quot;></i></button>
             </div>`).join("")}
           <button type="button" class="syl-editor-add-sm js-add-subtopic">+ Add subtopic</button>
         </div>`).join("")}
@@ -2641,7 +2704,7 @@ async function renderUsersAdmin() {
     <p class="muted" style="margin-bottom:16px;">Loaded 50 at a time so this stays fast even with thousands of sign-ups. Search looks up the start of a name across <em>everyone</em>, not just what's loaded.</p>
     <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:6px;">
       <input type="search" class="search-inline" id="userSearch" placeholder="Search by name…" style="margin-bottom:0;" />
-      <button class="btn btn-ghost btn-sm" id="exportUsersBtn">⬇ Export CSV (all users)</button>
+      <button class="btn btn-ghost btn-sm" id="exportUsersBtn"><i class=&quot;icon icon-download&quot;></i> Export CSV (all users)</button>
     </div>
     <table class="admin-table"><thead><tr><th>Name</th><th>District</th><th>Phone</th><th>Email</th><th>Joined</th><th></th></tr></thead>
     <tbody id="usersTableBody"></tbody></table>
@@ -2718,7 +2781,7 @@ async function exportAllUsersCSV() {
     const snap = await db.collection("users").get();
     exportUsersCSV(snap.docs.map(d => ({ id: d.id, ...d.data() })));
   } catch (err) { showToast("Export failed: " + err.message); }
-  btn.disabled = false; btn.textContent = "⬇ Export CSV (all users)";
+  btn.disabled = false; btn.innerHTML = ICONS["download"] + " Export CSV (all users)";
 }
 
 function openEditUserModal(user) {
@@ -2783,7 +2846,7 @@ async function renderPlaylistsAdmin() {
     <h2>Video Playlists</h2>
 
     <div class="bulk-card">
-      <h3>➕ Quick-add a single video</h3>
+      <h3><i class=&quot;icon icon-plus&quot;></i> Quick-add a single video</h3>
       <p class="muted" style="margin:0 0 12px;">Paste one video and either drop it into a playlist that already exists, or spin up a brand new playlist for it — no need to open the full form below.</p>
       <form id="quickAddVideoForm">
         <div class="form-row"><label>Playlist</label>
@@ -2866,7 +2929,7 @@ async function renderPlaylistsAdmin() {
     const row = document.createElement("div");
     row.className = "repeat-block video-row";
     row.innerHTML = `
-      <button type="button" class="remove-btn">✕</button>
+      <button type="button" class="remove-btn"><i class=&quot;icon icon-x&quot;></i></button>
       <div class="form-row"><label>Video title</label><input type="text" class="v-title" value="${title}" placeholder="e.g. Class 1 — Introduction" /></div>
       <div class="form-row"><label>YouTube URL</label><input type="url" class="v-url" value="${url}" placeholder="https://www.youtube.com/watch?v=..." /></div>`;
     row.querySelector(".remove-btn").addEventListener("click", () => row.remove());
@@ -3082,11 +3145,11 @@ async function renderTestAdmin(collectionName) {
     <h2>${isMock ? "Mock Tests" : "Quizzes"}</h2>
 
     <div class="bulk-card">
-      <h3>⚡ Bulk import from Excel</h3>
+      <h3><i class=&quot;icon icon-zap&quot;></i> Bulk import from Excel</h3>
       <p class="muted" style="margin:0;">Add many ${isMock ? "mock tests" : "quizzes"} at once. Download the template, fill it in (one row per question, same Title = same test), then upload it back here.</p>
       <div class="bulk-actions">
-        <button class="btn btn-ghost btn-sm" id="downloadTemplateBtn">⬇ Download Excel template</button>
-        <label class="btn btn-accent btn-sm" style="cursor:pointer;">⬆ Upload filled template<input type="file" id="bulkImportFile" accept=".xlsx,.xls" style="display:none;" /></label>
+        <button class="btn btn-ghost btn-sm" id="downloadTemplateBtn"><i class=&quot;icon icon-download&quot;></i> Download Excel template</button>
+        <label class="btn btn-accent btn-sm" style="cursor:pointer;"><i class=&quot;icon icon-upload&quot;></i> Upload filled template<input type="file" id="bulkImportFile" accept=".xlsx,.xls" style="display:none;" /></label>
       </div>
       <p class="bulk-status" id="bulkStatus"></p>
     </div>
@@ -3141,7 +3204,7 @@ async function renderTestAdmin(collectionName) {
     row.className = "repeat-block question-row";
     row.dataset.uid = uid;
     row.innerHTML = `
-      <button type="button" class="remove-btn">✕</button>
+      <button type="button" class="remove-btn"><i class=&quot;icon icon-x&quot;></i></button>
       <div class="form-row"><label>Question</label><textarea class="q-text" rows="2" placeholder="Type the question here">${q}</textarea></div>
       ${[0, 1, 2, 3].map(i => `
         <div class="form-row-inline" style="align-items:center;">
@@ -3282,7 +3345,7 @@ async function handleBulkImportFile(file, collectionName, isMock) {
     });
     await batch.commit();
     invalidateCollectionCache(collectionName);
-    statusEl.textContent = `✅ Imported ${testDocs.length} test${testDocs.length === 1 ? "" : "s"} successfully.${skipped ? ` (${skipped} row${skipped === 1 ? "" : "s"} skipped — missing fields or invalid correct-option value.)` : ""}`;
+    statusEl.textContent = `<i class=&quot;icon icon-check-circle&quot;></i> Imported ${testDocs.length} test${testDocs.length === 1 ? "" : "s"} successfully.${skipped ? ` (${skipped} row${skipped === 1 ? "" : "s"} skipped — missing fields or invalid correct-option value.)` : ""}`;
     showToast("Bulk import complete!");
     loadTestTable(collectionName);
   } catch (err) {
