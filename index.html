@@ -316,6 +316,44 @@ img { max-width: 100%; display: block; }
 .guest-cta h3 { font-size: 17px; margin-bottom: 4px; color: var(--color-primary-dark); }
 .guest-cta p { margin: 0; font-size: 13.5px; max-width: 420px; }
 
+/* ---------------- Leaderboard ---------------- */
+.lb-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; }
+.lb-toggle { display: inline-flex; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 999px; padding: 3px; gap: 2px; }
+.lb-toggle button { border: none; background: transparent; padding: 7px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: var(--color-ink-soft); cursor: pointer; }
+.lb-toggle button.active { background: var(--color-primary); color: #fff; }
+.lb-cat-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.lb-cat-pill { padding: 7px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 700; border: 1.5px solid var(--color-border); background: var(--color-surface); color: var(--color-ink-soft); cursor: pointer; }
+.lb-cat-pill.active { border-color: var(--color-primary); background: var(--color-primary-soft); color: var(--color-primary-dark); }
+.lb-podium { display: flex; align-items: flex-end; justify-content: center; gap: 14px; background: var(--color-bg); border-radius: var(--radius-lg); padding: 24px 20px 0; margin-bottom: 22px; }
+.lb-podium-slot { text-align: center; width: 130px; }
+.lb-podium-avatar-wrap { margin: 0 auto 8px; }
+.lb-podium-name { font-size: 13.5px; font-weight: 700; color: var(--color-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lb-podium-meta { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-ink-soft); margin-bottom: 8px; }
+.lb-podium-bar { background: var(--color-surface); border: 1px solid var(--color-border); border-bottom: none; border-radius: 12px 12px 0 0; display: flex; align-items: flex-start; justify-content: center; padding-top: 10px; }
+.lb-podium-slot.gold .lb-podium-bar { height: 92px; background: #FFF8DD; }
+.lb-podium-slot.silver .lb-podium-bar { height: 62px; }
+.lb-podium-slot.bronze .lb-podium-bar { height: 44px; background: var(--color-danger-soft); }
+.lb-row { display: flex; align-items: center; gap: 12px; padding: 12px 6px; border-bottom: 1px solid var(--color-border); }
+.lb-row:last-child { border-bottom: none; }
+.lb-row.me { background: var(--color-primary-soft); border-radius: var(--radius); border-bottom-color: transparent; padding: 12px 12px; margin: 2px -12px; }
+.lb-rank-num { font-family: var(--font-mono); font-weight: 700; font-size: 13px; color: var(--color-ink-soft); width: 22px; text-align: center; flex-shrink: 0; }
+.lb-row.me .lb-rank-num { color: var(--color-primary-dark); }
+.lb-row .grow h4 { font-size: 14px; margin: 0; }
+.lb-row .grow .muted { font-size: 11.5px; margin: 1px 0 0; }
+.lb-streak { display: flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 700; color: var(--color-accent-dark); flex-shrink: 0; }
+.lb-score { font-family: var(--font-mono); font-weight: 700; font-size: 13.5px; color: var(--color-ink); width: 64px; text-align: right; flex-shrink: 0; }
+.lb-widget { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 24px; }
+.lb-widget-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.lb-widget-head h3 { font-size: 15.5px; margin: 0; }
+.lb-nudge { display: flex; align-items: center; gap: 10px; background: var(--color-primary-soft); border-radius: var(--radius); padding: 12px 14px; margin-top: 14px; font-size: 12.5px; color: var(--color-primary-dark); }
+.lb-nudge strong { color: var(--color-ink); }
+.lb-note { font-size: 11.5px; color: var(--color-ink-soft); margin-top: 14px; }
+@media (max-width: 620px) {
+  .lb-podium { gap: 8px; padding: 18px 8px 0; }
+  .lb-podium-slot { width: 100px; }
+  .lb-podium-name { font-size: 12px; }
+}
+
 @media (max-width: 860px) {
   .quick-grid { grid-template-columns: repeat(2, 1fr); }
   .greet-banner { flex-direction: column; align-items: flex-start; }
@@ -522,6 +560,7 @@ img { max-width: 100%; display: block; }
         <a href="/quizzes" data-nav="quizzes">Quizzes</a>
         <a href="/mocks" data-nav="mocks">Mock Tests</a>
         <a href="/syllabus" data-nav="syllabus">Syllabus Tracker</a>
+        <a href="/leaderboard" data-nav="leaderboard">Leaderboard</a>
         <a href="/dashboard" data-nav="dashboard">Dashboard</a>
         <a href="/admin" data-nav="admin" id="navAdminLink" style="display:none;">Admin</a>
       </nav>
@@ -549,6 +588,7 @@ img { max-width: 100%; display: block; }
     <a href="/quizzes" data-nav="quizzes"><i class='icon icon-edit'></i> Quizzes</a>
     <a href="/mocks" data-nav="mocks"><i class='icon icon-clock'></i> Mock Tests</a>
     <a href="/syllabus" data-nav="syllabus"><i class='icon icon-check-circle'></i> Syllabus Tracker</a>
+    <a href="/leaderboard" data-nav="leaderboard"><i class='icon icon-award'></i> Leaderboard</a>
     <a href="/bookmarks" data-nav="bookmarks"><i class='icon icon-star-filled'></i> My Bookmarks</a>
     <a href="#" id="drawerInstallLink" style="display:none;"><i class='icon icon-download'></i> Install App</a>
     <a href="/dashboard" data-nav="dashboard"><i class='icon icon-user'></i> Dashboard</a>
@@ -627,6 +667,11 @@ img { max-width: 100%; display: block; }
   <!-- SYLLABUS TRACKER -->
   <section class="page" id="page-syllabus">
     <div class="section container" id="syllabusContainer"></div>
+  </section>
+
+  <!-- LEADERBOARD -->
+  <section class="page" id="page-leaderboard">
+    <div class="section container" id="leaderboardContainer"></div>
   </section>
 
   <!-- BOOKMARKS -->
@@ -858,6 +903,12 @@ async function recordDailyActivity() {
   try {
     await db.collection("users").doc(currentUser.uid).set({ streak: newStreak }, { merge: true });
     if (currentProfile) currentProfile.streak = newStreak;
+    // Mirror the count onto the leaderboard doc (merge, no-op if it doesn't exist
+    // yet) so the leaderboard can show streaks without a per-row read against users/*.
+    db.collection("leaderboard").doc(currentUser.uid).set({
+      streakCount: newCount, name: currentProfile?.name || currentUser.displayName || "Student",
+      photoURL: currentUser.photoURL || null
+    }, { merge: true }).then(() => invalidateCollectionCache("leaderboard")).catch(() => {});
     document.dispatchEvent(new CustomEvent("streakUpdated", { detail: newStreak }));
   } catch (err) { console.error("Couldn't update streak:", err); }
 }
@@ -1034,7 +1085,7 @@ let activeTest = null;
 // NOTE: for a direct browser visit / refresh on a path like /admin to work
 // (rather than 404), the host needs to rewrite all paths to this file
 // (a standard single-page-app rewrite). See firebase.json.
-const ROUTES = ["home", "videos", "pdfs", "quizzes", "mocks", "syllabus", "bookmarks", "blog", "about", "dashboard", "admin"];
+const ROUTES = ["home", "videos", "pdfs", "quizzes", "mocks", "syllabus", "leaderboard", "bookmarks", "blog", "about", "dashboard", "admin"];
 
 function currentRoute() {
   let path = location.pathname.replace(/^\/+|\/+$/g, "");
@@ -1103,6 +1154,7 @@ const PAGE_TITLES = {
   quizzes: "Quizzes | PSC FutureU",
   mocks: "Mock Tests | PSC FutureU",
   syllabus: "Syllabus Tracker | PSC FutureU",
+  leaderboard: "Leaderboard | PSC FutureU",
   bookmarks: "My Bookmarks | PSC FutureU",
   blog: "Blog | PSC FutureU",
   about: "About Us | PSC FutureU",
@@ -1117,6 +1169,7 @@ function loadPage(route) {
   else if (route === "quizzes") loadQuizzes();
   else if (route === "mocks") loadMocks();
   else if (route === "syllabus") loadSyllabusPage();
+  else if (route === "leaderboard") loadLeaderboardPage();
   else if (route === "bookmarks") loadBookmarksPage();
   else if (route === "blog") loadBlogPage();
   else if (route === "about") loadAboutPage();
@@ -1129,7 +1182,7 @@ window.addEventListener("authReady", (e) => {
   const adminLink = $("#navAdminLink");
   if (adminLink) adminLink.style.display = e.detail.isAdmin ? "" : "none";
   const route = currentRoute();
-  if (["home", "quizzes", "mocks", "syllabus", "bookmarks", "dashboard"].includes(route)) loadPage(route);
+  if (["home", "quizzes", "mocks", "syllabus", "leaderboard", "bookmarks", "dashboard"].includes(route)) loadPage(route);
   if (route === "admin") renderAdminPage(e.detail);
 });
 
@@ -1198,6 +1251,209 @@ async function fetchLeaderboard(opts = {}) {
   writeLocalCache(name, cache[name]);
   return cache[name];
 }
+
+// ---------------- LEADERBOARD ----------------
+// Data model recap (see submitTest() and recordDailyActivity()):
+//   leaderboard/{uid}  { name, photoURL, score, total, attempts, streakCount,
+//                         updatedAt, categories: { quiz:{score,total,attempts}, mock:{...} } }
+//   results/{autoId}   { uid, studentName, type: "quiz"|"mock", refId, title,
+//                         score, total, correct, wrong, unanswered, date }
+//
+// All-time standings read the incrementally-maintained leaderboard/* aggregate
+// (one doc per student — cheap). Weekly/Monthly standings aren't pre-aggregated
+// (that would need a scheduled Cloud Function to reset counters, which this
+// project doesn't have), so they're computed on demand from results/* filtered
+// by date, then cached client-side for LOCAL_CACHE_TTL like everything else.
+const LB_MIN_ATTEMPTS = 3; // hides students with 1-2 lucky attempts from topping the charts
+let lbState = { period: "weekly", category: "overall" };
+
+function lbInitials(name) {
+  return (name || "Student").trim().split(/\s+/).slice(0, 2).map(w => w[0] || "").join("").toUpperCase() || "S";
+}
+function lbAvatarHTML(name, photoURL, size) {
+  return photoURL
+    ? `<img src="${photoURL}" referrerpolicy="no-referrer" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:cover;flex-shrink:0;" alt="">`
+    : `<div style="width:${size}px;height:${size}px;border-radius:50%;background:var(--color-primary-soft);color:var(--color-primary-dark);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:${Math.round(size * 0.36)}px;flex-shrink:0;">${lbInitials(name)}</div>`;
+}
+function lbStartOfWeek() {
+  const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - d.getDay());
+  return firebase.firestore.Timestamp.fromDate(d);
+}
+function lbStartOfMonth() {
+  const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(1);
+  return firebase.firestore.Timestamp.fromDate(d);
+}
+
+async function lbAllTimeStandings(category) {
+  const docs = await fetchLeaderboard();
+  return docs.map(d => {
+    const src = category === "overall" ? d : (d.categories && d.categories[category]) || { score: 0, total: 0, attempts: 0 };
+    return {
+      uid: d.id, name: d.name || "Student", photoURL: d.photoURL || null, streak: d.streakCount || 0,
+      score: src.score || 0, total: src.total || 0, attempts: src.attempts || 0,
+      accuracy: src.total ? src.score / src.total : 0
+    };
+  }).filter(s => s.attempts >= LB_MIN_ATTEMPTS);
+}
+
+// Bypasses fetchCollection() deliberately: results docs have no createdAt
+// field to orderBy(), and we need a date range, not the whole collection.
+async function lbPeriodResults(period) {
+  const key = "leaderboardResults_" + period;
+  if (cache[key]) return cache[key];
+  const local = readLocalCache(key);
+  if (local && Date.now() - local.t < LOCAL_CACHE_TTL) { cache[key] = local.docs; return cache[key]; }
+  const start = period === "weekly" ? lbStartOfWeek() : lbStartOfMonth();
+  const snap = await db.collection("results").where("date", ">=", start).limit(3000).get();
+  const docs = snap.docs.map(d => d.data());
+  cache[key] = docs;
+  writeLocalCache(key, docs);
+  return docs;
+}
+
+async function lbPeriodStandings(period, category) {
+  const [results, allTime] = await Promise.all([lbPeriodResults(period), fetchLeaderboard()]);
+  const infoByUid = {};
+  allTime.forEach(d => { infoByUid[d.id] = { name: d.name, photoURL: d.photoURL || null, streak: d.streakCount || 0 }; });
+  const byUid = {};
+  results.forEach(r => {
+    if (category !== "overall" && r.type !== category) return;
+    if (!byUid[r.uid]) byUid[r.uid] = { uid: r.uid, name: r.studentName || infoByUid[r.uid]?.name || "Student", score: 0, total: 0, attempts: 0 };
+    byUid[r.uid].score += r.score || 0; byUid[r.uid].total += r.total || 0; byUid[r.uid].attempts += 1;
+  });
+  return Object.values(byUid).map(s => ({
+    ...s, photoURL: infoByUid[s.uid]?.photoURL || null, streak: infoByUid[s.uid]?.streak || 0,
+    accuracy: s.total ? s.score / s.total : 0
+  })).filter(s => s.attempts >= LB_MIN_ATTEMPTS);
+}
+
+// Ranked by accuracy (matches the "Rank" already shown on the home page /
+// dashboard, computed the same way in buildHomeSummary), attempts as tiebreak
+// so raw volume alone can't outrank someone who's actually more accurate.
+async function lbStandings(period, category) {
+  const list = period === "allTime" ? await lbAllTimeStandings(category) : await lbPeriodStandings(period, category);
+  return list.sort((a, b) => b.accuracy - a.accuracy || b.attempts - a.attempts);
+}
+
+function lbRowHTML(rank, s, isMe) {
+  return `
+    <div class="lb-row ${isMe ? "me" : ""}">
+      <div class="lb-rank-num">${rank}</div>
+      ${lbAvatarHTML(s.name, s.photoURL, 34)}
+      <div class="grow">
+        <h4>${isMe ? "You" : s.name}</h4>
+        <p class="muted">${Math.round(s.accuracy * 100)}% accuracy · ${s.attempts} attempt${s.attempts === 1 ? "" : "s"}</p>
+      </div>
+      ${s.streak ? `<span class="lb-streak"><i class='icon icon-flame'></i>${s.streak}</span>` : ""}
+      <div class="lb-score">${Math.round(s.score * 10) / 10}</div>
+    </div>`;
+}
+
+function lbPodiumSlotHTML(cls, s) {
+  if (!s) return `<div class="lb-podium-slot ${cls}"></div>`;
+  const avatarSize = cls === "gold" ? 56 : 44;
+  return `
+    <div class="lb-podium-slot ${cls}">
+      <div class="lb-podium-avatar-wrap">${lbAvatarHTML(s.name, s.photoURL, avatarSize)}</div>
+      <div class="lb-podium-name">${s.name}</div>
+      <div class="lb-podium-meta">${Math.round(s.accuracy * 100)}%</div>
+      <div class="lb-podium-bar"><i class='icon ${cls === "gold" ? "icon-award" : "icon-zap"}' style="color:${cls === "gold" ? "var(--color-accent-dark)" : cls === "silver" ? "var(--color-ink-soft)" : "var(--color-danger)"};"></i></div>
+    </div>`;
+}
+
+function lbEmptyHTML() {
+  return `<div class="empty-state"><div class="glyph"><i class='icon icon-bar-chart'></i></div><h3>Not enough attempts yet</h3><p class="muted">Students need at least ${LB_MIN_ATTEMPTS} attempts in this period to appear on the leaderboard. Take a quiz or mock test to get on the board.</p></div>`;
+}
+
+async function loadLeaderboardPage() {
+  const el = $("#leaderboardContainer");
+  if (!el) return;
+  el.innerHTML = `<p class="muted">Loading leaderboard…</p>`;
+  await renderLeaderboardPage(el);
+}
+
+async function renderLeaderboardPage(el) {
+  const { period, category } = lbState;
+  let standings;
+  try {
+    standings = await lbStandings(period, category);
+  } catch (err) {
+    console.error("Could not load leaderboard:", err);
+    el.innerHTML = `<div class="empty-state"><div class="glyph"><i class='icon icon-alert-triangle'></i></div><h3>Couldn't load the leaderboard</h3><p class="muted">Check your connection and try again.</p></div>`;
+    return;
+  }
+  const top3 = standings.slice(0, 3);
+  const rest = standings.slice(3, 50);
+  const myIdx = currentUser ? standings.findIndex(s => s.uid === currentUser.uid) : -1;
+  const meInTop50 = myIdx > -1 && myIdx < 50;
+
+  const periodLabel = { weekly: "Weekly", monthly: "Monthly", allTime: "All-time" };
+  const catLabel = { overall: "Overall", quiz: "Quizzes", mock: "Mock tests" };
+
+  el.innerHTML = `
+    <div class="lb-head">
+      <div><span class="eyebrow">Leaderboard</span><h2 style="margin-bottom:2px;">See how you rank</h2><p class="muted" style="margin:0;">Ranked by accuracy, students with ${LB_MIN_ATTEMPTS}+ attempts in this period.</p></div>
+      <div class="lb-toggle" id="lbPeriodToggle">
+        ${["weekly", "monthly", "allTime"].map(p => `<button data-period="${p}" class="${p === period ? "active" : ""}">${periodLabel[p]}</button>`).join("")}
+      </div>
+    </div>
+    <div class="lb-cat-row" id="lbCatRow">
+      ${["overall", "quiz", "mock"].map(c => `<button class="lb-cat-pill ${c === category ? "active" : ""}" data-cat="${c}">${catLabel[c]}</button>`).join("")}
+    </div>
+    ${!standings.length ? lbEmptyHTML() : `
+      <div class="lb-podium">
+        ${lbPodiumSlotHTML("silver", top3[1])}
+        ${lbPodiumSlotHTML("gold", top3[0])}
+        ${lbPodiumSlotHTML("bronze", top3[2])}
+      </div>
+      <div class="card"><div class="card-body">
+        ${rest.map((s, i) => lbRowHTML(i + 4, s, currentUser && s.uid === currentUser.uid)).join("") || `<p class="muted">That's everyone in this period so far.</p>`}
+        ${myIdx > -1 && !meInTop50 ? `<div style="text-align:center;padding:10px 0 2px;" class="muted">⋯</div>${lbRowHTML(myIdx + 1, standings[myIdx], true)}` : ""}
+      </div></div>
+      ${!currentUser ? `<div class="lb-nudge"><i class='icon icon-lock'></i> <span>Sign in to see your own rank on this board.</span></div>` : (myIdx === -1 ? `<div class="lb-nudge"><i class='icon icon-target'></i> <span>Take ${LB_MIN_ATTEMPTS} quizzes or mock tests this period to appear on the leaderboard.</span></div>` : "")}
+    `}
+  `;
+
+  $all("#lbPeriodToggle button", el).forEach(b => b.addEventListener("click", () => {
+    lbState.period = b.dataset.period;
+    el.innerHTML = `<p class="muted">Loading leaderboard…</p>`;
+    renderLeaderboardPage(el);
+  }));
+  $all("#lbCatRow .lb-cat-pill", el).forEach(b => b.addEventListener("click", () => {
+    lbState.category = b.dataset.cat;
+    el.innerHTML = `<p class="muted">Loading leaderboard…</p>`;
+    renderLeaderboardPage(el);
+  }));
+}
+
+// Compact "top scorers" card for the home page — weekly, overall, top 3 plus
+// the signed-in student's own row wherever it falls.
+async function renderHomeLeaderboardWidget() {
+  const host = $("#homeLeaderboardWidget");
+  if (!host) return;
+  let standings;
+  try { standings = await lbStandings("weekly", "overall"); }
+  catch (err) { console.error("Could not load leaderboard widget:", err); host.innerHTML = ""; return; }
+  if (!standings.length) { host.innerHTML = ""; return; }
+
+  const top3 = standings.slice(0, 3);
+  const myIdx = currentUser ? standings.findIndex(s => s.uid === currentUser.uid) : -1;
+  const showMeRow = myIdx > 2;
+  const nextUp = myIdx > 0 ? standings[myIdx - 1] : null;
+  const gap = (myIdx > 0 && nextUp) ? Math.max(0, Math.round((nextUp.accuracy - standings[myIdx].accuracy) * 1000) / 10) : null;
+
+  host.innerHTML = `
+    <div class="lb-widget">
+      <div class="lb-widget-head">
+        <h3><i class='icon icon-award'></i> Top scorers this week</h3>
+        <a href="/leaderboard" class="btn btn-ghost btn-sm">See full board</a>
+      </div>
+      ${top3.map((s, i) => lbRowHTML(i + 1, s, currentUser && s.uid === currentUser.uid)).join("")}
+      ${showMeRow ? lbRowHTML(myIdx + 1, standings[myIdx], true) : ""}
+      ${gap !== null && gap > 0 ? `<div class="lb-nudge"><i class='icon icon-target'></i> <span>You're <strong>${gap}% accuracy</strong> away from passing ${nextUp.name} into #${myIdx}.</span></div>` : ""}
+    </div>`;
+}
+
 function debounce(fn, ms) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; }
 // Call after any admin create/edit/delete so the public pages don't keep
 // serving stale cached data (memory or localStorage) for this collection.
@@ -1263,9 +1519,11 @@ async function loadHome() {
         </div>
         <button class="btn btn-primary js-home-signin">Sign in with Google</button>
       </div>
+      <div id="homeLeaderboardWidget"></div>
       ${quickAccessGridHTML(pl, pdfs, qz, mk)}`;
     const btn = $(".js-home-signin", container);
     if (btn) btn.addEventListener("click", signInWithGoogle);
+    renderHomeLeaderboardWidget();
     return;
   }
 
@@ -1294,7 +1552,9 @@ async function loadHome() {
     <div id="homeSuggestions">${suggestionsHTML(summary)}</div>
 
     <div style="height:10px;"></div>
+    <div id="homeLeaderboardWidget"></div>
     ${quickAccessGridHTML(pl, pdfs, qz, mk)}`;
+  renderHomeLeaderboardWidget();
 }
 
 // Builds { attempted, accuracy, rank, rankOf, weakSubject, lastResult } for the current user.
@@ -1845,14 +2105,27 @@ async function submitTest(autoSubmitted) {
       date: firebase.firestore.FieldValue.serverTimestamp()
     });
     // Keep the leaderboard aggregate in sync (cheap increments, not a full rescan).
+    // "categories.<type>" mirrors the same increments under quiz/mock specifically,
+    // so the leaderboard can show an all-time Quizzes-only or Mocks-only view
+    // without re-reading every result ever submitted.
     await db.collection("leaderboard").doc(currentUser.uid).set({
       name: currentProfile?.name || currentUser.displayName || "Student",
+      photoURL: currentUser.photoURL || null,
       score: firebase.firestore.FieldValue.increment(score),
       total: firebase.firestore.FieldValue.increment(doc.questions.length),
       attempts: firebase.firestore.FieldValue.increment(1),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      categories: {
+        [type]: {
+          score: firebase.firestore.FieldValue.increment(score),
+          total: firebase.firestore.FieldValue.increment(doc.questions.length),
+          attempts: firebase.firestore.FieldValue.increment(1)
+        }
+      }
     }, { merge: true });
     invalidateCollectionCache("leaderboard");
+    invalidateCollectionCache("leaderboardResults_weekly");
+    invalidateCollectionCache("leaderboardResults_monthly");
   } catch (err) {
     console.error("Could not save result:", err);
     saveFailed = true;
