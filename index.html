@@ -2152,13 +2152,16 @@ function renderSyllabusPage() {
   renderSyllabusRemaining(goalExam, checkedIds);
 }
 
+let openSyllabusSubjects = new Set();
+
 function renderSyllabusSubjects(exam, checkedIds) {
   const wrap = $("#syllabusSubjects");
   wrap.innerHTML = (exam.subjects || []).map((s, si) => {
     const stats = syllabusSubjectStats(s, checkedIds);
+    const isOpen = openSyllabusSubjects.has(si);
     return `
     <div class="syl-subject">
-      <div class="syl-subject-head" data-si="${si}">
+      <div class="syl-subject-head ${isOpen ? "open" : ""}" data-si="${si}">
         <span class="chev">▶</span>
         <div class="grow">
           <h4>${s.name}</h4>
@@ -2166,7 +2169,7 @@ function renderSyllabusSubjects(exam, checkedIds) {
         </div>
         <span class="pct">${stats.checked}/${stats.total} · ${stats.pct}%</span>
       </div>
-      <div class="syl-topics" data-si="${si}">
+      <div class="syl-topics ${isOpen ? "open" : ""}" data-si="${si}">
         ${(s.topics || []).map(t => `
           <div class="syl-topic">
             <h5>${t.name}</h5>
@@ -2181,6 +2184,8 @@ function renderSyllabusSubjects(exam, checkedIds) {
   }).join("");
 
   $all(".syl-subject-head", wrap).forEach(head => head.addEventListener("click", () => {
+    const si = Number(head.dataset.si);
+    openSyllabusSubjects.has(si) ? openSyllabusSubjects.delete(si) : openSyllabusSubjects.add(si);
     head.classList.toggle("open");
     $(`.syl-topics[data-si="${head.dataset.si}"]`, wrap).classList.toggle("open");
   }));
@@ -2207,6 +2212,7 @@ async function setGoalExam(examId) {
       goalExamId: examId, updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
     syllabusState.progressDoc.goalExamId = examId;
+    openSyllabusSubjects = new Set();
     renderSyllabusPage();
   } catch (err) { showToast("Couldn't update your goal: " + err.message); }
 }
